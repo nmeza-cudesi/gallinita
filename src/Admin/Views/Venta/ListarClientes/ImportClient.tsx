@@ -15,6 +15,8 @@ export const ImportClient = () => {
         file.current.click();
     };
     const file = useRef(null);
+    const [importanding, setImportanding] = useState(false)
+
     async function saveClient(persona_data: any, cliente_data: any) {
         let createPersona = await CreatePersona(persona_data);
         if (createPersona.data) {
@@ -48,7 +50,7 @@ export const ImportClient = () => {
                 reject(error);
             };
         });
-
+        setImportanding(true)
         promise.then(async (d) => {
             //@ts-ignore
             for (let i = 0; i < d.length; i++) {
@@ -83,14 +85,15 @@ export const ImportClient = () => {
                     PER_ID: val["Clasificación de cliente"]
                 }
                 console.log(per_data, cli_data);
-                saveClient(per_data, cli_data)
+                await saveClient(per_data, cli_data)
             }
+            setImportanding(false)
             //queryClient.invalidateQueries('PriceList');
         });
     };
 
     return (
-        <Button onClick={handleFile} mx={2} leftIcon={<BsUpload />} colorScheme="green">
+        <Button isLoading={importanding} onClick={handleFile} mx={2} leftIcon={<BsUpload />} colorScheme="green">
             <Text mx={2}>Import</Text>
             <input
                 ref={file}

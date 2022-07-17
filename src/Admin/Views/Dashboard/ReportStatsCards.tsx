@@ -123,14 +123,14 @@ export default function ReportStatsCards() {
         >
           <StatsCard
             title={"Total Vendido"}
-            stat={data.contado}
+            stat={(data.contado).toFixed(2)}
             defaultstat={"0.00"}
             icon={<FaMoneyBillAlt size={"3em"} />}
             loading={isLoading || isFetching}
           />
           <StatsCard
             title={"Total a cobrar"}
-            stat={data.totalcredito}
+            stat={(data.totalcredito).toFixed(2)}
             defaultstat={"0.00"}
             icon={<FiServer size={"3em"} />}
             loading={isLoading || isFetching}
@@ -143,7 +143,7 @@ export default function ReportStatsCards() {
               </Flex>
             }
             stat={dataSelect}
-            defaultstat={data.totalcredito}
+            defaultstat={(data.totalcredito).toFixed(2)}
             icon={<GiReceiveMoney size={"3em"} />}
             loading={isLoading || isFetching}
           />
