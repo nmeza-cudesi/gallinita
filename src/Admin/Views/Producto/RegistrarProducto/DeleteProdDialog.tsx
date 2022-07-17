@@ -1,12 +1,30 @@
 import React, { ReactNode } from 'react';
-import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button } from "@chakra-ui/react"
+import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useToast } from "@chakra-ui/react"
 import { useRef, useState } from "react"
 import { useMutation } from 'react-query';
+import { deleteProduct } from '../../../../Service/ProductAdminService';
 
 export const DeleteProdDialog = ({ children, proId }: { children: ReactNode, proId: string }) => {
     const [isOpen, setIsOpen] = useState(false)
     const cancelRef = useRef()
-    const { mutateAsync, isLoading } = useMutation('deleteProduct')
+    const toast = useToast();
+
+    const { mutateAsync, isLoading } = useMutation(deleteProduct,
+        {
+            onSuccess: async (data) => {
+                const validate = await data.json();
+                if (validate.code) {
+
+                    toast({
+                        title: "Acción no valida",
+                        description: "No se puede elimar este producto",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                    });
+                }
+            },
+        })
 
     const onClose = () => setIsOpen(false)
 

@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { QueryClient } from "react-query"
 import { v4 as uuidv4 } from 'uuid';
 import { createProduct, deleteProduct, editeProduct } from "../Service/ProductAdminService";
@@ -56,8 +57,14 @@ const deletepro = (queryClient: QueryClient) => {
             const previousProduct = queryClient.getQueryData(['products', deletedId])
             return { previousProduct, deletedId }
         },
-        onSuccess: (result, request, context) => {
-            const deletedId = context.deletedId
+        onSuccess: async (result, request, context) => {
+            const validate = await result.json();
+            var deletedId = context.deletedId
+            if (validate.code) {
+                deletedId = 0
+                alert("no permitido")
+            }
+
             //@ts-ignore
             queryClient.setQueryData('products', (old: any) => old.filter((pro: any) => pro.PRO_ID !== deletedId))
         },
