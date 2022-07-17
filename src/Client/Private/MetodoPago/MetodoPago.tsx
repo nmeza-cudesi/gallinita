@@ -19,7 +19,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaTruck } from "react-icons/fa";
 import { GrGallery } from "react-icons/gr";
 import { useMutation, useQuery } from "react-query";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { async } from "regenerator-runtime";
 import { CostoCompraState, IdOderState } from "../../../Data/Atoms/Carrito";
@@ -42,7 +42,7 @@ export const MetodoPago = () => {
   const [selectedImage, setSelectedImage] = useState(false);
   const [payMethod, setPayMethod] = useState(0)
   const [image, setImage] = useState([]);
-  const [nextStep, setNextStep] = useState(false);
+  const history = useHistory()
   const productos: IProductoCompra[] = JSON.parse(localStorage.getItem('cart') || '[]') as Array<IProductoCompra>
   const { isLoading: loading, isError, data, error, isFetching } = useQuery('metodo_pago', ListMetodoPago, { refetchOnWindowFocus: false })
 
@@ -101,7 +101,7 @@ export const MetodoPago = () => {
       ORD_ID: null,
       CLI_ID: client.iu,
       USR_ID: null,
-      ORT_ID:2,
+      ORT_ID: 2,
       ORD_DATE_ORDER: today + "",
       ORD_TOTAL_PRICE: costoCarrito.total + "",
       ORD_DISCOUNT_PRICE: costoCarrito.descuento + "",
@@ -110,7 +110,9 @@ export const MetodoPago = () => {
       ORD_STATUS: "0"
     }
     var orders_detail: IPedidoDetailModel[] = [];
+    
     productos.map((val, idx) => {
+      
       var order_detail: IPedidoDetailModel = {
         ODT_ID: null,
         DIS_ID: null,
@@ -142,7 +144,7 @@ export const MetodoPago = () => {
     })
     localStorage.removeItem('cart');
     setCarritoState([])
-    setNextStep(true)
+    history.push("/pedidos")
   }
   const file = useRef(null);
   useEffect(() => {
@@ -189,7 +191,6 @@ export const MetodoPago = () => {
           _hover={{ bg: buttonHoverBG }}>
           Concretar Pedido
         </Button>
-        {nextStep && <Redirect to="/pedidos" />}
       </Box>
       <Box
         bg={imgMetodoPagoBG}

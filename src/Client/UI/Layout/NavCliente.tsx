@@ -7,7 +7,8 @@ import { getPersonByIdUser } from "../../../Service/TiendaOnlineService";
 export const NavCliente = () => {
     //getPersonByIdUser
     const { data, isLoading, isError } = useQuery('datanombre', () => getPersonByIdUser(), { refetchOnWindowFocus: false })
-    const cliente = "Nick Meza";
+    console.log(data);
+
     if (isError && data.message) return <h1>Ocurrio algo inesperado</h1>;
 
     return (
@@ -20,7 +21,7 @@ export const NavCliente = () => {
                     <Skeleton height="50px" />
                     :
                     <Heading textAlign="center" mb={6} fontSize="xl" alignItems="center">
-                        {data.PER_NAME + " " + data.PER_LASTNAME}
+                        {(data.PER_TRADENAME.length > 0) ? data.PER_TRADENAME : data.PER_NAME + " " + data.PER_LASTNAME}
                     </Heading>
                 }
 
