@@ -23,7 +23,7 @@ import {
 } from "../../../../Service/AlertsService";
 import { AlertMessageAtom } from "./Mobilenav";
 
-export const SalesAlert = (props:any) => {
+export const SalesAlert = (props: any) => {
   const toast = useToast();
 
   const {
@@ -134,7 +134,7 @@ export const SalesAlert = (props:any) => {
               maxHeight="400px"
             >
               {isLoading === false ? (
-                data.map((values: any, idx: any) => {
+                data.length > 0 && data.map((values: any, idx: any) => {
                   return (
                     <MenuItem
                       key={"menu_item_alerts_" + idx}
@@ -165,7 +165,7 @@ export const SalesAlert = (props:any) => {
                                 {values.TEA_CLIENT}
                               </Text>
                               {String(values.TEA_DESCRIPTION) == "null" ||
-                              "" ? undefined : (
+                                "" ? undefined : (
                                 <Text fontSize="md" key={"description_" + idx}>
                                   {String(values.TEA_DESCRIPTION).substring(
                                     0,

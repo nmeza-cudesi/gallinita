@@ -76,8 +76,13 @@ export const Enviar = ({ venta, action }: { venta: any; action: any }) => {
     }
   }
   async function getProductosByVenta() {
+
+    const typeSale = await fetch(
+      import.meta.env.VITE_APP_API + "/sv_document/" + venta.DOC_ID
+    ); //falta
+    const type = await typeSale.json()
     const res = await fetch(
-      import.meta.env.VITE_APP_API + "/sales_description/bysale/" + venta.DOC_ID
+      import.meta.env.VITE_APP_API + "/sales_description/bysale/" + venta.DOC_ID + "/" + (type.SLT_ID == 15 ? "online" : "fisico")
     ); //falta
 
     const data = await res.json();

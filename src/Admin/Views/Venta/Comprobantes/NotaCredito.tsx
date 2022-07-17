@@ -17,13 +17,13 @@ import { Table, Tbody, Th, Thead, Tr } from "@chakra-ui/table";
 import React from "react";
 import { Td } from "../../../UI/Components/MyTable";
 
-export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
+export const NotaCredito = ({ venta, action }: { venta: any, action: any }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   let [cargaEnviado, SetCargaEnviado] = React.useState(false);
   let [despuesCarga, SetdespuesCarga] = React.useState(false);
   let [productos, SetProductos] = React.useState([]);
   let [tipoNota, SetTipoNota] = React.useState({
-    DCT_ID:0,
+    DCT_ID: 0,
     DCT_NAME: "",
     DCT_SERIE: "",
     DCT_SEQUENCE: 0,
@@ -55,8 +55,12 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
     return data;
   }
   async function getProductosByVenta() {
+    const typeSale = await fetch(
+      import.meta.env.VITE_APP_API + "/sv_document/" + venta.DOC_ID
+    ); //falta
+    const type = await typeSale.json()
     const res = await fetch(
-      import.meta.env.VITE_APP_API + "/sales_description/bysale/" + venta.DOC_ID
+      import.meta.env.VITE_APP_API + "/sales_description/bysale/" + venta.DOC_ID + "/" + (type.SLT_ID == 15 ? "online" : "fisico")
     ); //falta
 
     const data = await res.json();
@@ -81,8 +85,8 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
   }
   async function createCreditNote(datos: any) {
     try {
-      let ruta="";
-      
+      let ruta = "";
+
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -157,10 +161,10 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
         valorUnitario:
           ((parseFloat(element.SDT_PRICE) -
             parseFloat(element.SDT_DISCOUNT) / parseFloat(element.SDT_AMOUNT)) /
-          1.18).toFixed(2),
+            1.18).toFixed(2),
         precioUnitario:
           (parseFloat(element.SDT_PRICE) -
-          parseFloat(element.SDT_DISCOUNT) / parseFloat(element.SDT_AMOUNT)).toFixed(2),
+            parseFloat(element.SDT_DISCOUNT) / parseFloat(element.SDT_AMOUNT)).toFixed(2),
       });
     });
 
@@ -226,9 +230,9 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
       },
       productosTotal: {
         descuentoTotal: 0,
-        totalIgv: ((parseFloat(venta.DOC_NETO)/1.18)*0.18).toFixed(2),
+        totalIgv: ((parseFloat(venta.DOC_NETO) / 1.18) * 0.18).toFixed(2),
         precioNeto: (venta.DOC_NETO).toFixed(2),
-        operacionGravada: (parseFloat(venta.DOC_NETO)/1.18).toFixed(2),
+        operacionGravada: (parseFloat(venta.DOC_NETO) / 1.18).toFixed(2),
       },
       productos: products,
     };
@@ -243,16 +247,16 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
           document: {
             //ESTO SE DEJA POR DEFAULT EN PAGO AL CONTADO
             PMT_ID: 5, // METODO DE PAGO DE LA TABLA sv_payment_method
-  
+
             //VALOR CAMBIA
             DCT_ID: tipoNota.DCT_ID, //TIPO DE DOCUMENTO DE LA TABLA sv_document_type [FACTURA, BOLETA]
             //default
             SLT_ID: 5, //TIPO DE VENTA DE LA TABLA sv_sales_type [VENTA FISICA, VENTA ONLINE]
-  
+
             //ESTO SE DEJA EN DEFAULT
             XCR_ID: 5, //NO SE QUE VAINA ES, SOLO PONLE 5
             BUS_ID: 5, //DATOS DEL NEGOCIO CON EL QUE SE ESTÁ VENDIENDO
-  
+
             //CAMBIA - DATOS CLIENTE
             PER_ID: venta.PER_ID == 0 ? null : venta.PER_ID, //dato del cliente
             DOC_ID_CLIENT: venta.DOC_ID_CLIENT, //EL ID DEL CLIENTE YA SEA DNI O RUC
@@ -272,7 +276,7 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
             //CAMBIA
             DOC_IGV: venta.DOC_IGV, //IGV DEL DOC_TAXED
             DOC_NETO: venta.DOC_NETO, //DOC_TAXED + DOC_IGV
-            DOC_URLUBICATION:result[4],
+            DOC_URLUBICATION: result[4],
             //CAMBIA - ESTADO DOCUMENTO
             DOC_STATUS: "ACEPTADO", //HAY 2 ESTADO [CREADO,ACEPTADO ]
             DOC_DATE: getFecha(),
@@ -287,8 +291,8 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
           mensaje2: result[1],
           mensaje3: result[2],
         });
-        createCreditNote(newcomp).then((result)=>{
-          if(result.status==200){
+        createCreditNote(newcomp).then((result) => {
+          if (result.status == 200) {
             action();
             SetMensaje({
               alertStatus: "success",
@@ -297,7 +301,7 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
               mensaje2: "",
               mensaje3: "creado",
             });
-          }else{
+          } else {
             SetMensaje({
               alertStatus: "error",
               alertMessage: "no se pudo guardar la nota de crédito, intente nuevamente",
@@ -307,7 +311,7 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
             });
           }
         })
-        
+
       } else {
         if (result.length == 4) {
           SetMensaje({
@@ -322,7 +326,7 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
           SetMensaje({
             alertStatus: "error",
             alertMessage: "hubo algún error al enviar a sunat",
-            mensaje1: result.length>=2?result[1]:"ningún mensaje",
+            mensaje1: result.length >= 2 ? result[1] : "ningún mensaje",
             mensaje2: "ningún mensaje",
             mensaje3: "ningún mensaje",
           });
@@ -349,7 +353,7 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
   return (
     <>
       <Button
-        display={venta.DOC_STATUS.includes("ACEPTADO") && venta.DOC_DOC_TYPE != "NOTA DE CREDITO" && venta.DOC_ID_CLIENT !="00000000"? "block" : "none" }
+        display={venta.DOC_STATUS.includes("ACEPTADO") && venta.DOC_DOC_TYPE != "NOTA DE CREDITO" && venta.DOC_ID_CLIENT != "00000000" ? "block" : "none"}
         onClick={OpenModal}
       >
         Generar Nota de Crédito
@@ -480,9 +484,9 @@ export const NotaCredito = ({ venta, action }: { venta: any , action:any}) => {
               <Text align="center">Generando Nota de Crédito...</Text>
             </Box>
             <Box display={despuesCarga ? "block" : "none"}>
-              <Alert 
-              //@ts-ignore
-              status={mensaje.alertStatus}>
+              <Alert
+                //@ts-ignore
+                status={mensaje.alertStatus}>
                 <AlertIcon />
                 {mensaje.alertMessage}
               </Alert>

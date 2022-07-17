@@ -250,8 +250,13 @@ const InformacionProducto = ({
   async function getProductosByVenta() {
     if (idventa != null) {
       // const res = await fetch(import.meta.env.VITE_APP_API + "/sales/saleswithclient/"+idventa); //falta
+      const typeSale = await fetch(
+        import.meta.env.VITE_APP_API + "/document/" + idventa
+      ); //falta
+      const type = await typeSale.json();
+
       const res = await fetch(
-        import.meta.env.VITE_APP_API + "/sales_description/bysale/" + idventa
+        import.meta.env.VITE_APP_API + "/sales_description/bysale/" + idventa + "/" + (type.SLT_ID == 15 ? "online" : "fisico")
       );
       return res.json();
     } else {

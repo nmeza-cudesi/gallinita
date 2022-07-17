@@ -20,7 +20,7 @@ import { Skeleton } from "@chakra-ui/skeleton";
 import './print.css';
 export const ImpresionVentaTicket = ({
   idventa = null,
-  activador = () => {},
+  activador = () => { },
 }: {
   idventa: any;
   activador: any;
@@ -32,7 +32,7 @@ export const ImpresionVentaTicket = ({
   async function getVentasWithClient() {
     if (idventa != null) {
       // const res = await fetch(import.meta.env.VITE_APP_API + "/sales/saleswithclient/"+idventa); //falta
-      const res = await fetch(import.meta.env.VITE_APP_API  + "/document/" + idventa);
+      const res = await fetch(import.meta.env.VITE_APP_API + "/document/" + idventa);
       return res.json();
     } else {
       return null;
@@ -78,7 +78,7 @@ export const ImpresionVentaTicket = ({
 const InformacionEmpresa = () => {
   async function getEmpresa() {
     // const res = await fetch(import.meta.env.VITE_APP_API + "/sales/saleswithclient/"+idventa); //falta
-    const res = await fetch(import.meta.env.VITE_APP_API  + "/company/");
+    const res = await fetch(import.meta.env.VITE_APP_API + "/company/");
     return res.json();
   }
   const { isLoading, isError, data, error } = useQuery("empresa", getEmpresa, {
@@ -142,9 +142,13 @@ const InformacionCliente = ({ datos }: { datos: any }) => {
 const InformacionProducto = ({ idventa = null }: { idventa: any }) => {
   async function getProductosByVenta() {
     if (idventa != null) {
+      const typeSale = await fetch(
+        import.meta.env.VITE_APP_API + "/document/" + idventa
+      ); //falta
+      const type = await typeSale.json();
       // const res = await fetch(import.meta.env.VITE_APP_API + "/sales/saleswithclient/"+idventa); //falta
       const res = await fetch(
-        import.meta.env.VITE_APP_API  + "/sales_description/bysale/" + idventa
+        import.meta.env.VITE_APP_API + "/sales_description/bysale/" + idventa + "/" + (type.SLT_ID == 15 ? "online" : "fisico")
       );
       return res.json();
     } else {
@@ -188,7 +192,7 @@ const InformacionProducto = ({ idventa = null }: { idventa: any }) => {
         return (
           <React.Fragment>
             <Text>
-            {result.SDT_DESCRIPTION}
+              {result.SDT_DESCRIPTION}
             </Text>
             <Flex>
               <Text>{result.SDT_AMOUNT.toFixed(2)}</Text>
@@ -247,7 +251,7 @@ const InformacionTotal = ({ datos }: { datos: any }) => {
           Inafecta:
         </Text>
         <Text w="30%" align="right">
-        {datos.DOC_INAFECT.toFixed(2)}
+          {datos.DOC_INAFECT.toFixed(2)}
         </Text>
       </Flex>
       <Flex>
@@ -255,7 +259,7 @@ const InformacionTotal = ({ datos }: { datos: any }) => {
           IGV:
         </Text>
         <Text w="30%" align="right">
-        {datos.DOC_IGV.toFixed(2)}
+          {datos.DOC_IGV.toFixed(2)}
         </Text>
       </Flex>
       <Flex>
@@ -263,7 +267,7 @@ const InformacionTotal = ({ datos }: { datos: any }) => {
           Importe Total:
         </Text>
         <Text w="30%" align="right">
-        {datos.DOC_NETO.toFixed(2)}
+          {datos.DOC_NETO.toFixed(2)}
         </Text>
       </Flex>
       {/**Info venta toal escrita  */}

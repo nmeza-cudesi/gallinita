@@ -21,7 +21,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { BsEye } from "react-icons/bs";
 
-export const StockAlert = (props:any) => {
+export const StockAlert = (props: any) => {
   const {
     isLoading,
     isError,
@@ -90,7 +90,7 @@ export const StockAlert = (props:any) => {
                 //   loader={<Center>Loading...</Center>}
                 // >
                 <>
-                  {data.map((values: any, idx: any) => {
+                  {data.length > 0 && data.map((values: any, idx: any) => {
                     return (
                       <MenuItem
                         key={String(idx)}
