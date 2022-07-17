@@ -1,11 +1,11 @@
 import { Image } from '@chakra-ui/image'
-import { Stack, IconButton, Button, HStack, Spacer } from '@chakra-ui/react'
-import React from 'react'
+import { Stack, IconButton, Button, HStack, Spacer, Tabs, TabList, Tab, TabPanels, TabPanel, Box } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { useQuery } from 'react-query'
 import { MyReactTable } from '../../../../GlobalUI/Table/MyReactTable'
 import { getProductswithTDandCat } from '../../../../Service/ProductAdminService'
-import { TableChargeListProduct } from '../../../UI/Components/TableCharge/tablecharge'
+import { TableCharge, TableChargeListProduct } from '../../../UI/Components/TableCharge/tablecharge'
 import { DeleteProdDialog } from './DeleteProdDialog'
 import { CreateProdHijoModal, EditeProdModal } from './EditeProdModal'
 import { MyContain } from '../../../UI/Components/MyContain'
@@ -14,9 +14,10 @@ import { ButtonRefetch } from '../../../UI/Components/ButtonRefetch'
 import { CgAdd } from 'react-icons/cg'
 import { BsPlusLg } from 'react-icons/bs'
 import { ImportProd } from './ImportProd'
+import { TablaSinDatos } from '../../../UI/Components/TablaSinDatos'
 
 export const ProdTable = ({ online }: { online: boolean }) => {
-
+    const [vendida, setVendida] = useState("1");
     const { data, isLoading, isError, isFetching, refetch } = useQuery('products', () => getProductswithTDandCat(online), { refetchOnWindowFocus: false })
 
     const columns = [
@@ -73,9 +74,43 @@ export const ProdTable = ({ online }: { online: boolean }) => {
             </MyContain>
             {isLoading || isFetching ?
                 <TableChargeListProduct /> :
-                <MyContain>
-                    <MyReactTable columns={columns} data={data.status == 200 ? [] : data} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
-                </MyContain>}
+                online
+                    ?
+                    <MyContain>
+                        <Tabs variant='enclosed'>
+                            <TabList>
+                                <Tab onClick={() => {  }}>Disponibles</Tab>
+                                <Tab onClick={() => {  }}>Vendidas</Tab>
+                            </TabList>
+                            <TabPanels>
+                                <TabPanel>
+                                    {(isLoading || isFetching) ? (<TableCharge />) : (data.length > 0) ?
+                                        (
+                                            <Box w="full">
+                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
+                                                    return req.PRO_AGOTADO == "1";
+                                                })} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+                                            </Box>
+                                        ) :
+                                        (<TablaSinDatos message="No hay Ventas" />)}
+                                </TabPanel>
+                                <TabPanel>
+                                    {(isLoading || isFetching) ? (<TableCharge />) : (data.length > 0) ?
+                                        (
+                                            <Box w="full">
+                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
+                                                    return req.PRO_AGOTADO == "0";
+                                                })} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+                                            </Box>
+                                        ) :
+                                        (<TablaSinDatos message="No hay Ventas" />)}
+                                </TabPanel>
+                            </TabPanels>
+                        </Tabs>
+                    </MyContain>
+                    : <MyContain>
+                        <MyReactTable columns={columns} data={data.status == 200 ? [] : data} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+                    </MyContain>}
         </>
 
     )
@@ -87,7 +122,7 @@ const ActionCell = ({ pro }: { pro: any }) =>
         {pro.PRO_FATHER == 1 && <CreateProdHijoModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1) }}>
             <IconButton borderRadius={"full"} icon={<BsPlusLg />} aria-label="Editar" colorScheme="blue" />
         </CreateProdHijoModal>}
-        <EditeProdModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1),PRO_FATHER: (pro.PRO_REMISION == 1), PRO_INAFECT: (pro.PRO_INAFECT == "1") }}>
+        <EditeProdModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1), PRO_FATHER: (pro.PRO_REMISION == 1), PRO_INAFECT: (pro.PRO_INAFECT == "1") }}>
             <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
         </EditeProdModal>
         <DeleteProdDialog proId={pro.PRO_ID}>
