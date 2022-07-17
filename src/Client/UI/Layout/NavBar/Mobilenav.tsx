@@ -80,7 +80,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
       <Link to="/">
         <Image
-          w='150px'
+          w='235px'
           objectFit='cover'
           src='http://143.110.154.185:4000/upload/logo.jpg'
           alt='Dan Abramov'

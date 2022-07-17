@@ -6,7 +6,7 @@ import { FcNext, FcPrevious } from 'react-icons/fc'
 import { IEstados } from '../../../../Model/Order'
 import './assets/css/CambiarEstado.css'
 
-export const CambiarEstado = ({ sale, isLoading, mutateM }: { sale: any, isLoading: any, mutateM: any }) => {
+export const CambiarEstado = ({ sale, isLoading, mutateM , aprobacion}: { sale: any, isLoading: any, mutateM: any , aprobacion:any }) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const cancelRef = useRef()
@@ -34,22 +34,32 @@ export const CambiarEstado = ({ sale, isLoading, mutateM }: { sale: any, isLoadi
     }]
 
     function HandlesState(state: number, direccion: boolean) {
-        //estadoGlobal(dato)
-        dato = state
-        if (direccion && state === 3) {
-            setIsOpen(true)
-        }
-        else if (!direccion && state === 2) {
+        if(aprobacion=="1"){
+                //estadoGlobal(dato)
+            dato = state
+            if (direccion && state === 3) {
+                setIsOpen(true)
+            }
+            else if (!direccion && state === 2) {
+                toast({
+                    title: `Accion no permitida`,
+                    description:`No se puede regresar a este paso`,
+                    status: "warning",
+                    duration: 1500,
+                    isClosable: true,
+                })
+            } else {
+                mutateM(dato, sale.PEDIDO)
+                sale.ESTADO = dato
+            }
+        }else{
             toast({
                 title: `Accion no permitida`,
-                description:`No se puede regresar a este paso`,
+                description:`Necesita confirmar el voucher`,
                 status: "warning",
                 duration: 1500,
                 isClosable: true,
             })
-        } else {
-            mutateM(dato, sale.PEDIDO)
-            sale.ESTADO = dato
         }
     }
     function updateSate() {

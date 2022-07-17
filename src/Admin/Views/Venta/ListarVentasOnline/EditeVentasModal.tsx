@@ -168,6 +168,7 @@ export const EditVentasModal = ({
     let hoy = new Date();
     return hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate();
   };
+  console.log(venta);
   async function confirmar() {
     setLoading(true);
     let verifyVoucher = await VerifyVoucherOrder(venta.PEDIDO, 1, admin.iu);
@@ -380,7 +381,7 @@ export const EditVentasModal = ({
                 </Flex>
               </BoxInfo>
               <BoxInfo>
-                <CambiarEstado sale={venta} isLoading={isLoadingM} mutateM={mutateM} />
+                <CambiarEstado sale={venta} isLoading={isLoadingM} mutateM={mutateM} aprobacion={venta.APROBACION} />
               </BoxInfo>
               <Box
                 bg="white"

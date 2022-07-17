@@ -42,7 +42,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Image
             //   borderRadius="full"
-            w="150px"
+            w="235px"
             src="http://143.110.154.185:4000/upload/logo.jpg"
             alt="Phiona App"
           />
