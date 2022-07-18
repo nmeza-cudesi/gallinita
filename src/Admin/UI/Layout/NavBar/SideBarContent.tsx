@@ -51,7 +51,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             onClick={onClose}
           />
         </Flex>
-        <Accordion allowMultiple>
+        <Accordion allowMultiple style={{height:"91%",overflowY:"auto"}}>
           {accesos.map((val, idx) => (
             <AccordionItem key={idx}>
               <h2>

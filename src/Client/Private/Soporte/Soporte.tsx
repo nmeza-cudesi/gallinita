@@ -59,7 +59,7 @@ export const Soporte = () => {
     setNavClient(true);
   }, []);
   return (
-    <Box id= 'asdd' padding={{ base: '3', md: '10', lg: '16' }}>
+    <Box id='asdd' padding={{ base: '3', md: '10', lg: '16' }}>
       <MyContain overflowX='scroll'>
         <HeaderTicket setReset={setReset} />
         <SoporteTable reset={reset} />
@@ -231,7 +231,7 @@ const HeaderTicket = ({ setReset }: { setReset: any }) => {
               <FormLabel>Asunto</FormLabel>
               <Input
                 placeholder='Aqui va el asunto'
-                onChange={(e:any) => handleChangeInput('TCK_PETITIONER', e)}
+                onChange={(e: any) => handleChangeInput('TCK_PETITIONER', e)}
               />
             </FormControl>
             <br />
@@ -239,7 +239,7 @@ const HeaderTicket = ({ setReset }: { setReset: any }) => {
               <FormLabel>Descripción</FormLabel>
               <Textarea
                 placeholder='Aqui va una Descripción'
-                onChange={(e:any) => handleChangeTextArea('TCK_DESCRIPTION', e)}
+                onChange={(e: any) => handleChangeTextArea('TCK_DESCRIPTION', e)}
               />
             </FormControl>
             <br />
@@ -247,15 +247,15 @@ const HeaderTicket = ({ setReset }: { setReset: any }) => {
               <FormLabel>Lugar</FormLabel>
               <Input
                 placeholder='Aqui va el lugar'
-                onChange={(e:any) => handleChangeInput('TCK_FINAL_LOCATION', e)}
+                onChange={(e: any) => handleChangeInput('TCK_FINAL_LOCATION', e)}
               />
             </FormControl>
             <br />
             <FormControl>
               <FormLabel>Tipo de soporte</FormLabel>
-              <Select w='250px' placeholder='Selecciona un estado' onChange={(e:any) => handleChangeSelect('TCK_SUPPORT_TYPE', e)}>
-                <option key='1' value='Software'>Software</option>
-                <option key='2' value='Hardware'>Hardware</option>
+              <Select w='250px' placeholder='Selecciona un estado' onChange={(e: any) => handleChangeSelect('TCK_SUPPORT_TYPE', e)}>
+                <option key='1' value='Producto Dañado'>Producto Dañado</option>
+                <option key='2' value='Producto Vencido'>Producto Vencido</option>
               </Select>
             </FormControl>
             <br />
@@ -265,7 +265,7 @@ const HeaderTicket = ({ setReset }: { setReset: any }) => {
               width='200px'
               border='2px'
               borderColor='green.500'>
-              <input type='file' name='imagen' onChange={(e:any) => handleChangeFile(e)} />{' '}
+              <input type='file' name='imagen' onChange={(e: any) => handleChangeFile(e)} />{' '}
               <MdAddAPhoto className='evidence' type='file' />
             </Button>
             <br />

@@ -370,7 +370,7 @@ export const AddTicket = ({
                 <Box flex="1" color="black" marginRight="20px">
                   <FormLabel>Tipo de soporte</FormLabel>
                   <Input
-                    placeholder="Software / Hardware / Otros"
+                    placeholder="Producto Dañado / Producto Vencido / Otros"
                     onChange={ (e) => handleChangeInput("TCK_SUPPORT_TYPE", e) }
                   />
                 </Box>
