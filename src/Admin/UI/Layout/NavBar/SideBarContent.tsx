@@ -42,12 +42,12 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Image
             //   borderRadius="full"
-            w="235px"
+            w={{base:"150px",md:235}}
             src="http://143.110.154.185:4000/upload/logo.jpg"
             alt="Phiona App"
           />
           <CloseButton
-            display={{ base: "flex", md: "none" }}
+            display={{ base: "flex", lg: "none" }}
             onClick={onClose}
           />
         </Flex>

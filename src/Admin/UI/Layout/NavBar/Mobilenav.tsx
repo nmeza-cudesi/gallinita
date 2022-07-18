@@ -38,7 +38,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <>
       <Flex
-        ml={{ base: 0, md: 60 }}
+        ml={{ base: 0, lg: 60 }}
         px={{ base: 4, md: 4 }}
         key="mobile-nav"
         height="20"
@@ -50,7 +50,8 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         {...rest}
       >
         <IconButton
-          display={{ base: "flex", md: "none" }}
+          display={{ base: "flex", lg: "none" ,}}
+          // w="lg"
           onClick={onOpen}
           variant="outline"
           aria-label="open menu"
@@ -66,13 +67,13 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         </Box>
 
         <Spacer display={{ "base": "none", "md": "block" }} />
-        <Image
+        {/* <Image
           display={{ base: "flex", md: "none" }}
           //   borderRadius="full"
           w="235px"
           src="http://143.110.154.185:4000/upload/logo.jpg"
           alt="Phiona App"
-        />
+        /> */}
         <HStack spacing={{ base: "0", md: "6" }}>
           <SalesAlert />
           <StockAlert />

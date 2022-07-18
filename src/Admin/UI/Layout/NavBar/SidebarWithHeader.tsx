@@ -16,7 +16,7 @@ export default function SidebarWithHeader({ children }: { children: ReactNode })
         <Box minH="100vh" bg={ useColorModeValue('gray.100', 'gray.900') }>
             <SidebarContent
                 onClose={ () => onClose }
-                display={ { base: 'none', md: 'block' } }
+                display={ { base: 'none', lg: 'block' } }
             />
             <Drawer
                 autoFocus={ false }
@@ -25,14 +25,15 @@ export default function SidebarWithHeader({ children }: { children: ReactNode })
                 onClose={ onClose }
                 returnFocusOnClose={ false }
                 onOverlayClick={ onClose }
-                size="full">
+                size="full"             
+                >
                 <DrawerContent>
                     <SidebarContent onClose={ onClose } />
                 </DrawerContent>
             </Drawer>
             {/* mobilenav */ }
             <MobileNav onOpen={ onOpen } />
-            <Box ml={ { base: 0, md: 60 } } p="4">
+            <Box ml={ { base: 0, lg: 60 } } p="4">
                 { children }
             </Box>
         </Box>

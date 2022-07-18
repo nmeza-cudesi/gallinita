@@ -33,7 +33,11 @@ import { MdRemoveShoppingCart } from "react-icons/md";
 
 export const PedidosComp = ({ orders }: any) => {
   const itemOrderBG = useColorModeValue("white", "gray.800");
-
+  
+  function convertDateFormat(string: string) {
+    var info = string.split('-');
+    return info[2] + '/' + info[1] + '/' + info[0];
+}
   return (
     <Box borderRadius="lg" paddingY="2" margin={ { base: "2", sm: "5" } }>
       <Flex direction="column-reverse">
@@ -52,7 +56,7 @@ export const PedidosComp = ({ orders }: any) => {
                     <Center>
                       <Box>
                         <Text fontSize="sm">
-                          Pedido efectuado el: { val.ORD_DATE_ORDER }
+                          Pedido efectuado el: { convertDateFormat(val.ORD_DATE_ORDER) }
                         </Text>
                         <Text fontSize="sm">N° de pedido: { val.ORD_ID }</Text>
                       </Box>
