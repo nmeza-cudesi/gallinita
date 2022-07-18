@@ -64,6 +64,7 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
         let productoCompra: IProductoCompra = {
             id: producto.PRO_ID,
             cantidad: 1,
+            peso: producto.PRO_WEIGHT,
             nombre: producto.PRO_NAME,
             precio: producto.PRO_PRICE_DISCOUNT ? Number(producto.PRO_PRICE) - producto.PRO_PRICE_DISCOUNT : Number(producto.PRO_PRICE),
             subtotal: producto.PRO_PRICE_DISCOUNT ? ((producto.PRO_PRICE - producto.PRO_PRICE_DISCOUNT) * 1) : producto.PRO_PRICE * 1,
@@ -184,6 +185,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
         let productoCompra: IProductoCompra = {
             id: product_detail.PRO_ID,
             cantidad: cantidad,
+            peso: product_detail.PRO_WEIGHT,
             nombre: product_detail.PRO_NAME,
             precio: product_detail.PRO_PRICE_DISCOUNT ? Number(product_detail.PRO_PRICE) - product_detail.PRO_PRICE_DISCOUNT : Number(product_detail.PRO_PRICE),
             subtotal: product_detail.PRO_PRICE_DISCOUNT ? ((product_detail.PRO_PRICE - product_detail.PRO_PRICE_DISCOUNT) * cantidad) : product_detail.PRO_PRICE * cantidad,

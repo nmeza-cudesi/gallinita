@@ -15,7 +15,7 @@ export const GenerarDeAnulado = ({ venta }: { venta: any; }) => {
     //======================= carga de datos
     async function getProductosByVenta() {
         const typeSale = await fetch(
-            import.meta.env.VITE_APP_API + "/sv_document/" + venta.DOC_ID
+            import.meta.env.VITE_APP_API + "/document/" + venta.DOC_ID
         ); //falta
         const type = await typeSale.json()
 

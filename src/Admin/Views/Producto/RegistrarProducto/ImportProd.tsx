@@ -59,6 +59,7 @@ export const ImportProd = () => {
                 const val = d[i];
                 console.log(val);
                 let productoEncontrado = await ProductByCode((val.codigo).toString().substring(1, 6));
+                console.log(productoEncontrado);
 
                 let categoriaEncontrada = await getCategoryById(productoEncontrado[0].CAT_ID);
                 let horaCreate = new Date().toLocaleTimeString().toLocaleString()
@@ -86,6 +87,7 @@ export const ImportProd = () => {
                     "PRO_REMISION": productoEncontrado[0].PRO_REMISION,
                     "PRO_FATHER": "0",
                     "PRO_ONLINE": "1",
+                    "PRO_AGOTADO": "1",
                 }
                 console.log(values);
                 let formData = new FormData();

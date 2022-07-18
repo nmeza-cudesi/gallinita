@@ -181,10 +181,10 @@ export const EditVentasModal = ({
       const stockProduc: any = [];
       saleProduct.push({
         DOC_ID: 0,
-        PRO_ID: 128,
+        PRO_ID: 27,
         DIS_ID: null,
         SDT_CODE: "DELIVERY",
-        SDT_AMOUNT: 0,
+        SDT_AMOUNT: 1,
         SDT_DESCRIPTION: "DELIVERY",
         SDT_PRICE: company.COM_DELIVERY_PRICE,
         SDT_SUBTOTAL: company.COM_DELIVERY_PRICE,
@@ -202,9 +202,9 @@ export const EditVentasModal = ({
           SDT_CODE: values.PRO_CODE,
           SDT_AMOUNT: values.CANTIDAD,
           SDT_DESCRIPTION: values.DESCRIPCION,
-          SDT_PRICE: values.PRECIO,
-          SDT_SUBTOTAL: values.PRECIO * values.CANTIDAD,
-          SDT_DISCOUNT: (values.PRECIO * values.CANTIDAD) - values.SUBTOTAL,
+          SDT_PRICE: (values.PRECIO / values.CANTIDAD),// CALCULAMOS EL PRECIO UNITARIO A BASE DE LA CANTIDAD Y LE PRECIO QUE SALIO
+          SDT_SUBTOTAL: (values.PRECIO / values.CANTIDAD) * values.CANTIDAD,
+          SDT_DISCOUNT: ((values.PRECIO / values.CANTIDAD) * values.CANTIDAD) - values.SUBTOTAL,
           SDT_TOTAL: values.SUBTOTAL,
           SDS_DAYS_TO_SEND: values.ODT_DAYS_TO_SENDE,
           SDT_DATE: getFecha(),

@@ -3,6 +3,7 @@ export interface IProductoCompra {
     nombre: string,
     precio: number,
     cantidad: number,
+    peso?: number,
     subtotal: number,
     imagen: string,
     descripcion: string,

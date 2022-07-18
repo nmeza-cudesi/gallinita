@@ -78,7 +78,7 @@ export const Enviar = ({ venta, action }: { venta: any; action: any }) => {
   async function getProductosByVenta() {
 
     const typeSale = await fetch(
-      import.meta.env.VITE_APP_API + "/sv_document/" + venta.DOC_ID
+      import.meta.env.VITE_APP_API + "/document/" + venta.DOC_ID
     ); //falta
     const type = await typeSale.json()
     const res = await fetch(
@@ -109,7 +109,7 @@ export const Enviar = ({ venta, action }: { venta: any; action: any }) => {
             totalImpuestos: ((element.SDT_SUBTOTAL / 1.18) * 0.18).toFixed(2),
             valorVenta: (element.SDT_SUBTOTAL / 1.18).toFixed(2),
             valorUnitario: (element.SDT_PRICE / 1.18).toFixed(2),
-            precioUnitario: ((element.SDT_TOTAL / element.SDT_AMOUNT) == Infinity ? (element.SDT_PRICE / 1.18) : (element.SDT_TOTAL / element.SDT_AMOUNT)).toFixed(2),
+            precioUnitario: ((element.SDT_TOTAL / element.SDT_AMOUNT)).toFixed(2),
             descuentoItem: [
               {
                 codTipoDescuento: "01",

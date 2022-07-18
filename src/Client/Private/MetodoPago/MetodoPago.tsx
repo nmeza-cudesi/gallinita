@@ -110,9 +110,9 @@ export const MetodoPago = () => {
       ORD_STATUS: "0"
     }
     var orders_detail: IPedidoDetailModel[] = [];
-    
+
     productos.map((val, idx) => {
-      
+
       var order_detail: IPedidoDetailModel = {
         ODT_ID: null,
         DIS_ID: null,
@@ -120,7 +120,7 @@ export const MetodoPago = () => {
         SLT_ID: 15,
         PRO_ID: val.id,
         ODT_DAYS_TO_SENDE: "0",
-        ODT_AMOUNT: val.cantidad + "",
+        ODT_AMOUNT: val.peso + "",
         ODT_SUBTOTAL: val.subtotal + "",
         ODT_STATUS: "1"
       }
