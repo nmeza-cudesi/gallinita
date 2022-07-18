@@ -38,7 +38,6 @@ interface IBuscador {
     where: string,
     searcher: string
 }
-
 export const ProductoComp = ({ searcher, where }: IBuscador) => {
 
     const searcherState = useRecoilValue(SearcherState)
@@ -58,6 +57,10 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
     } */
     function cortarString(description: string) {
         return description.length > 10 ? description.slice(0, 10) + "..." : description
+    }
+    function convertDateFormat(string: string) {
+        var info = string.split('-');
+        return info[1] + '/' + info[0] + '/' + info[2];
     }
     const { isOpen, onOpen, onClose } = useDisclosure()
     function AgregarCarrito(producto: IProducto) {
@@ -179,7 +182,10 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
     if (data) {
         product_detail = data[0] as IProducto
     }
-
+    function convertDateFormat(string: string) {
+        var info = string.split('-');
+        return info[1] + '/' + info[0] + '/' + info[2];
+    }
     function AgregarCarrito() {
         let productoCompra: IProductoCompra = {
             id: product_detail.PRO_ID,
@@ -256,7 +262,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                         <Text fontSize="3xl">Descripción</Text>
                         {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text marginBottom="4" fontSize="xl">{data[0].PRO_DESCRIPTION}</Text>) : <Skeleton height={"36px"} width="100%" />}
                         {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">peso neto de{" " + data[0].PRO_WEIGHT}Kg.</Text>}
-                        {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " + data[0].PRO_EXPIRATION_DATE}</Text>}
+                        {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " +convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
                         {isLoading ?
                             <Button isLoading={isLoading} leftIcon={<FaCartPlus />} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
                                 Agregar a Carrito
@@ -284,7 +290,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                                 <Text fontSize="3xl">Descripción</Text>
                                 {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">{data[0].PRO_DESCRIPTION}</Text>}
                                 {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">peso neto de{" " + data[0].PRO_WEIGHT}Kg.</Text>}
-                                {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " + data[0].PRO_EXPIRATION_DATE}</Text>}
+                                {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " +convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
                                 {isLoading ?
                                     <Button isLoading={isLoading} leftIcon={<FaCartPlus />} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
                                         Agregar a Carrito
