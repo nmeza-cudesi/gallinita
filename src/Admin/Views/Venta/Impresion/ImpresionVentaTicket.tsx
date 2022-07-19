@@ -99,7 +99,7 @@ const InformacionEmpresa = () => {
       <Center>
         <Image
           src="gibbresh.png"
-          fallbackSrc="https://via.placeholder.com/150"
+          fallbackSrc={data[0].COM_ORGANIZATION_LOGO}
         />
       </Center>
       <Text textAlign="center">

@@ -59,8 +59,8 @@ export const EditCompanyModal = ({
             initialValues={company}
             onSubmit={async (values: any) => {
               if (file.length > 0) {
-                const path = SubirLogo(file[0])
-                values = { ...values, COM_ORGANIZATION_LOGO: path }
+                const path = await SubirLogo(file[0])
+                values = { ...values, COM_ORGANIZATION_LOGO: path.url }
               }
               await UpdateCompany(values)
 
