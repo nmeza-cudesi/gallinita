@@ -79,7 +79,7 @@ export const ImportProd = () => {
                     "PRO_BARCODE": (val.codigo).toString(),
                     "PRO_CREATE_DATE": productoEncontrado[0].PRO_CREATE_DATE,
                     "CAT_ID": productoEncontrado[0].CAT_ID,
-                    "PRO_PRICE": Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11))).toFixed(2)),
+                    "PRO_PRICE": Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)))),
                     "PRO_WEIGHT": Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)),
                     "PRO_EXPIRATION_DATE": dateexpere,
                     "PRO_IMAGE": productoEncontrado[0].PRO_IMAGE,

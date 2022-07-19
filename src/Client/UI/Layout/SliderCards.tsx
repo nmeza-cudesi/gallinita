@@ -7,13 +7,20 @@ import { getProductWithDiscount, tenProduct } from '../../../Service/TiendaOnlin
 import { TitleCenter } from '../Component/TitleCenter'
 import './SliderCards.css'
 
-export const SliderCards = () => {
-    const { data, isLoading } = useQuery('oferts', getProductWithDiscount, { refetchOnWindowFocus: false });
+export const SliderCards = ({ descuentoCant, setDescuentoCant }: { descuentoCant: any, setDescuentoCant: any }) => {
+    const { data, isLoading } = useQuery('oferts', getProductWithDiscount, {
+        refetchOnWindowFocus: false,
+        onSuccess: (product) => {
+            if (product.message) {
+                setDescuentoCant(true)
+            }
+
+        }
+    });
     const { data: tenProduc, isLoading: loading } = useQuery('tenProduct', tenProduct, { refetchOnWindowFocus: false });
 
     const colorsBoxShadow = useColorModeValue("e1e5ee", "gray-600");
     const colorBg = useColorModeValue("white", "gray.700");
-
     var descuentoSeparador = _.groupBy(data, 'DIS_PERCENTAGE')
     var keySeparador = Object.keys(descuentoSeparador)
     var descuentoSeparados: any[] = []
@@ -50,7 +57,7 @@ export const SliderCards = () => {
                                     <p className="card__description">{val.PRO_DESCRIPTION}</p>
                                     <p className="card__description"><b> S/. {val.PRO_PRICE}</b></p>
                                 </div>
-                                <Link style={{ width: "100%" }} to={"/ofert/" + val.PRO_ID}><button className="card__btn">Ver Oferta</button></Link>
+                                <Link style={{ width: "100%" }} to={"/producto/" + val.PRO_ID}><button className="card__btn">Ver Producto</button></Link>
                             </Box>)}
                     </div>
                 </Box>

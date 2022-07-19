@@ -1,5 +1,5 @@
 import { Box, Flex, Grid } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useSetRecoilState } from 'recoil';
 import { HeaderClient, NavClient } from '../../../Data/Atoms/Client';
@@ -25,6 +25,7 @@ export const ClientDashboard = () => {
   const { isLoading, isError, data, error, isFetching } = useQuery('promociones', ListPromotion, { refetchOnWindowFocus: false })
   const setNavClient = useSetRecoilState(NavClient);
   const setHeadClient = useSetRecoilState(HeaderClient);
+  const [descuentoCant, setDescuentoCant] = useState(0);
   useEffect(() => {
     setNavClient(false)
     setHeadClient(true)
@@ -50,10 +51,12 @@ export const ClientDashboard = () => {
           <CategoriaComp />
         </Flex>
         <div>
-          <TitleCenter title="Promociones" justifyContent="space-around" margin="50px 0" />
+          <TitleCenter title={descuentoCant ? "Productos" : "Promociones"} justifyContent="space-around" margin="50px 0" />
         </div>
         <Box bg="gray.200" borderRadius="20px" paddingY="10">
-          <SliderCards />
+          <SliderCards
+            descuentoCant={descuentoCant}
+            setDescuentoCant={setDescuentoCant} />
         </Box>
       </Box>
     </Flex>
