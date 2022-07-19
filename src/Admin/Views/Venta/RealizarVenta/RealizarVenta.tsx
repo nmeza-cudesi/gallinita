@@ -15,7 +15,7 @@ import { AdminState } from "../../../../Data/Atoms/Admin";
 
 export const getFecha = () => {
   let hoy = new Date();
-  return hoy.getDate() + "/" + (hoy.getMonth() + 1) + "/" + hoy.getFullYear()
+  return hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate()
 };
 
 export const RealizarVenta = () => {
