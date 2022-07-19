@@ -89,7 +89,7 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
             Footer: "Imagen",
             id: "imagen",
             // @ts-ignore
-            Cell: ({ row }) => <Image width="80%" src={ row.original.PRO_IMAGE } />,
+            Cell: ({ row }) => <Image height="200px" src={ row.original.PRO_IMAGE } />,
         },
         {
             Header: "Nombre",

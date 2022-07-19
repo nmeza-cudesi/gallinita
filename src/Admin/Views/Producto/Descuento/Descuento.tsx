@@ -102,7 +102,7 @@ export const Descuento = ({ online }: { online: boolean }) => {
                                 </datalist>
                                 :
                                 <datalist id="datalist-prod">
-                                    {!producto.data.message ? (producto.data).map((item: any) => { return <option value={item.PRO_BARCODE + " "+ item.PRO_CREATE_DATE}> {item.PRO_NAME}</option> }) : <option disabled={true} value={producto.data.message}>404</option>}
+                                    {!producto.data.message ? (producto.data).map((item: any) => { return <option value={item.PRO_BARCODE}> {item.PRO_NAME + " "+item.PRO_CREATE_DATE}</option> }) : <option disabled={true} value={producto.data.message}>404</option>}
                                 </datalist>}
                         </InputGroup>
                     </FormLabel>

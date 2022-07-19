@@ -635,6 +635,10 @@ export const InfoVenta = (props: any) => {
     DCT_SEQUENCE: "",
     DCT_SERIE: "",
   });
+  function convertDateFormat(string: string) {
+    var info = string.split('-');
+    return info[2] + '/' + info[1] + '/' + info[0];
+  }
   const [serie, SetSerie] = React.useState("");
   const [numeracion, SetNumeracion] = React.useState(0);
   function asignarSerieNumeracion(ide: any) {
@@ -683,7 +687,7 @@ export const InfoVenta = (props: any) => {
             <FormControl id="fecha">
               <p>
                 Fecha:
-                <b> {getFecha()}</b>
+                <b> {convertDateFormat(getFecha())}</b>
               </p>
             </FormControl>
             <FormControl id="vendedor">

@@ -58,10 +58,6 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
     function cortarString(description: string) {
         return description.length > 10 ? description.slice(0, 10) + "..." : description
     }
-    function convertDateFormat(string: string) {
-        var info = string.split('-');
-        return info[1] + '/' + info[0] + '/' + info[2];
-    }
     const { isOpen, onOpen, onClose } = useDisclosure()
     function AgregarCarrito(producto: IProducto) {
         let productoCompra: IProductoCompra = {
@@ -185,7 +181,9 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
     }
     function convertDateFormat(string: string) {
         var info = string.split('-');
-        return info[1] + '/' + info[0] + '/' + info[2];
+        var sinhora= info[2].toString().split(' ');
+        console.log(sinhora);
+        return info[1] + '/' + info[0] + '/' + sinhora[0];
     }
     function AgregarCarrito() {
         let productoCompra: IProductoCompra = {
