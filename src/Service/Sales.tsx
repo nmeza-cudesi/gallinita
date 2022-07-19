@@ -44,7 +44,7 @@ export const getDocumentForSaleOnline = async (id: number) => {
 
 //Cabiar el estado de la Orden
 //@ts-ignore
-export const ChangeOrderState = async ({ ORD_ID, ORD_STATUS }) => {
+export const ChangeOrderState = async ({ ORD_ID, ORD_STATUS, nombre, correo }) => {
   const requestOptions = {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
@@ -54,6 +54,29 @@ export const ChangeOrderState = async ({ ORD_ID, ORD_STATUS }) => {
     import.meta.env.VITE_APP_API + "/orders/changestatus/" + ORD_ID,
     requestOptions
   );
+  const estados = [{
+    idestado: 1,
+    nombre: "registrado"
+  }, {
+    idestado: 2,
+    nombre: "confirmado"
+  }, {
+    idestado: 3,
+    nombre: "en proceso de envio"
+  }, {
+    idestado: 4,
+    nombre: "entregado"
+  }]
+  const requestOptionsEmail = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ estadoOrden: estados.filter((val) => val.idestado == ORD_STATUS)[0].nombre, nombre: correo, correo: nombre }),
+  };
+  const resEmail = await fetch(
+    import.meta.env.VITE_APP_API + "/mail/orderUpdate",
+    requestOptionsEmail
+  );
+
   const data = await res.json();
   return data;
 };

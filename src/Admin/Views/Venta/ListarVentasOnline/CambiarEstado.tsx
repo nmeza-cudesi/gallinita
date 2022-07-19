@@ -1,12 +1,12 @@
 import { Box, Flex, Text, Icon, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, Button, IconButton, useToast } from '@chakra-ui/react'
-import React, {  useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { BsFillInboxFill, BsPersonCheckFill } from 'react-icons/bs'
 import { FaCashRegister, FaTruck } from 'react-icons/fa'
 import { FcNext, FcPrevious } from 'react-icons/fc'
 import { IEstados } from '../../../../Model/Order'
 import './assets/css/CambiarEstado.css'
 
-export const CambiarEstado = ({ sale, isLoading, mutateM , aprobacion}: { sale: any, isLoading: any, mutateM: any , aprobacion:any }) => {
+export const CambiarEstado = ({ sale, isLoading, mutateM, aprobacion }: { sale: any, isLoading: any, mutateM: any, aprobacion: any }) => {
 
     const [isOpen, setIsOpen] = useState(false)
     const cancelRef = useRef()
@@ -34,8 +34,8 @@ export const CambiarEstado = ({ sale, isLoading, mutateM , aprobacion}: { sale: 
     }]
 
     function HandlesState(state: number, direccion: boolean) {
-        if(aprobacion=="1"){
-                //estadoGlobal(dato)
+        if (aprobacion == "1") {
+            //estadoGlobal(dato)
             dato = state
             if (direccion && state === 3) {
                 setIsOpen(true)
@@ -43,19 +43,19 @@ export const CambiarEstado = ({ sale, isLoading, mutateM , aprobacion}: { sale: 
             else if (!direccion && state === 2) {
                 toast({
                     title: `Accion no permitida`,
-                    description:`No se puede regresar a este paso`,
+                    description: `No se puede regresar a este paso`,
                     status: "warning",
                     duration: 1500,
                     isClosable: true,
                 })
             } else {
-                mutateM(dato, sale.PEDIDO)
+                mutateM(dato, sale.PEDIDO, (sale.CLIENTE.trim()).length > 0 ? sale.CLIENTE : sale.TRADENAME, sale.EMAIL)
                 sale.ESTADO = dato
             }
-        }else{
+        } else {
             toast({
                 title: `Accion no permitida`,
-                description:`Necesita confirmar el voucher`,
+                description: `Necesita confirmar el voucher`,
                 status: "warning",
                 duration: 1500,
                 isClosable: true,
@@ -115,7 +115,7 @@ export const CambiarEstado = ({ sale, isLoading, mutateM , aprobacion}: { sale: 
                                 <label key={`label_radio_${idx}`} className="label_radio" htmlFor={val.idestado + "status"}>
                                     <Box key={`box_a_${idx}`} my="5">
                                         <Box key={`box_b_${idx}`} fontSize={{ base: "15px", md: "20px" }}><Icon as={val.valor} /></Box>
-                                        <Text key={`text_${idx}`}fontSize={{ base: "5px", md: "10px" }}>{val.nombre}</Text>
+                                        <Text key={`text_${idx}`} fontSize={{ base: "5px", md: "10px" }}>{val.nombre}</Text>
                                     </Box>
                                 </label>
 

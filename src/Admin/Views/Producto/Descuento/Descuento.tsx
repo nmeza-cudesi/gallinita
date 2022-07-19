@@ -4,10 +4,12 @@ import {
     NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper,
     NumberDecrementStepper
 } from '@chakra-ui/react'
+import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { BsBag } from 'react-icons/bs'
 import { FaCashRegister, FaPlus } from 'react-icons/fa'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
+import { ProductSearchSelect } from "../../../../GlobalUI/Forms/ProviderSearchSelect";
 import { IDicount, IDicountDetail } from '../../../../Model/Discount'
 import { getCategories } from '../../../../Service/CategoryAdminService'
 import { createDiscount, getProductWithCategoryOrProduct } from '../../../../Service/DescuentoAdminService'
@@ -37,6 +39,8 @@ export const Descuento = ({ online }: { online: boolean }) => {
     })
     const [addstate, setAddstate] = useState(false)
     const [choosed, setChoosed] = useState("")
+    const [pro, setPro] = useState<any>({})
+    const [prod, setProd] = useState<any>({})
     const [product, setProduct] = useState<any[]>([])
     //setSearch
 
@@ -49,20 +53,23 @@ export const Descuento = ({ online }: { online: boolean }) => {
         setSearcher({ ...searcher, where: "cat", searcher: event.target.value })
     }
     function getCodeProduct(event: any) {
-        setAddstate(true)
-        if (event.target.value != "") {
-            setChoosed(event.target.value)
-            setSearcher({ ...searcher, where: "pro", searcher: event.target.value })
+        console.log(event)
+        setPro(event)
+        /*  setAddstate(true) */
+        if (event != "") {
+            setChoosed(event)
+            setSearcher({ ...searcher, where: "pro", searcher: event })
         }
     }
     function addProduct() {
+        setProd({})
         setProduct([...product, producto.data.filter((val: any) => val.PRO_BARCODE === choosed)[0]])
     }
     function addDiscount() {
         const discount: IDicount =
         {
-            DIS_NAME: "Nuevo Descuento",
-            DIS_DESCRIPTION: "Nuevo Descuento",
+            DIS_NAME: "Descuento de " + porcentage + "%",
+            DIS_DESCRIPTION: "Descuento de " + porcentage + "%",
             DIS_AMOUNT: "2",
             DIS_PERCENTAGE: "" + porcentage,
             DIS_START_DATE: "string",
@@ -82,29 +89,42 @@ export const Descuento = ({ online }: { online: boolean }) => {
         console.log(discount);
         mutate({ discount: { ...discount }, discounts_detail });
     }
-    console.log(producto.data);
+    console.log(pro.PRO_BARCODE);
+
     return (
         <Grid gap="1rem">
             <MyContain>
                 <Flex gridGap="1rem" alignItems="center" flexDirection={{ base: "column", md: "row" }}>
                     <FormLabel htmlFor="producto" width={{ base: "90%", md: "30%" }}>Insumo
 
-                        <InputGroup>
+                        {/* <InputGroup>
                             <InputLeftElement
                                 pointerEvents="none"
                                 children={<BsBag />}
                             />
-                            {/* @ts-ignore */}
-                            <Input onChange={getCodeProduct} autoComplete={"off"} id="producto" type="search" placeholder="Ingrese Código o nombre" list="datalist-prod" />
-                            {producto.isLoading ?
-                                <datalist id="datalist-prod">
-                                    <option value="...Cargando" />
-                                </datalist>
-                                :
-                                <datalist id="datalist-prod">
-                                    {!producto.data.message ? (producto.data).map((item: any) => { return <option value={item.PRO_BARCODE}> {item.PRO_NAME + " "+item.PRO_CREATE_DATE}</option> }) : <option disabled={true} value={producto.data.message}>404</option>}
-                                </datalist>}
-                        </InputGroup>
+                            <Input onChange={getCodeProduct} autoComplete={"off"} id="producto" placeholder="Ingrese Código o nombre" list="datalist-prod" />
+
+                        </InputGroup> */}
+
+                        <Formik initialValues={{}} onSubmit={() => undefined}>
+                            <ProductSearchSelect
+                                loading={producto.isLoading}
+                                data={producto.data}
+                                label="Cliente"
+                                setPro={getCodeProduct}
+                                pro={pro}
+                                // @ts-ignore
+                                itemClick={(option, func) => {
+                                    getCodeProduct(option.PRO_BARCODE)
+                                    setProd(option)
+                                    console.log(option);
+                                }}
+                                placeholder="Buscar Insumo"
+                                name="search"
+                                id="search"
+                            />
+                        </Formik>
+
                     </FormLabel>
                     <FormLabel htmlFor="categoria" width={{ base: "90%", md: "30%" }}>Categoría
                         <Select id="categoria" onChange={getIdCategory}>
@@ -115,7 +135,7 @@ export const Descuento = ({ online }: { online: boolean }) => {
                     </FormLabel>
 
                     <Spacer />
-                    <Button width={{ base: "90%", md: "30%" }} disabled={(producto.data && addstate) ? producto.data.status : true} onClick={addProduct} leftIcon={<FaPlus />} colorScheme="green" >Agregar</Button>
+                    <Button width={{ base: "90%", md: "30%" }} disabled={(prod.PRO_BARCODE) ? false : true} onClick={addProduct} leftIcon={<FaPlus />} colorScheme="green" >Agregar</Button>
                 </Flex>
             </MyContain>
             {((product.length) > 0) && <Flex gridGap="1rem" alignItems="center" flexDirection={{ base: "column", md: "row" }}>

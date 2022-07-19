@@ -129,8 +129,8 @@ export const EditVentasModal = ({
     onChange: confirmacion,
   });
 
-  function mutateM(state: number, orderId: number) {
-    mutate({ ORD_ID: orderId, ORD_STATUS: state })
+  function mutateM(state: number, orderId: number, correo: string, nombre: string) {
+    mutate({ ORD_ID: orderId, ORD_STATUS: state, correo, nombre })
   }
 
   async function sendEmail(wtogo: string) {
