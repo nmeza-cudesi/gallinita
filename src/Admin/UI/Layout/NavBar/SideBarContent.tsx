@@ -33,8 +33,6 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       <Box
         transition="width 3s ease"
         bg={useColorModeValue("white", "gray.900")}
-        borderRight="1px"
-        borderRightColor={useColorModeValue("gray.200", "gray.700")}
         w={{ base: "full", md: 60 }}
         pos="fixed"
         h="full"
@@ -86,7 +84,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                         onClick={onClose}
                         // @ts-ignore
                         to={"/admin" + val.Ruta + child.ruta}>
-                        <Box ml={10} borderBottomColor="black" my={1}>
+                        <Box ml={10} my={1}>
                           {child.nombre}
                         </Box>
                       </Box>

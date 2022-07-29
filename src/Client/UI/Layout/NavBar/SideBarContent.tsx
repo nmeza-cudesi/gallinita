@@ -7,7 +7,7 @@ interface SidebarProps extends BoxProps {
     onClose: () => void;
 }
 export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-    const sidebarContentBG = useColorModeValue('rgba(44,82,130,1)', 'gray.900');
+    const sidebarContentBG = useColorModeValue('rgba(202, 247, 136,1)', 'gray.900');
     const sidebarContentBorderRight = useColorModeValue('gray.200', 'gray.700');
     return (
         <Box

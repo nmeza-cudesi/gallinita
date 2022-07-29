@@ -57,7 +57,7 @@ export const ImpresionVentaTicket = ({
   //   activador();
   // })
   return (
-    <div>
+    <Box marginLeft={"5"} paddingLeft={"5"}>
       {/* <Button onClick={Print} id="boton"> Imprimir</Button> */}
       <Box w="350px" border="0px" margin="3">
         {/**Info Empresa */}
@@ -71,7 +71,7 @@ export const ImpresionVentaTicket = ({
         {/**Total */}
         <InformacionTotal datos={data} />
       </Box>
-    </div>
+    </Box>
   );
 };
 
@@ -274,11 +274,11 @@ const InformacionTotal = ({ datos }: { datos: any }) => {
       <Text>Son {datos.DOC_NETO.toFixed(2)} con 0/100 soles</Text>
       {/**QR */}
       <Center>
-        <Image
+       {/*  <Image
           boxSize="150px"
           src="gibbresh.png"
           fallbackSrc="https://static-unitag.com/images/help/QRCode/qrcode.png?mh=07b7c2a2"
-        />
+        /> */}
       </Center>
       {/**Observaciones */}
       <Text>Observaciones:</Text>

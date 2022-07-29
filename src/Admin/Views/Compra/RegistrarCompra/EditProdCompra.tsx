@@ -75,7 +75,7 @@ export const EditProdCompra = ({
         >
           <ModalOverlay />
           <ModalContent maxW="40%">
-            <ModalHeader>Registrar Proveedor</ModalHeader>
+            <ModalHeader>Editar Remision</ModalHeader>
             <ModalCloseButton />
             <Formik
               enableReinitialize={true}
@@ -140,7 +140,7 @@ export const EditProdCompra = ({
                     </GridItem>
                     <GridItem mx={2} colSpan={3}>
                       <MyTextInput
-                        label="Licensia del Conductor"
+                        label="Licencia del Conductor"
                         name="REM_LICENSE"
                         placeholder="Nombre de Provincia"
                       />

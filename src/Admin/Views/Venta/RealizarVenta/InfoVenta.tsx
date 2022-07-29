@@ -672,7 +672,10 @@ export const InfoVenta = (props: any) => {
   ///====║
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{
+        borderRadius: "5px",
+        boxShadow: "-7px 0px 9px 0px #3a355d"
+      }}>
         <Box
           border="1px"
           borderColor="gray.100"
@@ -922,10 +925,10 @@ export const InfoVenta = (props: any) => {
             </Text>
           </FormControl>
         </Box>
-        <HStack>
+        <HStack p={"3"}>
           <ModalConf />
         </HStack>
       </form>
-    </Box>
+    </Box >
   );
 };

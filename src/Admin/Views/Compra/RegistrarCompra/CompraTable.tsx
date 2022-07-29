@@ -15,12 +15,14 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { BiExport } from "react-icons/bi";
 import { BsFillPrinterFill } from "react-icons/bs";
 import { useMutation, useQuery } from "react-query";
 import { MyReactTable } from "../../../../GlobalUI/Table/MyReactTable";
 import { getBuyDetail, getBuys } from "../../../../Service/ProductAdminService";
 import { AgregarRemission, EditarRemission, remissionList } from "../../../../Service/RemisionAdminService";
 import { EditProdCompra } from "./EditProdCompra";
+import { ExportRemision } from "./ExportRemision";
 
 export const CompraTable = () => {
 
@@ -99,14 +101,6 @@ export const CompraTable = () => {
 };
 
 const ActionCell = ({ prov, refetch }: { prov: any, refetch: any }) => {
-  function AbrirVentana() {
-    let ruta = import.meta.env.VITE_APP_API_SUNAT_2 + "/impresion/remision/" + prov.REM_ID;
-    let titulo = "Ventar";
-    let opciones =
-      "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=400,height=screen.height,top=0,left=0";
-
-    window.open(ruta, titulo, opciones);
-  }
 
   return (
     <Stack
@@ -117,14 +111,8 @@ const ActionCell = ({ prov, refetch }: { prov: any, refetch: any }) => {
           {prov.REM_OUT == 1 ? "En Remision" : "En Almacen"}
         </Button>
       </EditProdCompra>
-      <Tooltip label='Imprimir'>
-        <IconButton
-          colorScheme='gray'
-          aria-label='Call Segun'
-          size='lg'
-          icon={<BsFillPrinterFill />}
-          onClick={AbrirVentana}
-        />
+      <Tooltip label='Exportar'>
+        <ExportRemision idexport={prov.REM_ID} />
       </Tooltip>;
     </Stack>
   );

@@ -209,7 +209,7 @@ export const AddProdCompra = ({
         <CompraProdTable prods={prods} setProds={setProds} />
         <Flex direction="column">
           <Text float="right" mr="40%" fontWeight={500}>
-            Total de la compra: s./ {total}
+            Total de la compra: s./ {total.toFixed(2)}
           </Text>
           <Button onClick={handleAgregar}>
             Agregar

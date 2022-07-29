@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/modal";
 import { useQuery } from "react-query";
 import { AddProdCompra } from "./AddProdCompra";
+import { ImportProdRemision } from "./ImportProd";
 
 export const RegCompraModal = () => {
 
@@ -28,8 +29,9 @@ export const RegCompraModal = () => {
 
   return (
     <>
-      <Box onClick={onOpen} w={"fit-content"} display="flex" gap={5}>
-        <Button>Agregar</Button>
+      <Box w={"fit-content"} display="flex" gap={5}>
+        <Button onClick={onOpen}>Agregar</Button>
+        <ImportProdRemision />
       </Box>
       <Modal
         closeOnOverlayClick={false}

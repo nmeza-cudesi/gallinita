@@ -39,7 +39,7 @@ export const Descuento = ({ online }: { online: boolean }) => {
     })
     const [addstate, setAddstate] = useState(false)
     const [choosed, setChoosed] = useState("")
-    const [pro, setPro] = useState<any>({})
+    const [pro, setPro] = useState<any>("")
     const [prod, setProd] = useState<any>({})
     const [product, setProduct] = useState<any[]>([])
     //setSearch

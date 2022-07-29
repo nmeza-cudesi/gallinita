@@ -11,6 +11,12 @@ export const producstCategoria = async () => {
     return dat
 }
 
+export const exportRemission = async (idexport: number) => {
+    const res = await fetch(import.meta.env.VITE_APP_API + '/remission/export/' + idexport)
+    const dat = await res.json()
+    return dat
+}
+
 export const remissionList = async () => {
     const res = await fetch(import.meta.env.VITE_APP_API + '/remission')
     const dat = await res.json()

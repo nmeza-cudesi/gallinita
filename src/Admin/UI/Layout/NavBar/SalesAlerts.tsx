@@ -44,7 +44,7 @@ export const SalesAlert = (props: any) => {
     socketApi.on("newSaleOnline", async (data) => {
       var dataToast = {
         title: "Nueva venta realizada",
-        color: "green",
+        color: "#edf2f7",
         type: "v",
       };
       if (data.type != "") {
@@ -56,11 +56,12 @@ export const SalesAlert = (props: any) => {
           render: ({ onClose }) => (
             <Box
               m={2}
-              color="black"
+              color="black" 
               p={2}
               borderRadius={5}
               borderStart={"4px solid " + dataToast.color}
-              bg={dataToast.color + ".100"}
+              boxShadow="lg"
+              bg={dataToast.color}
             >
               <Flex>
                 <Box>

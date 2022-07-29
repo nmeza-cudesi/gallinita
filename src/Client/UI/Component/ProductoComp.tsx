@@ -131,9 +131,9 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                                         <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >{cortarString(val.PRO_DESCRIPTION)}</Text>
                                     </Tooltip>
 
-                                    {!val.PRO_PRICE_DISCOUNT ? <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}>S/.{val.PRO_PRICE}</span>
+                                    {!val.PRO_PRICE_DISCOUNT ? <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span>
                                         :
-                                        <><span style={{ color: "#FF4E00", textDecoration: "line-through", fontSize: "1rem" }}>S/.{val.PRO_PRICE}</span> <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1.2rem" }}>S/. {val.PRO_PRICE - val.PRO_PRICE_DISCOUNT}</span></>}
+                                        <><span style={{ color: "#FF4E00", textDecoration: "line-through", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span> <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1.2rem" }}>S/. {(val.PRO_PRICE - val.PRO_PRICE_DISCOUNT).toFixed(2)}</span></>}
                                     <Flex justifyContent={"space-between"} className='button__pro'>
 
                                         {val.PRO_DISABLED == 0 ?

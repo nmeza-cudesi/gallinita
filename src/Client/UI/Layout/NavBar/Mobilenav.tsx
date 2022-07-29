@@ -60,7 +60,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       px={{ base: 4, md: 4 }}
       flexWrap="wrap"
       alignItems="center"
-      background="linear-gradient(90deg, rgba(44,82,130,1) 0%, rgba(66,153,225,1) 100%)"
+      background="linear-gradient(90deg, rgba(202,247,136) 0%, rgba(124,157,103) 100%)"
       borderBottomColor={MobileNavBorderBottom}
       justifyContent={{
         base: "space-between",
@@ -78,14 +78,15 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         <></>
       )}
 
-      <Link to="/">
-        <Image
-          w='235px'
-          objectFit='cover'
-          src='http://143.110.154.185:4000/upload/logo.jpg'
-          alt='Dan Abramov'
-        />
-      </Link>
+      {!navclient &&
+        <Link to="/">
+          <Image
+            w='235px'
+            objectFit='cover'
+            src='http://143.110.154.185:4000/upload/logo.jpg'
+            alt='Dan Abramov'
+          />
+        </Link>}
       <Flex justifyContent="center" mr={{ base: "40px", md: "100px" }} display={{ base: "none", sm: "block" }}>
         <form
           onSubmit={(event) => {
@@ -152,13 +153,13 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   </MenuItem>
                 </Link>
                 <MenuDivider />
-                <MenuItem onClick={LogOut}>Sign out</MenuItem>
+                <MenuItem onClick={LogOut}>Cerrar Sesión</MenuItem>
               </MenuList>
               :
               <MenuList bg={menuListBG} borderColor={menuListBorder}>
                 <Link to="/login">
                   <MenuItem>
-                    Iniciar Sesion
+                    Iniciar Sesión
                   </MenuItem>
                 </Link>
                 <Link to="/registrar">

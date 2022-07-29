@@ -55,7 +55,7 @@ export const SliderCards = ({ descuentoCant, setDescuentoCant }: { descuentoCant
                                     <img src={val.PRO_IMAGE} className="card__image" />
                                     <h2 className="card__title">{val.PRO_NAME}</h2>
                                     <p className="card__description">{val.PRO_DESCRIPTION}</p>
-                                    <p className="card__description"><b> S/. {val.PRO_PRICE}</b></p>
+                                    <p className="card__description"><b> S/. {val.PRO_PRICE.toFixed(2)}</b></p>
                                 </div>
                                 <Link style={{ width: "100%" }} to={"/producto/" + val.PRO_ID}><button className="card__btn">Ver Producto</button></Link>
                             </Box>)}

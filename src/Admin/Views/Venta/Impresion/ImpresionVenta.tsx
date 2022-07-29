@@ -414,14 +414,14 @@ const CodigoQR = () => {
     <React.Fragment>
       <Box w="500px">
         <Center>
-          <Image
+          {/* <Image
             boxSize="150px"
             src="gibbresh.png"
             fallbackSrc="https://static-unitag.com/images/help/QRCode/qrcode.png?mh=07b7c2a2"
-          />
+          /> */}
         </Center>
         <Text align="center">
-          Representación impresa del comprobante daef aef ea
+          Podra ser Consultado en https://cudesi.com.pe/
         </Text>
       </Box>
     </React.Fragment>

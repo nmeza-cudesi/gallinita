@@ -38,19 +38,20 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <>
       <Flex
+        color={"white"}
         ml={{ base: 0, lg: 60 }}
         px={{ base: 4, md: 4 }}
         key="mobile-nav"
         height="20"
         alignItems="center"
-        bg={useColorModeValue("white", "gray.900")}
+        bg={"#0f1e49"}
         borderBottomWidth="1px"
         borderBottomColor={useColorModeValue("gray.200", "gray.700")}
         justifyContent={{ base: "space-between", md: "flex-end" }}
         {...rest}
       >
         <IconButton
-          display={{ base: "flex", lg: "none" ,}}
+          display={{ base: "flex", lg: "none", }}
           // w="lg"
           onClick={onOpen}
           variant="outline"
@@ -62,7 +63,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 
         <Box display={{ "base": "none", "md": "block" }}>
           <Text fontSize="xl" fontWeight={"bold"} id="title_view">
-            FIONA APP
+            FIONA APPs
           </Text>
         </Box>
 
@@ -123,7 +124,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   Configuración
                 </MenuItem>
                 <MenuDivider />
-                <MenuItem onClick={LogOut}>Sign out</MenuItem>
+                <MenuItem onClick={LogOut}>Cerrar Sesión</MenuItem>
               </MenuList>
             </Menu>
           </Flex>

@@ -1,7 +1,9 @@
 import {
   Box,
+  Flex,
   FormControl,
   FormErrorMessage,
+  Image,
   Skeleton,
   Text,
 } from "@chakra-ui/react";
@@ -107,14 +109,17 @@ export const ProductSearchSelect = ({ itemClick, setPro, pro, loading, data, lab
                     // @ts-ignore
                     onClick={() => itemClick(option, changeInput)}
                   >
-                    <Box alignItems={'start'} textAlign={'start'}>
-                      <Text fontSize="sm" fontWeight={'bold'}>
-                        {option.PRO_BARCODE}
-                      </Text>
-                      <Text fontSize="xs">
-                        {option.PRO_NAME + " " + option.PRO_CREATE_DATE}
-                      </Text>
-                    </Box>
+                    <Flex>
+                      <Image src={option.PRO_IMAGE} height={"50px"} />
+                      <Box alignItems={'start'} textAlign={'start'}>
+                        <Text fontSize="sm" fontWeight={'bold'}>
+                          {option.PRO_BARCODE}
+                        </Text>
+                        <Text fontSize="xs">
+                          {option.PRO_NAME + " " + option.PRO_CREATE_DATE}
+                        </Text>
+                      </Box>
+                    </Flex>
                   </AutoCompleteItem>
                 ))
               ) : (

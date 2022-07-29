@@ -315,7 +315,7 @@ export const ProductFindComp = ({
           <Input value={busqueda} onChange={handleChage} />
         </Flex>
         {//@ts-ignore
-          usuarios.message && <h1>No hay data</h1>}
+          usuarios.message && <h1>No se encontro resultados, asugurece de tener Stock o una Lisa de Precios activa</h1>}
         <Flex gap={5} overflowX={"auto"}>
           {//@ts-ignore
             !(usuarios.message) && usuarios.map((val: any, idx: number) => (
