@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 import { useMutation } from 'react-query';
 import { LoginAdmin } from '../../../Service/LoginService';
-import { MyTextInput } from '../../../GlobalUI/Forms/MyInputs';
+import { MyPasswordArea, MyTextInput } from '../../../GlobalUI/Forms/MyInputs';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { BiHome } from "react-icons/bi";
@@ -94,10 +94,9 @@ export const Login = () => {
                             type="text"
                             placeholder="Correo de usuario"
                         />
-                        <MyTextInput
+                        <MyPasswordArea
                             label="Contraseña"
                             name="password"
-                            type="password"
                             placeholder="Contraseña de usuario"
                         />
                         <Button

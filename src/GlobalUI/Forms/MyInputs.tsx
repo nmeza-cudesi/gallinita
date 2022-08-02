@@ -14,11 +14,12 @@ import {
   Box,
   InputRightElement,
   Flex,
+  IconButton,
 } from "@chakra-ui/react";
 import { useField } from "formik";
 import React, { useRef, useState } from "react";
 import { AiOutlineSearch, AiOutlineSend } from "react-icons/ai";
-import { BsUpload } from "react-icons/bs";
+import { BsEye, BsEyeSlash, BsUpload } from "react-icons/bs";
 import "./MyInputs.css";
 // @ts-ignore
 export const MyTextInput = ({ label, ...props }) => {
@@ -55,9 +56,8 @@ export const MyPasswordArea = ({ label, ...props }) => {
           {...props}
         />
         <InputRightElement width="4.5rem">
-          <Button h="1.75rem" size="sm" onClick={handleClick}>
-            {show ? "Hide" : "Show"}
-          </Button>
+          {show ? <IconButton onClick={handleClick} aria-label='Search database' icon={<BsEye />} /> :
+            <IconButton onClick={handleClick} aria-label='Search database' icon={<BsEyeSlash />} />}
         </InputRightElement>
       </InputGroup>
       <FormErrorMessage>{meta.error}</FormErrorMessage>

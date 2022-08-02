@@ -2,7 +2,7 @@ import { Button, IconButton, Stack, Skeleton, Img, HStack, Spacer } from '@chakr
 import React from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { getCategories } from '../../../../Service/TiendaOnlineService';
+import { getAllCategories } from '../../../../Service/TiendaOnlineService';
 import { EditCatModal } from './EditeCatModal';
 import { DeleteCatDialog } from './DeleteCatDialog';
 import { MyReactTable } from '../../../../GlobalUI/Table/MyReactTable';
@@ -15,7 +15,7 @@ import { ButtonRefetch } from '../../../UI/Components/ButtonRefetch';
 export const CatTable = () => {
 
     // ? QUERY PARA OBTENER LA DATA DEL BACKEND
-    const { isLoading, isError, data, error, isFetching, refetch } = useQuery('categories', getCategories, { refetchOnWindowFocus: false })
+    const { isLoading, isError, data, error, isFetching, refetch } = useQuery('categories', getAllCategories, { refetchOnWindowFocus: false })
 
     /*
     ? SE DEFINE LOS TEXTOS A RENDERIZAR
@@ -38,7 +38,7 @@ export const CatTable = () => {
             accessor: 'CAT_IMAGE',
             // @ts-ignore
             Cell: ({ row }) => (
-                <Img borderRadius={"full"} boxSize="80px" style={{ objectFit: "cover" }} src={ row.original.CAT_IMAGE } />
+                <Img borderRadius={"full"} boxSize="80px" style={{ objectFit: "cover" }} src={row.original.CAT_IMAGE} />
             ),
         },
         // ? SI NO SE DEFINE EL 'Filter' EL FILTRO SERÁ AUTOMÁTICO
@@ -69,7 +69,7 @@ export const CatTable = () => {
             */
             // @ts-ignore
             Cell: ({ row }) => (
-                <ActionCell cat={ row.original } />
+                <ActionCell cat={row.original} />
             ),
         },
     ]
@@ -78,21 +78,21 @@ export const CatTable = () => {
     if (isLoading || isFetching) return (<TableChargeListProduct />)
 
     // @ts-ignore
-    if (isError) return <h1>{ error.message } { ':(' }</h1>
+    if (isError) return <h1>{error.message} {':('}</h1>
 
     return (
         <>
             <MyContain>
                 <HStack>
                     <CreateCatModal>
-                        <Button leftIcon={ <FaPlus /> } colorScheme="green" >Agregar</Button>
+                        <Button leftIcon={<FaPlus />} colorScheme="green" >Agregar</Button>
                     </CreateCatModal>
                     <Spacer />
-                    <ButtonRefetch refetch={ refetch } />
+                    <ButtonRefetch refetch={refetch} />
                 </HStack>
             </MyContain>
             <MyContain>
-                <MyReactTable columns={ columns } data={ data } isPaginated hasFilters pagesOptions={ [5, 10, 15] } />
+                <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
             </MyContain>
         </>
     )
@@ -107,26 +107,37 @@ const ActionCell = ({ cat }: { cat: any }) => {
 
     const status = cat.CAT_STATUS === '1'
 
-    const { mutate, isLoading } = useMutation('editeCategory')
+    const { mutateAsync, isLoading } = useMutation('editeCategory')
 
-    function handleStatus() {
-        mutate({ ...cat, CAT_STATUS: cat.CAT_STATUS === '1' ? '2' : '1' })
+    async function handleStatus() {
+        let formData = new FormData();
+        /* append input field values to formData */
+        for (let value in cat) {
+            if (value != "CAT_STATUS") {
+                formData.append(value, cat[value]);
+            } else {
+                formData.append("CAT_STATUS", cat.CAT_STATUS === '1' ? "0" : "1");
+            }
+        }
+        //@ts-ignore
+        await mutateAsync({ formData: formData, CAT_ID: cat.CAT_ID })
+        //mutate({ ...cat, CAT_STATUS: cat.CAT_STATUS === '1' ? '2' : '1' })
     }
 
     return (
-        <Stack direction={ { base: "column", md: "row" } }>
-            <EditCatModal category={ cat }>
-                <IconButton icon={ <AiFillEdit /> } aria-label="Editar" colorScheme="blue" />
+        <Stack direction={{ base: "column", md: "row" }}>
+            <EditCatModal category={cat}>
+                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
             </EditCatModal>
-            <DeleteCatDialog catId={ cat.CAT_ID }>
-                <IconButton icon={ <AiFillDelete /> } aria-label="Eliminar" colorScheme="red" />
+            <DeleteCatDialog catId={cat.CAT_ID}>
+                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
             </DeleteCatDialog>
             <Button
-                colorScheme={ status ? "green" : "yellow" }
-                onClick={ handleStatus }
-                isLoading={ isLoading }
+                colorScheme={status ? "green" : "yellow"}
+                onClick={handleStatus}
+                isLoading={isLoading}
             >
-                { status ? 'Activado' : 'Desactivado' }
+                {status ? 'Activado' : 'Desactivado'}
             </Button>
         </Stack>)
 }

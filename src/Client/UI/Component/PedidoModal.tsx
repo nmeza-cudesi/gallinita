@@ -31,6 +31,11 @@ import { BiStore } from "react-icons/bi";
 import { TableChargeListProduct } from "../../../Admin/UI/Components/TableCharge/tablecharge";
 import { AiOutlineFileDone } from "react-icons/ai";
 
+const Texto = (row: any) => {
+    console.log(Number(row.row.original.ODT_SUBTOTAL).toFixed(2));
+    return (<Text> {Number(row.row.original.ODT_SUBTOTAL).toFixed(2)} </Text>)
+}
+
 export const PedidoList = ({
     children,
     ORD_ID,
@@ -44,17 +49,17 @@ export const PedidoList = ({
 
     return (
         <>
-            <div onClick={ onOpen }>{ children }</div>
+            <div onClick={onOpen}>{children}</div>
             <Modal
-                closeOnOverlayClick={ false }
+                closeOnOverlayClick={false}
                 size="6xl"
-                isOpen={ isOpen }
-                onClose={ onClose }>
+                isOpen={isOpen}
+                onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Lista de Insumos</ModalHeader>
                     <ModalCloseButton />
-                    <OrderDetail ORD_ID={ ORD_ID } ORD_VOUCHER={ ORD_VOUCHER } />
+                    <OrderDetail ORD_ID={ORD_ID} ORD_VOUCHER={ORD_VOUCHER} />
                 </ModalContent>
             </Modal>
         </>
@@ -89,7 +94,7 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
             Footer: "Imagen",
             id: "imagen",
             // @ts-ignore
-            Cell: ({ row }) => <Image height="200px" src={ row.original.PRO_IMAGE } />,
+            Cell: ({ row }) => <Image height="200px" src={row.original.PRO_IMAGE} />,
         },
         {
             Header: "Nombre",
@@ -105,6 +110,8 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
             Header: "Sub Total",
             Footer: "Sub Total",
             accessor: "ODT_SUBTOTAL",
+            // @ts-ignore
+            Cell: ({ row }) => <Texto row={row} />,
         },
     ];
     useEffect(() => {
@@ -124,12 +131,12 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
     if (isError)
         return (
             <h1>
-                {/* @ts-ignore */ }
-                { error.message } { ":(" }
+                {/* @ts-ignore */}
+                {error.message} {":("}
             </h1>
         );
     if (data) {
-        if (data.message) return <h1>{ data.message }</h1>;
+        if (data.message) return <h1>{data.message}</h1>;
     }
 
     //TO-DO Implementar el total dinamicamente
@@ -143,7 +150,7 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
                 border="1px solid #E2E8F0">
                 <Flex>
                     <Text fontSize="lg">
-                        Suma total del Pedido: <b> { subTotal }</b>
+                        Suma total del Pedido: <b> {subTotal.toFixed(2)}</b>
                     </Text>
                     <Spacer />
                 </Flex>
@@ -157,19 +164,19 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
                             </Box>
                             <AccordionIcon />
                         </AccordionButton>
-                        <AccordionPanel pb={ 4 }>
-                            <Center mb={ 2 }>
-                                <Image src={ ORD_VOUCHER } alt='Voucher de compra' />
+                        <AccordionPanel pb={4}>
+                            <Center mb={2}>
+                                <Image src={ORD_VOUCHER} alt='Voucher de compra' />
                             </Center>
                         </AccordionPanel>
                     </AccordionItem>
                 </Accordion>
                 <MyReactTable
-                    columns={ columns }
-                    data={ data }
+                    columns={columns}
+                    data={data}
                     isPaginated
                     hasFilters
-                    pagesOptions={ [5, 10, 15] }
+                    pagesOptions={[5, 10, 15]}
                 />
             </Box>
         </>

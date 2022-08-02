@@ -15,6 +15,8 @@ export const EditCatModal = ({ children, category }: { children: ReactNode, cate
 
     const validate = yup.object().shape({
         CAT_NAME: yup.string().required("Debe ingresar un nombre"),
+        CAT_EXPIRATION_MONTH: yup.number().required("Debe ingresar un numero valido"),
+        CAT_NUMERATION: yup.number().required("Debe ingresar un numero valido"),
         CAT_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
         CAT_CREATE_DATE: yup.date().required("Debe ingresar una fecha"),
     })
@@ -55,6 +57,18 @@ export const EditCatModal = ({ children, category }: { children: ReactNode, cate
                                     label="Nombre"
                                     name="CAT_NAME"
                                     type="text"
+                                    placeholder="Nombre de categoría"
+                                />
+                                <MyTextInput
+                                    label="Meses de Expiracion"
+                                    name="CAT_EXPIRATION_MONTH"
+                                    type="number"
+                                    placeholder="Nombre de categoría"
+                                />
+                                <MyTextInput
+                                    label="Numero de Prioridad"
+                                    name="CAT_NUMERATION"
+                                    type="number"
                                     placeholder="Nombre de categoría"
                                 />
                                 <MyTextArea

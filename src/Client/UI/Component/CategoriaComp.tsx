@@ -328,7 +328,7 @@ export const ProductFindComp = ({
               >
                 <Image
                   src={
-                    "https://s03.s3c.es/imag/_v0/770x420/6/a/6/490x_pollo-entero-crudo-770.jpg"
+                    val.PRO_IMAGE
                   }
                   alt={val.PRO_NAME}
                   width={{ base: "125px", md: "250px" }}

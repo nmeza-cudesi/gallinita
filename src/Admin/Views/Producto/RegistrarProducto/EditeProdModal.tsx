@@ -23,7 +23,7 @@ export const EditeProdModal = ({ children, product }: { children: ReactNode, pro
 
     const validate = yup.object().shape({
         PRO_NAME: yup.string().required("Debe ingresar un nombre"),
-        PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
+        //PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
         PRO_BRAND: yup.string().required("Debe ingresar un nombre secundario"),
         PRO_CODE: yup.string().required("Debe ingresar un código"),
         PRO_BARCODE: yup.string().required("Debe scanear un código  de barras"),
@@ -63,8 +63,11 @@ export const EditeProdModal = ({ children, product }: { children: ReactNode, pro
                             for (let value in values) {
                                 if (values[value]) {
                                     formData.append(value, values[value]);
+                                } else if (value == "PRO_DESCRIPTION") {
+                                    formData.append("PRO_DESCRIPTION", "");
                                 }
                             }
+
                             /* FormData requires name: id */
                             formData.append("IMAGE", file[0]);
                             console.log(values);
@@ -116,6 +119,7 @@ export const EditeProdModal = ({ children, product }: { children: ReactNode, pro
                                         <MyTextInput
                                             label="Fecha de Registro"
                                             name="PRO_CREATE_DATE"
+                                            type="datetime-local"
                                         />
                                     </GridItem>
                                     <GridItem mx={2} colSpan={3} rowSpan={2}>

@@ -24,10 +24,14 @@ export const ReportBar = () => {
   if (isLoading || isFetching) return <SkeletonReportBar />;
 
   return (
-    <Box width="auto"  m={1}>
+    <Box width="auto" m={1}>
       <Box>
-        <Center border="1px solid black" borderRadius="5px">
-          <Text fontSize="xl" fontWeight="800" color="#011627">
+        <Center
+          bg={"#3e49f9"}
+          paddingY={"3"}
+          marginX={"20%"}
+          borderRadius="10px">
+          <Text fontSize="xl" fontWeight="800" color="white">
             Documentos a travez del tiempo
           </Text>
         </Center>

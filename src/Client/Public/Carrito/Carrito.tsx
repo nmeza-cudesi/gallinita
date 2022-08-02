@@ -334,7 +334,7 @@ export const Carrito = () => {
             <Flex marginY="3" justifyContent="space-between">
               <Text opacity="0.8">Subtotal</Text>
               <Box width="80px" textAlign="end">
-                <Text>S/.{costoCarrito.subtotal}</Text>
+                <Text>S/.{costoCarrito.subtotal.toFixed(2)}</Text>
               </Box>
             </Flex>
             <Flex marginY="3" justifyContent="space-between">

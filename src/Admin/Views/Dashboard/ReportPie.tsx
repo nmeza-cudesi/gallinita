@@ -45,8 +45,12 @@ export default function ReportPie() {
   return (
     <Box width="full" m={1}>
       <Box w="auto">
-        <Center border="1px solid black" borderRadius="5px">
-          <Text fontSize="xl" fontWeight="800" color="#011627">
+        <Center
+          bg={"#3e49f9"}
+          padding={"3"}
+          marginX={"20%"}
+          borderRadius="10px">
+          <Text fontSize="xl" fontWeight="800" color="white">
             Documentos emitidos vs pagados
           </Text>
         </Center>

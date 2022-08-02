@@ -254,10 +254,10 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                 <Box flex="7" padding="8" margin="4" borderRadius="md" bg={imgAndDetailProductBG}>
                     {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text fontSize="2xl">{data[0].PRO_NAME}</Text>) : <Skeleton height={"36px"} width="100%" />}
                     <Flex gridGap="10%">
-                        {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text textDecoration={data[0].PRO_PRICE_DISCOUNT ? "line-through" : "none"} fontSize="2xl">S/. {data[0].PRO_PRICE}</Text>) : <Skeleton height={"36px"} width="100%" />}
-                        {data && (data.message ? <Text fontSize="2xl">No Data</Text> : <Text fontSize="2xl">S/. {data[0].PRO_PRICE - data[0].PRO_PRICE_DISCOUNT}</Text>)}
+                        {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text textDecoration={data[0].PRO_PRICE_DISCOUNT ? "line-through" : "none"} fontSize="2xl">S/. {data[0].PRO_PRICE.toFixed(2)}</Text>) : <Skeleton height={"36px"} width="100%" />}
+                        {data && (data.message ? <Text fontSize="2xl">No Data</Text> : <Text fontSize="2xl">S/. {(data[0].PRO_PRICE - data[0].PRO_PRICE_DISCOUNT).toFixed(2)}</Text>)}
                     </Flex>
-                    {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text display={data[0].PRO_PRICE_DISCOUNT ? "block" : "none"} fontSize="2xl">Descuento -S/. {(data[0].PRO_PRICE_DISCOUNT)}</Text>) : <Skeleton height={"36px"} width="100%" />}
+                    {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text display={data[0].PRO_PRICE_DISCOUNT ? "block" : "none"} fontSize="2xl">Descuento -S/. {(data[0].PRO_PRICE_DISCOUNT).toFixed(2)}</Text>) : <Skeleton height={"36px"} width="100%" />}
                     <Flex borderRadius="md" bg={deltailProductBG} padding="4" direction="column">
                         <Text fontSize="3xl">Descripción</Text>
                         {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text marginBottom="4" fontSize="xl">{data[0].PRO_DESCRIPTION}</Text>) : <Skeleton height={"36px"} width="100%" />}
@@ -284,7 +284,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                         <>
                             {isLoading ? <Skeleton height={"36px"} width="100%" /> : <Text fontSize="2xl">{data[0].PRO_NAME}</Text>}
                             <Flex gridGap="10%">
-                                {isLoading ? <Skeleton height={"36px"} width="100%" /> : <Text fontSize="2xl">S/. {data[0].PRO_PRICE}</Text>}
+                                {isLoading ? <Skeleton height={"36px"} width="100%" /> : <Text fontSize="2xl">S/. {data[0].PRO_PRICE.toFixed(2)}</Text>}
                             </Flex>
                             <Flex borderRadius="md" bg={deltailProductBG} padding="4" direction="column">
                                 <Text fontSize="3xl">Descripción</Text>
@@ -384,10 +384,10 @@ export const ProductoCarrito = ({ productocompra }: IProductoCompras) => {
                     <Box marginLeft="4" width={{ base: "150px", md: "150px" }}>
                         <Text fontSize={{ base: "sm", md: "lg" }} textTransform="uppercase">{val.nombre}</Text>
                         <Text whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden" display={{ base: "none", lg: "block" }} color={colorTextDiscount} fontSize="md" >{val.descripcion}</Text>
-                        <Text fontSize={{ base: "sm", sm: "lg" }} display={{ base: "block", md: "none" }} color="#FF4E00" fontWeight="bold">S/.{val.precio}</Text>
+                        <Text fontSize={{ base: "sm", sm: "lg" }} display={{ base: "block", md: "none" }} color="#FF4E00" fontWeight="bold">S/.{val.precio.toFixed(2)}</Text>
                     </Box>
                     <Box display={{ base: "none", md: "block" }} marginLeft="8" width={{ base: "100px", md: "250px" }}>
-                        <Text color="#FF4E00" fontWeight="bold">S/.{val.precio}</Text>
+                        <Text color="#FF4E00" fontWeight="bold">S/.{val.precio.toFixed(2)}</Text>
                     </Box>
                     <Flex marginY="4" alignItems="center">
                         <Box fontSize="sm">

@@ -122,7 +122,7 @@ const ActionCell = ({ pro }: { pro: any }) =>
         {pro.PRO_FATHER == 1 && <CreateProdHijoModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1) }}>
             <IconButton borderRadius={"full"} icon={<BsPlusLg />} aria-label="Editar" colorScheme="blue" />
         </CreateProdHijoModal>}
-        <EditeProdModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1), PRO_FATHER: (pro.PRO_REMISION == 1), PRO_INAFECT: (pro.PRO_INAFECT == "1") }}>
+        <EditeProdModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1), PRO_FATHER: (pro.PRO_FATHER == 1), PRO_INAFECT: (pro.PRO_INAFECT == "1") }}>
             <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
         </EditeProdModal>
         <DeleteProdDialog proId={pro.PRO_ID}>

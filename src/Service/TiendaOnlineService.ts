@@ -6,6 +6,11 @@ const getCategories = async () => {
     return res.json()
 }
 
+const getAllCategories = async () => {
+    const res = await fetch(import.meta.env.VITE_APP_API + '/category')
+    return res.json()
+}
+
 const getPersonByIdUser = async () => {
 
     const token = cookies.get('clientToken')
@@ -178,6 +183,7 @@ export {
     getProductWithDiscountById,
     CreateTicketTiendaOnline,
     getCategories,
+    getAllCategories,
     getProductsByCategoryOrSearcher,
     getPedidosByIdClient,
     getProductDetail,

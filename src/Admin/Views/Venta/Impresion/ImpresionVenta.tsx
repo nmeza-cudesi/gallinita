@@ -128,7 +128,7 @@ const InformacionEmpresa = () => {
 
   return (
     <React.Fragment>
-      <Image src="gibbresh.png" fallbackSrc="https://via.placeholder.com/150" />
+      <Image src="gibbresh.png" w={"30%"} fallbackSrc={"http://146.190.44.4:4000/upload/LOGO%20HORIZONTAL.png"} />
       {/* empresa */}
       <Box w="650px">
         <Center>
@@ -136,11 +136,6 @@ const InformacionEmpresa = () => {
             <b>{data[0].COM_COMPANY_NAME}</b>
           </Text>
         </Center>
-
-        <label></label>
-        <Text fontSize="sm">
-          <b>Descripción:</b> {data[0].COM_ORGANIZATION_SECTOR}
-        </Text>
         <Text fontSize="sm">
           <b>Dirección:</b> {data[0].COM_ORGANIZATION_DIRECTION}
         </Text>

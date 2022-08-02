@@ -60,7 +60,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       px={{ base: 4, md: 4 }}
       flexWrap="wrap"
       alignItems="center"
-      background="linear-gradient(90deg, rgba(202,247,136) 0%, rgba(124,157,103) 100%)"
+      background="linear-gradient(90deg, rgba(124,157,103) 0%, rgba(202,247,136) 100%)"
       borderBottomColor={MobileNavBorderBottom}
       justifyContent={{
         base: "space-between",

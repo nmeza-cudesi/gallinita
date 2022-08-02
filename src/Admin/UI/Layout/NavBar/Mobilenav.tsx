@@ -112,6 +112,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuList
                 bg={useColorModeValue("white", "gray.900")}
                 borderColor={useColorModeValue("gray.200", "gray.700")}
+                color={"black"}
               >
                 <MenuItem as={Link} to="/admin/opciones/perfil" key="Perfil">
                   Perfil

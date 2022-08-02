@@ -51,11 +51,11 @@ export const CreateProdModal = ({ children, online }: { children: ReactNode, onl
         online ?
             {
                 PRO_NAME: yup.string().required("Debe ingresar un nombre"),
-                PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
+                //PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
                 PRO_BRAND: yup.string().required("Debe ingresar un nombre secundario"),
                 PRO_CODE: yup.string().required("Debe ingresar un código"),
                 PRO_BARCODE: yup.string().required("Debe scanear un código  de barras"),
-                PRO_CREATE_DATE: yup.date().required("Debe ingresar una fecha"),
+                //PRO_CREATE_DATE: yup.date().required("Debe ingresar una fecha"),
                 CAT_ID: yup.string().required("Debe seleccionar una categoría"),
                 PRO_PRICE: yup.string().required("Dene ser un número válido"),
                 PRO_WEIGHT: yup.string().required("Dene ser un número válido"),
@@ -64,11 +64,11 @@ export const CreateProdModal = ({ children, online }: { children: ReactNode, onl
             :
             {
                 PRO_NAME: yup.string().required("Debe ingresar un nombre"),
-                PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
+                //PRO_DESCRIPTION: yup.string().required("Debe ingresar una descripción"),
                 PRO_BRAND: yup.string().required("Debe ingresar un nombre secundario"),
                 PRO_CODE: yup.string().required("Debe ingresar un código"),
                 PRO_BARCODE: yup.string().required("Debe scanear un código  de barras"),
-                PRO_CREATE_DATE: yup.date().required("Debe ingresar una fecha"),
+                //PRO_CREATE_DATE: yup.date().required("Debe ingresar una fecha"),
                 CAT_ID: yup.string().required("Debe seleccionar una categoría"),
                 PRO_MIN: yup.string().required("Dene ser un número válido"),
                 PRO_MAX: yup.string().required("Dene ser un número válido"),

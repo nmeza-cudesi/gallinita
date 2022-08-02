@@ -27,6 +27,8 @@ interface StatsCardProps {
   defaultstat: any;
   icon: ReactNode;
   loading: boolean;
+  color: string;
+
 }
 export const StatsCard = (props: StatsCardProps) => {
   return (
@@ -34,9 +36,11 @@ export const StatsCard = (props: StatsCardProps) => {
       px={{ base: 2, md: 4 }}
       py={"5"}
       shadow={"xl"}
-      border={"1px solid"}
-      borderColor={useColorModeValue("gray.800", "gray.500")}
-      rounded={"lg"}
+
+      bg={props.color}
+      borderRadius="10px"
+      color="white"
+
     >
       <Box width={"auto"}>
         <Flex justifyContent={"space-between"}>
@@ -100,11 +104,13 @@ export default function ReportStatsCards() {
     <Box>
       <Box>
         <Center
+          bg={"#3e49f9"}
           textAlign={"center"}
-          border="1px solid black"
-          borderRadius="5px"
+          paddingY={"3"}
+          marginX={"20%"}
+          borderRadius="10px"
         >
-          <Text fontSize="xl" fontWeight="800" color="#011627">
+          <Text fontSize="xl" fontWeight="800" color="white">
             Reportes Generales
           </Text>
         </Center>
@@ -122,20 +128,23 @@ export default function ReportStatsCards() {
           spacing={{ base: 5, lg: 8 }}
         >
           <StatsCard
+            color="#0f1e49"
             title={"Total Vendido"}
             stat={(data.contado).toFixed(2)}
             defaultstat={"0.00"}
-            icon={<FaMoneyBillAlt size={"3em"} />}
+            icon={<FaMoneyBillAlt size={"3em"} color="white" />}
             loading={isLoading || isFetching}
           />
           <StatsCard
+            color="#0080ff"
             title={"Total a cobrar"}
             stat={(data.totalcredito).toFixed(2)}
             defaultstat={"0.00"}
-            icon={<FiServer size={"3em"} />}
+            icon={<FiServer size={"3em"} color="white" />}
             loading={isLoading || isFetching}
           />
           <StatsCard
+            color="#0080ff"
             title={
               <Flex gap={"1"}>
                 <Text>Total por cobrar a</Text>
@@ -144,7 +153,7 @@ export default function ReportStatsCards() {
             }
             stat={dataSelect}
             defaultstat={(data.totalcredito).toFixed(2)}
-            icon={<GiReceiveMoney size={"3em"} />}
+            icon={<GiReceiveMoney size={"3em"} color="white" />}
             loading={isLoading || isFetching}
           />
         </SimpleGrid>
