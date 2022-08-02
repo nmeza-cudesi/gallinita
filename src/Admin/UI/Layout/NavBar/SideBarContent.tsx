@@ -80,7 +80,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                     <ListItem key={idx}>
                       <Box
                         as={NavLink}
-                        activeStyle={{ color: "blue" }}
+                        activeStyle={{ color: "#00ffff" }}
                         onClick={onClose}
                         // @ts-ignore
                         to={"/admin" + val.Ruta + child.ruta}>
