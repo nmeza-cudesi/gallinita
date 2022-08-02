@@ -27,8 +27,8 @@ export const CalculadorTotal = (props: any) => {
             <Spacer/>
             <Divider/>
             <Spacer/>
-            <table>
-                <tbody>
+            <table >
+                <tbody  >
 
                     <tr>
                         <th style={ { textAlign: 'right', paddingRight: '10px' } }>Total Bruto</th>

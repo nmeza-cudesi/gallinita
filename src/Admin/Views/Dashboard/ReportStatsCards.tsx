@@ -77,10 +77,10 @@ export const SelectTitle = (props: any) => {
       onChange={(e: any) => props.changeSelect(e.target.value)}
       style={{ fontSize: "small" }}
     >
-      <option value="">Todo</option>
+      <option style={{background:"#2321fd"}} value="">Todo</option>
       {props.data.map((item: any, idx: any) => {
         return (
-          <option key={idx} value={item.TOTAL}>
+          <option style={{background:"#2321fd"}} key={idx} value={item.TOTAL}>
             {item.PAY}
           </option>
         );
@@ -147,8 +147,8 @@ export default function ReportStatsCards() {
             color="#0080ff"
             title={
               <Flex gap={"1"}>
-                <Text>Total por cobrar a</Text>
-                <SelectTitle data={data.credito} changeSelect={setDataSelect} />
+                <Text >Total por cobrar a</Text>
+                <SelectTitle background="#00ffff" data={data.credito} changeSelect={setDataSelect} />
               </Flex>
             }
             stat={dataSelect}
