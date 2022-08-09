@@ -352,7 +352,7 @@ export const MyReactTable = ({columns: userColumns, data, isPaginated = false, p
                                 <Button onClick={() => gotoPage(val - 1)} key={i}>{val}</Button>
                             )
                     }
-                    <Button colorScheme="green" >{pageIndex + 1}</Button>
+                    <Button bg={"#3e49f9"} color={"white"} >{pageIndex + 1}</Button>
                     {
                         nextFive(pageIndex).filter(val => val <= pageCount - 1)
                             .map((val, i) =>
@@ -361,7 +361,7 @@ export const MyReactTable = ({columns: userColumns, data, isPaginated = false, p
                     }
                     <IconButton aria-label="go-next" icon={<IoCaretForwardSharp />} onClick={() => nextPage()} disabled={!canNextPage} />
                     <IconButton aria-label="go-to-last" icon={<IoPlayForwardSharp />} onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} />
-                    <Badge colorScheme="green" fontSize="md">
+                    <Badge bg={"#3e49f9"} color="white" fontSize="md">
                         Página{' '}
                         <strong>
                             {pageIndex + 1} de {pageOptions.length}

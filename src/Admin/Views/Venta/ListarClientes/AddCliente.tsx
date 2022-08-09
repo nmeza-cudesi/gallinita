@@ -124,7 +124,7 @@ export const AddCliente = ({
             <Button
                 onClick={OpenDraw}
                 ref={buttonOpen}
-                colorScheme='green'
+                bg={"#0f1e49"} color={"white"} _hover={{}}
                 size={sizeButton}>
                 {icon}
                 {title}

@@ -52,7 +52,7 @@ const ExportCSV = ({ csvData, fileName, isLoading }: any) => {
 
     return (
 
-        <Button isLoading={isLoading} colorScheme="blue" leftIcon={<BsDownload />} onClick={(e) => exportToCSV(csvData, fileName)}>Export</Button>
+        <Button isLoading={isLoading} bg={"#3e49f9"} leftIcon={<BsDownload />} onClick={(e) => exportToCSV(csvData, fileName)}>Export</Button>
 
     )
 

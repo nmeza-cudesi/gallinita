@@ -65,7 +65,7 @@ export const SliderCards = ({ descuentoCant, setDescuentoCant }: { descuentoCant
             <>
                 {descuentoSeparados.map((descuentoEspecifico: any, idx: number) =>
                     <Box key={idx}>
-                        <TitleCenter title={"Ofertas del " + descuentoEspecifico.porcentaje + "%"} bg="linear-gradient(90deg, rgb(165 177 229) 0%, rgb(33 120 192) 100%)"
+                        <TitleCenter title={"Ofertas del " + descuentoEspecifico.porcentaje + "%"} bg="linear-gradient(90deg, rgba(202,247,136) 0%, rgba(124,157,103) 100%)"
                             padding={{ base: "8px 40px", md: "8px 80px" }} borderRadius="0 40px 40px 0 " width="80%" justifyContent="flex-start" margin="20px 0" />
                         <div key={"descuento" + idx} className="wrapper">
                             {isLoading ? <h1>cargando</h1> : (descuentoEspecifico.descuento).length > 0 ? (descuentoEspecifico.descuento).map((val: any) =>

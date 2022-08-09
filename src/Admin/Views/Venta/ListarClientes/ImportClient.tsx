@@ -93,7 +93,7 @@ export const ImportClient = () => {
     };
 
     return (
-        <Button isLoading={importanding} onClick={handleFile} mx={2} leftIcon={<BsUpload />} colorScheme="green">
+        <Button isLoading={importanding} onClick={handleFile} mx={2} leftIcon={<BsUpload />} bg={"#0f1e49"} color={"white"} _hover={{}}>
             <Text mx={2}>Import</Text>
             <input
                 ref={file}

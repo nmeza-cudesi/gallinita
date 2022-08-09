@@ -36,7 +36,7 @@ export const ClientDashboard = () => {
         {isLoading ? <Box>cargando</Box> : <Slider promocion={data} />}
       </div>
       <Box bg="white" borderRadius="lg" margin={{ base: "3", md: "7" }} paddingX={{ base: "2", md: "8" }} paddingY="5">
-        <Flex gridGap="5" overflowY="auto" css={{
+        {/* <Flex gridGap="5" overflowY="auto" css={{
           '&::-webkit-scrollbar': {
             width: '1px',
           },
@@ -48,8 +48,8 @@ export const ClientDashboard = () => {
             borderRadius: '12px',
           },
         }}>
-          <CategoriaComp />
-        </Flex>
+          
+        </Flex> */}
         <div>
           <TitleCenter title={descuentoCant ? "Productos" : "Promociones"} justifyContent="space-around" margin="50px 0" />
         </div>

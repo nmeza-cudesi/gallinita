@@ -128,7 +128,7 @@ const InformacionEmpresa = () => {
 
   return (
     <React.Fragment>
-      <Image src="gibbresh.png" w={"30%"} fallbackSrc={"http://146.190.44.4:4000/upload/LOGO%20HORIZONTAL.png"} />
+      <Image src="gibbresh.png" w={"30%"} fallbackSrc={import.meta.env.VITE_APP_LOGO + "/upload/LOGO%20HORIZONTAL.png"} />
       {/* empresa */}
       <Box w="650px">
         <Center>

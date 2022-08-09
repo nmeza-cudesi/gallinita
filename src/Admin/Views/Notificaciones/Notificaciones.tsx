@@ -155,7 +155,7 @@ export const SalesAlert = () => {
             fontSize={{ sm: "lg", md: "xl", lg: "lg" }}
             fontWeight="bold"
           >
-            Historico de Alertas de Ventas
+            Histórico de Alertas de Ventas
           </Text>
           <Button size="xs" onClick={() => sales_refetch()}>
             <Icon as={GrRefresh} />

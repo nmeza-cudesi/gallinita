@@ -306,7 +306,9 @@ const VerVenta = ({ venta }: { venta: any }) => {
     <>
       <Tooltip label='Ver'>
         <IconButton
-          colorScheme='teal'
+          bg={"#0080ff"}
+          color="white"
+          _hover={{}}
           aria-label='Call Segun'
           size='lg'
           /*@ts-ignore*/

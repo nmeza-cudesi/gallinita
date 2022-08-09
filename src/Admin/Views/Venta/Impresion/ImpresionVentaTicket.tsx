@@ -99,7 +99,7 @@ const InformacionEmpresa = () => {
       <Center>
         <Image
           src="gibbresh.png"
-          fallbackSrc={"http://146.190.44.4:4000/upload/LOGO%20HORIZONTAL.png"}
+          fallbackSrc={import.meta.env.VITE_APP_LOGO + "/upload/LOGO%20HORIZONTAL.png"}
         />
       </Center>
       <Text textAlign="center">
@@ -274,7 +274,7 @@ const InformacionTotal = ({ datos }: { datos: any }) => {
       <Text>Son {datos.DOC_NETO.toFixed(2)} con 0/100 soles</Text>
       {/**QR */}
       <Center>
-       {/*  <Image
+        {/*  <Image
           boxSize="150px"
           src="gibbresh.png"
           fallbackSrc="https://static-unitag.com/images/help/QRCode/qrcode.png?mh=07b7c2a2"

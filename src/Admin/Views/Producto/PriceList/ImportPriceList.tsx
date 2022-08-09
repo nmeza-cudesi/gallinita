@@ -60,8 +60,8 @@ export const ImportPriceList = () => {
     };
     
     return (
-        <Button onClick={handleFile} mx={2} leftIcon={<BsUpload />} colorScheme="green">
-            <Text mx={2}>Import</Text>
+        <Button onClick={handleFile} mx={2} leftIcon={<BsUpload />} bg={"#0f1e49"} >
+            <Text mx={2}>Importar</Text>
             <input
                 ref={file}
                 hidden

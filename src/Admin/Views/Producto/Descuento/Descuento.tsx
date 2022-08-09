@@ -86,6 +86,7 @@ export const Descuento = ({ online }: { online: boolean }) => {
             }
             discounts_detail.push(order_detail)
         })
+        setProduct([])
         console.log(discount);
         mutate({ discount: { ...discount }, discounts_detail });
     }

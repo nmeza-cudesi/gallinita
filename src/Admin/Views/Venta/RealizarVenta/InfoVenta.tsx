@@ -503,8 +503,10 @@ export const InfoVenta = (props: any) => {
                 }
               : saveDataVenta
           }
-          colorScheme="blue"
+          bg={"#2321fd"}
           w="100%"
+          color={"white"}
+          _hover={{ bg: "#0080ff" }}
         >
           Generar
         </Button>

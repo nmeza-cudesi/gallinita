@@ -79,7 +79,7 @@ export const Comprobantes = () => {
       Cell: ({ row }) => (
         <Popover placement='left'>
           <PopoverTrigger>
-            <Button>Acciones</Button>
+            <Button bg={"#0080ff"} color="white" _hover={{}}>Acciones</Button>
           </PopoverTrigger>
           <Portal>
             <PopoverContent>

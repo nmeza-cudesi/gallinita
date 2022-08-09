@@ -10,6 +10,18 @@
     border-radius: 20px;
 }
 
+.contenedor__prod_skeleton {
+    background: white;
+    transition: box-shadow .5s;
+    color: white;
+    padding: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
 .product__datos {
     transition: transform .5s;
     padding: 0 2px;

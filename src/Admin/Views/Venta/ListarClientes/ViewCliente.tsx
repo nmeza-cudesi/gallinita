@@ -72,7 +72,9 @@ export const ViewCliente = ({
         <Button
           onClick={onOpen}
           onClickCapture={() => getOneClient(idCliente)}
-          colorScheme="teal"
+          bg={"#0f1e49"}
+          color={"white"}
+          _hover={{}}
         >
           {icon}
           {title}

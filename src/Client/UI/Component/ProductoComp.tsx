@@ -85,7 +85,18 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
         onOpen();
     }
 
-    if (isLoading) { return (<h1>Cargando...</h1>) }
+    if (isLoading) {
+        return (
+            <Flex justifyContent="center">
+                <Grid padding={{ base: "5", md: "10" }} justify-self="center" maxWidth="1200px" templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }} gap={{ base: "5", md: "8" }}>
+                    <ProductSkeleton />
+                    <ProductSkeleton />
+                    <ProductSkeleton />
+                    <ProductSkeleton />
+                </Grid>
+            </Flex>
+        )
+    }
     if (error) { return (<h1>algo salio mal :(</h1>) }
     return (
 
@@ -118,46 +129,75 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
             <Grid padding={{ base: "5", md: "10" }} justify-self="center" maxWidth="1200px" templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }} gap={{ base: "5", md: "8" }}>
                 {!data ? <h1>Cargando...</h1> : data.length > 0 ? data.map((val: any, idx: number) => {
                     return (
-                        (val.PRO_DISABLED == 0 || val.PRO_AGOTADO == 0) ? <></> : <div className="contenedor__prod">
-                            <div>
-                                <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
-                                    <Image src={val.PRO_IMAGE} alt={val.PRO_NAME} width="100%" height={{ base: "100px", md: "200px" }} objectFit="cover" />
-                                </Link>
-                                <div className='product__datos'>
+                        (val.PRO_DISABLED == 0 || val.PRO_AGOTADO == 0) ? <></> :
+                            <div className="contenedor__prod">
+                                <div>
                                     <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
-                                        <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} fontWeight={"700"}>{val.PRO_NAME}</Text>
+                                        <Image src={val.PRO_IMAGE} alt={val.PRO_NAME} width="100%" height={{ base: "100px", md: "200px" }} objectFit="cover" />
                                     </Link>
-                                    <Tooltip label={val.PRO_DESCRIPTION} aria-label='A tooltip'>
-                                        <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >{cortarString(val.PRO_DESCRIPTION)}</Text>
-                                    </Tooltip>
+                                    <div className='product__datos'>
+                                        <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
+                                            <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} fontWeight={"700"}>{val.PRO_NAME}</Text>
+                                        </Link>
+                                        <Tooltip label={val.PRO_DESCRIPTION} aria-label='A tooltip'>
+                                            <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >{cortarString(val.PRO_DESCRIPTION)}</Text>
+                                        </Tooltip>
 
-                                    {!val.PRO_PRICE_DISCOUNT ? <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span>
-                                        :
-                                        <><span style={{ color: "#FF4E00", textDecoration: "line-through", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span> <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1.2rem" }}>S/. {(val.PRO_PRICE - val.PRO_PRICE_DISCOUNT).toFixed(2)}</span></>}
-                                    <Flex justifyContent={"space-between"} className='button__pro'>
+                                        {!val.PRO_PRICE_DISCOUNT ? <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span>
+                                            :
+                                            <><span style={{ color: "#FF4E00", textDecoration: "line-through", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span> <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1.2rem" }}>S/. {(val.PRO_PRICE - val.PRO_PRICE_DISCOUNT).toFixed(2)}</span></>}
+                                        <Flex justifyContent={"space-between"} className='button__pro'>
 
-                                        {val.PRO_DISABLED == 0 ?
-                                            <Box cursor="not-allowed" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
-                                                <FaCartPlus />
-                                            </Box> :
-                                            <Box cursor="pointer" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
-                                                <FaCartPlus onClick={() => { AgregarCarrito(val); }} />
-                                            </Box>}
+                                            {val.PRO_DISABLED == 0 ?
+                                                <Box cursor="not-allowed" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
+                                                    <FaCartPlus />
+                                                </Box> :
+                                                <Box cursor="pointer" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
+                                                    <FaCartPlus onClick={() => { AgregarCarrito(val); }} />
+                                                </Box>}
 
-                                        {val.PRO_DISABLED == 0 ? <Button borderRadius={"full"} disabled fontWeight={"200"} variant='outline'>Agotado</Button> : <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
-                                            <Button borderRadius={"full"} fontWeight={"200"} variant='outline'>Ver más</Button>
-                                        </Link>}
-                                    </Flex>
+                                            {val.PRO_DISABLED == 0 ? <Button borderRadius={"full"} disabled fontWeight={"200"} variant='outline'>Agotado</Button> : <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
+                                                <Button borderRadius={"full"} fontWeight={"200"} variant='outline'>Ver más</Button>
+                                            </Link>}
+                                        </Flex>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     )
                 }
 
-                ) : <h1>No se encontraron productos</h1>}
+                ) : <ProductNoFound />}
             </Grid></Flex>
     )
 }
+const ProductSkeleton = () =>
+(<Box className="contenedor__prod_skeleton" height={"365px"}>
+    <div>
+        <Skeleton width="236px" height={{ base: "100px", md: "200px" }} mb={"2"} /> {/* <Image width="236px" height={{ base: "100px", md: "200px" }} objectFit="cover" /> */}
+        <div className='product__datos'>
+            <Skeleton height='20px' mb={"2"} />
+            <Skeleton height='20px' />
+            <Tooltip aria-label='A tooltip'>
+                <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >...</Text>
+            </Tooltip>
+            <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}><Skeleton height='20px' w={"8"}/></span>
+            <Flex justifyContent={"space-between"} className='button__pro'>
+                <Box cursor="not-allowed" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
+                    <FaCartPlus />
+                </Box>
+            </Flex>
+        </div>
+    </div>
+</Box>)
+
+const ProductNoFound = () =>
+(
+    <Box gridColumn={"1/4"}>
+        <b style={{ fontSize: "25px" }}>Lo sentimos, no encontramos insumos relacionados a esta búsqueda :(</b>
+        <Text mt={"5"}>Podés intentar con un término más general o revisar que esté bien escrito</Text>
+        <Text fontSize={"100px"} mt={"5"}>🙁</Text>
+    </Box>
+)
 interface IproductoDetail {
     id: number,
     where: string
@@ -181,7 +221,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
     }
     function convertDateFormat(string: string) {
         var info = string.split('-');
-        var sinhora= info[2].toString().split(' ');
+        var sinhora = info[2].toString().split(' ');
         console.log(sinhora);
         return info[1] + '/' + info[0] + '/' + sinhora[0];
     }
@@ -216,7 +256,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
     }, [data])
 
     /*     if (isLoading) return (<Text>asd</Text>);
-        if (data.message) return (<Text>{data.message}</Text>); */
+                    if (data.message) return (<Text>{data.message}</Text>); */
     return (
         <Flex paddingX="4" direction={{ base: "column", md: "row" }} justifyContent="space-around">
             <Modal isOpen={isOpen} onClose={onClose}>
@@ -262,7 +302,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                         <Text fontSize="3xl">Descripción</Text>
                         {data ? (data.message ? <Text fontSize="2xl">No Data</Text> : <Text marginBottom="4" fontSize="xl">{data[0].PRO_DESCRIPTION}</Text>) : <Skeleton height={"36px"} width="100%" />}
                         {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">peso neto de{" " + data[0].PRO_WEIGHT}Kg.</Text>}
-                        {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " +convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
+                        {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " + convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
                         {isLoading ?
                             <Button isLoading={isLoading} leftIcon={<FaCartPlus />} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
                                 Agregar a Carrito
@@ -290,7 +330,7 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                                 <Text fontSize="3xl">Descripción</Text>
                                 {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">{data[0].PRO_DESCRIPTION}</Text>}
                                 {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">peso neto de{" " + data[0].PRO_WEIGHT}Kg.</Text>}
-                                {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " +convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
+                                {isLoading ? <Skeleton height={"36px"} width="100%" marginBottom="4" /> : <Text marginBottom="4" fontSize="xl">Fecha de vencimiento{" " + convertDateFormat(data[0].PRO_EXPIRATION_DATE)}</Text>}
                                 {isLoading ?
                                     <Button isLoading={isLoading} leftIcon={<FaCartPlus />} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
                                         Agregar a Carrito

@@ -21,6 +21,9 @@ import {
   VStack,
   useToast,
   Image,
+  ButtonGroup,
+  Button,
+  Divider,
 } from "@chakra-ui/react";
 import { Link, Redirect } from "react-router-dom";
 import { ClientState, NavClient } from "../../../../Data/Atoms/Client";
@@ -30,6 +33,7 @@ import { CartHeader } from "./CartHeader";
 import Cookies from "universal-cookie";
 import { useQuery } from "react-query";
 import { getCompany } from "../../../../Service/CompanyService";
+import { CategoriaComp } from "../../Component/CategoriaComp";
 
 interface MobileProps extends FlexProps {
   onOpen: () => void;
@@ -56,148 +60,153 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     )
   }
   return (
-    <Flex
-      px={{ base: 4, md: 4 }}
-      flexWrap="wrap"
-      alignItems="center"
-      background="linear-gradient(90deg, rgba(124,157,103) 0%, rgba(202,247,136) 100%)"
-      borderBottomColor={MobileNavBorderBottom}
-      justifyContent={{
-        base: "space-between",
-        md: navclient ? "flex-end" : "space-between",
-      }}>
-      {auth && navclient ? (
-        <IconButton
-          display={{ base: "flex", md: "none" }}
-          onClick={onOpen}
-          variant="outline"
-          aria-label="open menu"
-          icon={<FiMenu />}
-        />
-      ) : (
-        <></>
-      )}
+    <Box
+      background="linear-gradient(90deg, rgba(124,157,103) 0%, rgba(202,247,136) 100%)">
+      <Flex
+        px={{ base: 4, md: 4 }}
+        flexWrap="wrap"
+        alignItems="center"
 
-      {!navclient &&
-        <Link to="/">
-          <Image
-            w='235px'
-            objectFit='cover'
-            src='http://143.110.154.185:4000/upload/logo.jpg'
-            alt='Dan Abramov'
+        borderBottomColor={MobileNavBorderBottom}
+        justifyContent={{
+          base: "space-between",
+          md: navclient ? "flex-end" : "space-between",
+        }}>
+        {auth && navclient ? (
+          <IconButton
+            display={{ base: "flex", md: "none" }}
+            onClick={onOpen}
+            variant="outline"
+            aria-label="open menu"
+            icon={<FiMenu />}
           />
-        </Link>}
-      <Flex justifyContent="center" mr={{ base: "40px", md: "100px" }} display={{ base: "none", sm: "block" }}>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            setRedirect(true);
-            setSearcherState({ where: true, key: buscador });
-          }}>
-          {redirect && <Redirect to={"/buscador/" + buscador} />}
-          <InputGroup margin="5">
-            <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
-            <Input
-              bgColor="white"
-              onChange={(event) => {
-                if (event.target.value != "") {
-                  setBuscador(event.target.value);
-                  setRedirect(false);
-                }
-              }}
-              focusBorderColor=""
-              type="tel"
-              placeholder="Buscar producto"
+        ) : (
+          <></>
+        )}
+
+        {!navclient &&
+          <Link to="/">
+            <Image
+              w='235px'
+              objectFit='cover'
+              src={import.meta.env.VITE_APP_LOGO + '/upload/logo.jpg'}
+              alt='Dan Abramov'
             />
-          </InputGroup>
-        </form>
-      </Flex>
-      <HStack spacing={{ base: "0", md: "6" }}>
-        <CartHeader />
-        <Flex alignItems={"center"}>
-          <Menu>
-            <MenuButton
-              py={2}
-              transition="all 0.3s"
-              _focus={{ boxShadow: "none" }}>
-              <HStack>
-                {auth.auth && <>
-                  <Avatar
-                    size={"sm"}
-                    src={
-                      "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                    }
-                  />
-                  <NameClientUser name={auth.user} />
-                </>}
-                <Box display={{ base: "none", md: "flex" }}>
-                  <FiChevronDown />
-                </Box>
-              </HStack>
-            </MenuButton>
-            {auth.auth ?
-              <MenuList bg={menuListBG} borderColor={menuListBorder}>
-                <Link to="/perfil">
-                  <MenuItem>
-                    Perfil
-                  </MenuItem>
-                </Link>
-                <Link to="/pedidos">
-                  <MenuItem>
-                    Pedidos
-                  </MenuItem>
-                </Link>
-                <Link to="/soporte">
-                  <MenuItem>
-                    Soporte
-                  </MenuItem>
-                </Link>
-                <MenuDivider />
-                <MenuItem onClick={LogOut}>Cerrar Sesión</MenuItem>
-              </MenuList>
-              :
-              <MenuList bg={menuListBG} borderColor={menuListBorder}>
-                <Link to="/login">
-                  <MenuItem>
-                    Iniciar Sesión
-                  </MenuItem>
-                </Link>
-                <Link to="/registrar">
-                  <MenuItem>
-                    Registrar
-                  </MenuItem>
-                </Link>
-              </MenuList>
-            }
-          </Menu>
+          </Link>}
+        <Flex justifyContent="center" mr={{ base: "40px", md: "100px" }} display={{ base: "none", sm: "block" }}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setRedirect(true);
+              setSearcherState({ where: true, key: buscador });
+            }}>
+            {redirect && <Redirect to={"/buscador/" + buscador} />}
+            <InputGroup margin="5">
+              <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
+              <Input
+                bgColor="white"
+                onChange={(event) => {
+                  if (event.target.value != "") {
+                    setBuscador(event.target.value);
+                    setRedirect(false);
+                  }
+                }}
+                focusBorderColor=""
+                type="tel"
+                placeholder="Buscar producto"
+              />
+            </InputGroup>
+          </form>
         </Flex>
-      </HStack>
-      <Flex justifyContent="center" display={{ base: "block", sm: "none" }}>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            setRedirect(true);
-            setSearcherState({ where: true, key: buscador });
-          }}>
-          {redirect && <Redirect to={"/buscador/" + buscador} />}
-          <InputGroup margin="5">
-            <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
-            <Input
-              bgColor="white"
-              onChange={(event) => {
-                if (event.target.value != "") {
-                  setBuscador(event.target.value);
-                  setRedirect(false);
-                }
-              }}
-              focusBorderColor=""
-              type="tel"
-              placeholder="Buscar producto"
-            />
-          </InputGroup>
-        </form>
+        <HStack spacing={{ base: "0", md: "6" }}>
+          <CartHeader />
+          <Flex alignItems={"center"}>
+            <Menu>
+              <MenuButton
+                py={2}
+                transition="all 0.3s"
+                _focus={{ boxShadow: "none" }}>
+                <HStack>
+                  {auth.auth && <>
+                    <Avatar
+                      size={"sm"}
+                      src={
+                        "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
+                      }
+                    />
+                    <NameClientUser name={auth.user} />
+                  </>}
+                  <Box display={{ base: "none", md: "flex" }}>
+                    <FiChevronDown />
+                  </Box>
+                </HStack>
+              </MenuButton>
+              {auth.auth ?
+                <MenuList bg={menuListBG} borderColor={menuListBorder}>
+                  <Link to="/perfil">
+                    <MenuItem>
+                      Perfil
+                    </MenuItem>
+                  </Link>
+                  <Link to="/pedidos">
+                    <MenuItem>
+                      Pedidos
+                    </MenuItem>
+                  </Link>
+                  <Link to="/soporte">
+                    <MenuItem>
+                      Soporte
+                    </MenuItem>
+                  </Link>
+                  <MenuDivider />
+                  <MenuItem onClick={LogOut}>Cerrar Sesión</MenuItem>
+                </MenuList>
+                :
+                <MenuList bg={menuListBG} borderColor={menuListBorder}>
+                  <Link to="/login">
+                    <MenuItem>
+                      Iniciar Sesión
+                    </MenuItem>
+                  </Link>
+                  <Link to="/registrar">
+                    <MenuItem>
+                      Registrar
+                    </MenuItem>
+                  </Link>
+                </MenuList>
+              }
+            </Menu>
+          </Flex>
+        </HStack>
+        <Flex justifyContent="center" display={{ base: "block", sm: "none" }}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              setRedirect(true);
+              setSearcherState({ where: true, key: buscador });
+            }}>
+            {redirect && <Redirect to={"/buscador/" + buscador} />}
+            <InputGroup margin="5">
+              <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
+              <Input
+                bgColor="white"
+                onChange={(event) => {
+                  if (event.target.value != "") {
+                    setBuscador(event.target.value);
+                    setRedirect(false);
+                  }
+                }}
+                focusBorderColor=""
+                type="tel"
+                placeholder="Buscar producto"
+              />
+            </InputGroup>
+          </form>
+        </Flex>
       </Flex>
-    </Flex>
+      <Divider />
+      <CategoriaComp />
+    </Box>
   );
 };
 const NameClientUser = ({ name }: any) => {

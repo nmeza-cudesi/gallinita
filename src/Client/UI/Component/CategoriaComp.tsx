@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Grid, IconButton, Image, Input, Text } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Grid, HStack, IconButton, Image, Input, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { ICategoria } from "../../../Model/Categoria";
 import { TitleCenter } from "./TitleCenter";
@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import { getCategories } from "../../../Service/TiendaOnlineService";
 import { producstCategoria, producstRemision } from "../../../Service/RemisionAdminService";
 import { IoArrowBack, IoReturnDownBack } from "react-icons/io5";
-
 /* estilos categoria */
 const categoriaComp = {
   borderRadius: "30px 30px 30px 30px",
@@ -41,37 +40,24 @@ export const CategoriaComp = ({
 
   return (
     <>
-      {data.map((val: any, idx: number) =>
-        !background ? (
-          <Link
-            className="link__cat"
-            key={idx}
-            to={"categoria/" + val.CAT_NAME.replace(" ", "-")}
-          >
-            <div className="contenedor__cat">
-              <Image
-                src={val.CAT_IMAGE}
-                alt={val.CAT_NAME}
-                width={{ base: "125px", md: "250px" }}
-                height={{ base: "125px", md: "250px" }}
-                objectFit="cover"
-              />
-              <div className="button__cat">
-                <Text fontWeight={"150px"} fontSize={"3xl"}>
-                  {val.CAT_NAME}
-                </Text>
-                <Button
-                  borderRadius={"full"}
-                  fontWeight={"bold"}
-                  color={"white"}
-                  variant="ghost"
-                >
-                  Ver Más
-                </Button>
-              </div>
-            </div>
-          </Link>
-        ) : (
+      {!background ?
+        <><HStack spacing="10" justify="space-between" padding={"5"} overflow="auto" className="category_scroll">
+          <ButtonGroup variant="link" spacing="20" margin={"auto"}>
+            {data.map((val: any, idx: number) =>
+
+              <Link
+                className="link__cat"
+                key={idx}
+                to={"/categoria/" + val.CAT_NAME.replace(" ", "-")}
+              >
+                <Button color={"white"} fontSize={"xl"} key={val}>{val.CAT_NAME}</Button>
+              </Link>
+
+            )}
+          </ButtonGroup>
+        </HStack></>
+        :
+        <>{data.map((val: any, idx: number) => (
           <Box
             key={idx}
             className="contenedor__cat other__cat"
@@ -98,8 +84,9 @@ export const CategoriaComp = ({
               </Text>
             </div>
           </Box>
-        )
-      )}
+        ))
+        }</>
+      }
     </>
   );
 };

@@ -68,13 +68,6 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         </Box>
 
         <Spacer display={{ "base": "none", "md": "block" }} />
-        {/* <Image
-          display={{ base: "flex", md: "none" }}
-          //   borderRadius="full"
-          w="235px"
-          src="http://143.110.154.185:4000/upload/logo.jpg"
-          alt="Phiona App"
-        /> */}
         <HStack spacing={{ base: "0", md: "6" }}>
           <SalesAlert />
           <StockAlert />

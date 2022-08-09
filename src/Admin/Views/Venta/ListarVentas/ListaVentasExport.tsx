@@ -8,7 +8,7 @@ import { BsDownload } from 'react-icons/bs';
 
 export const ListaVentasExport = ({ isLoading, data }: { isLoading: any, data: any }) => {
     if (isLoading) return (<Button
-        colorScheme="blue"
+        bg={"#3e49f9"}
         isLoading={isLoading}
         leftIcon={<BsDownload />}>
         Export

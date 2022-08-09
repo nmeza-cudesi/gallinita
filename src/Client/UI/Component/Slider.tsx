@@ -47,7 +47,7 @@ export const Slider = (promocion: any) => {
         
           <Box key={idx} className="mySlides fade">
             <Box className="numbertext">{idx+1} / {promocionesActivas.length}</Box>
-            <Img src={val.PRT_IMAGE} height={{base:"223px",sm:"380px",md:"500px"}} objectFit="cover" width="100%" />
+            <Img src={val.PRT_IMAGE} width="100%" />
             <Box className="text">{val.PRT_TITLE}</Box>
           </Box>
         ) }

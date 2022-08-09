@@ -23,7 +23,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
                     <Image
                         //   borderRadius="full"
                         w="235px"
-                        src="http://143.110.154.185:4000/upload/logo.jpg"
+                        src={import.meta.env.VITE_APP_LOGO + "/upload/logo.jpg"}
                         alt="Phiona App"
                     />
                 </Link>

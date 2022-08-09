@@ -41,7 +41,7 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           <Image
             //   borderRadius="full"
             w={{base:"150px",md:235}}
-            src="http://143.110.154.185:4000/upload/logo.jpg"
+            src={import.meta.env.VITE_APP_LOGO+"/upload/logo.jpg"}
             alt="Phiona App"
           />
           <CloseButton
