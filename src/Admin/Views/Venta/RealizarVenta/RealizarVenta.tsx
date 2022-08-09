@@ -122,7 +122,7 @@ export const RealizarVenta = () => {
             borderRadius="10px"
             w={["100%", "100%", "70%"]}
           >
-            <Box position="relative">
+            <Box position="relative" >
               <h2>
                 <b>Insumos</b>
               </h2>
@@ -137,10 +137,11 @@ export const RealizarVenta = () => {
               />
               <Divider m="2" />
 
-              <Box pt={3}>
-                <h2>
-                  <b>Descripción</b>
+              <Box pt={3} style={{marginBottom:"100px"}} >
+                <h2 >
+                  <b >Descripción</b>
                 </h2>
+                
                 <VentaTable
                   updateTotal={updateTotal}
                   cambioVuelto={cambioVuelto}
