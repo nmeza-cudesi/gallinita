@@ -180,7 +180,7 @@ const ProductSkeleton = () =>
             <Tooltip aria-label='A tooltip'>
                 <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >...</Text>
             </Tooltip>
-            <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}><Skeleton height='20px' w={"8"}/></span>
+            <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}><Skeleton height='20px' w={"8"} /></span>
             <Flex justifyContent={"space-between"} className='button__pro'>
                 <Box cursor="not-allowed" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
                     <FaCartPlus />
@@ -194,7 +194,7 @@ const ProductNoFound = () =>
 (
     <Box gridColumn={"1/4"}>
         <b style={{ fontSize: "25px" }}>Lo sentimos, no encontramos insumos relacionados a esta búsqueda :(</b>
-        <Text mt={"5"}>Podés intentar con un término más general o revisar que esté bien escrito</Text>
+        <Text mt={"5"}>Puedes intentar con otra palabra o revisar que esté bien escrito</Text>
         <Text fontSize={"100px"} mt={"5"}>🙁</Text>
     </Box>
 )

@@ -210,14 +210,16 @@ export const InfoVenta = (props: any) => {
           throw data;
         })
         .catch((error: any) => {
-          messageToast({
-            title: "Error " + error.status + ", Oops!",
-            description: error.message,
-            status: "warning",
-            variant: "subtle",
-            duration: 3000,
-            isClosable: true,
-          });
+          if (error.status) {
+            messageToast({
+              title: "Error " + error.status + ", Oops!",
+              description: error.message,
+              status: "warning",
+              variant: "subtle",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
         });
     }
   };

@@ -133,10 +133,10 @@ export const Registrar = () => {
 
   if (TypePerson.isLoading) return <Skeleton height="500px" />;
   return (
-    <Flex minHeight="100vh" alignItems="center" justifyContent="center">
+    <Flex minHeight="100vh" alignItems="center" justifyContent={"center"}>
       <Flex
         direction="column"
-        maxW="60vw"
+        maxW={{ base: "80%", md: "60vw" }}
         w="100%"
         background="white"
         p="4"
@@ -253,9 +253,10 @@ export const Registrar = () => {
                   justifyContent="center"
                   mb={8}
                   mt={4}
-                  marginX={{ base: "4", md: "8" }}>
+                  marginX={{ base: "0", md: "8" }}>
                   <Box
-                    style={{ margin: "3px 20px", width: "300px" }}
+                    w={{ base: "90%", md: "300px" }}
+                    margin={{ base: "0px 20px", md: "3px 20px" }}
                     alignItems="flex-start">
                     <MySelect
                       onChange={aparecerCampo}
@@ -291,8 +292,8 @@ export const Registrar = () => {
                 {ruc && <Flex
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
-                  marginX={{ base: "4", md: "8" }}>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  marginX={{ base: "0", md: "8" }}>
+                  <Box style={{ margin: "3px 20px" }} w={{ base: "auto", md: "300px" }}>
                     <MyTextInput
                       label="RUC"
                       name="PER_RUC"
@@ -304,10 +305,10 @@ export const Registrar = () => {
                 <Flex
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
-                  marginX={{ base: "4", md: "8" }}>
+                  marginX={{ base: "0", md: "8" }}>
                   {usuarioElegido === 2 ? (
                     <>
-                      <Box style={{ margin: "3px 20px", width: "300px" }}>
+                      <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                         <MyTextInput
                           label="Nombre"
                           name="PER_NAME"
@@ -315,7 +316,7 @@ export const Registrar = () => {
                           placeholder="Nombre"
                         />
                       </Box>
-                      <Box style={{ margin: "3px 20px", width: "300px" }}>
+                      <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                         <MyTextInput
                           label="Apellido"
                           name="PER_LASTNAME"
@@ -329,7 +330,7 @@ export const Registrar = () => {
                   )}
                   {usuarioElegido === 1 ? (
                     <>
-                      <Box style={{ margin: "3px 20px", width: "300px" }}>
+                      <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                         <MyTextInput
                           label="Nombre Comercial"
                           name="PER_TRADENAME"
@@ -338,7 +339,7 @@ export const Registrar = () => {
                         />
                       </Box>
 
-                      <Box style={{ margin: "3px 20px", width: "300px" }}>
+                      <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                         <MyTextInput
                           label="RUC"
                           name="PER_RUC"
@@ -356,8 +357,8 @@ export const Registrar = () => {
                 <Flex
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
-                  marginX={{ base: "4", md: "8" }}>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  marginX={{ base: "0", md: "8" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Celular"
                       name="PER_N_PHONE"
@@ -365,7 +366,7 @@ export const Registrar = () => {
                       placeholder="Celular"
                     />
                   </Box>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Correo"
                       name="PER_EMAIL"
@@ -377,11 +378,12 @@ export const Registrar = () => {
                 <Flex
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
-                  marginX={{ base: "4", md: "8" }}
+                  marginX={{ base: "0", md: "8" }}
                   marginBottom="25px">
                   <Box
-                    style={{ margin: "3px 20px" }}
-                    width={usuarioElegido === 2 ? "300px" : "74%"}>
+                    style={{ margin: "3px 20px" }} 
+                    w={{ base: "90%", md: "300px" }}
+                    /* width={usuarioElegido === 2 ? "300px" : "74%"} */>
                     <MyTextInput
                       label="Dirección"
                       name="PER_DIRECTION"
@@ -391,7 +393,7 @@ export const Registrar = () => {
                   </Box>
                   {usuarioElegido === 2 ? (
                     <>
-                      <Box style={{ margin: "3px 20px", width: "300px" }}>
+                      <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                         <MyTextInput
                           label="DNI"
                           name="PER_DNI"
@@ -407,8 +409,8 @@ export const Registrar = () => {
                 <Flex
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
-                  marginX={{ base: "4", md: "8" }}>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  marginX={{ base: "0", md: "8" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="País"
                       name="PER_COUNTRY"
@@ -416,7 +418,7 @@ export const Registrar = () => {
                       placeholder="País"
                     />
                   </Box>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Departamento"
                       name="PER_DEPARTMENT"
@@ -429,8 +431,8 @@ export const Registrar = () => {
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
                   mb={8}
-                  marginX={{ base: "4", md: "8" }}>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  marginX={{ base: "0", md: "8" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Provincia"
                       name="PER_PROVINCE"
@@ -438,7 +440,7 @@ export const Registrar = () => {
                       placeholder="Provincia"
                     />
                   </Box>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Distrito"
                       name="PER_DISTRIC"
@@ -452,8 +454,8 @@ export const Registrar = () => {
                   direction={{ base: "column", lg: "row" }}
                   justifyContent="center"
                   mb={8}
-                  marginX={{ base: "4", md: "8" }}>
-                  <Box style={{ margin: "3px 20px", width: "300px" }}>
+                  marginX={{ base: "0", md: "8" }}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }}>
                     <MyTextInput
                       label="Usuario"
                       name="USR_USER"
@@ -461,7 +463,7 @@ export const Registrar = () => {
                       placeholder="Usuario"
                     />
                   </Box>
-                  <Box style={{ margin: "3px 20px", width: "300px" }} display={"flex"} alignItems={"end"}>
+                  <Box style={{ margin: "3px 20px" }} width={{ base: "90%", md: "300px" }} display={"flex"} alignItems={"end"}>
                     <MyTextInput
                       label="Contraseña"
                       name="USR_PASSWORD"
@@ -473,7 +475,7 @@ export const Registrar = () => {
                         {show ? 'Hide' : 'Show'}
                       </Button>
                     </InputRightElement> */}
-                    <Button h={"40px"} size='sm' onClick={handleClick}>
+                    < Button h={"40px"} size='sm' onClick={handleClick}>
                       {show ? <BsEyeSlashFill /> : <BsEyeFill />}
                     </Button>
                   </Box>
@@ -489,7 +491,7 @@ export const Registrar = () => {
           </>
         )}
       </Flex>
-    </Flex>
+    </Flex >
   );
 };
 

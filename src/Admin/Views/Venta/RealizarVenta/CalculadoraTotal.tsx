@@ -23,7 +23,7 @@ export const CalculadorTotal = (props: any) => {
         props.SetDescuentoGeneral(parseFloat(val));
     }
     return (
-        <Box float={'right'}  alignContent={'end'}>
+        <Box display={"flex"} justifyContent="end" alignContent={'end'}>
             <Spacer/>
             <Divider/>
             <Spacer/>

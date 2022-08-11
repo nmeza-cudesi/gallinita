@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.1/css/swiper.min.css");
 @import url("https://use.fontawesome.com/releases/v5.0.13/css/all.css");
+
 .wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
@@ -67,6 +68,11 @@
         max-width: 1200px;
         justify-content: center;
     }
+
+    .card__description {
+        font-size: 15px;
+    }
+
     .card__btn {
         width: 90%;
         padding: .4rem;
@@ -80,10 +86,16 @@
         border-radius: 0.2rem;
         transition: background 200ms ease-in, color 200ms ease-in;
     }
+
     .card__image {
         height: 6rem;
         width: 100%;
         object-fit: cover;
+    }
+
+    .card__title {
+        font-size: 12px;
+        padding: .5rem;
     }
 }
 
@@ -111,17 +123,20 @@
     /* height: 40vh !important; */
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2);
 }
-.descuento_desc{
+
+.descuento_desc {
     margin-left: 80px;
 }
-.descriprtion_desc{
+
+.descriprtion_desc {
     margin-top: 150px;
 }
+
 .swiper-slide .content {
     position: absolute;
     top: 10%;
     left: 0;
-    width: 100% !important; 
+    width: 100% !important;
     padding-left: 5%;
     color: #2796ff;
 }

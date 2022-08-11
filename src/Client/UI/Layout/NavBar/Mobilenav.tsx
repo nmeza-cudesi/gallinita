@@ -64,7 +64,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       background="linear-gradient(90deg, rgba(124,157,103) 0%, rgba(202,247,136) 100%)">
       <Flex
         px={{ base: 4, md: 4 }}
-        flexWrap="wrap"
+        flexWrap="nowrap"
         alignItems="center"
 
         borderBottomColor={MobileNavBorderBottom}
@@ -93,7 +93,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               alt='Dan Abramov'
             />
           </Link>}
-        <Flex justifyContent="center" mr={{ base: "40px", md: "100px" }} display={{ base: "none", sm: "block" }}>
+        <Flex justifyContent="center" mr={{ base: "40px", md: "100px" }} display={{ base: "none", md: "block" }}>
           <form
             onSubmit={(event) => {
               event.preventDefault();
@@ -118,7 +118,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             </InputGroup>
           </form>
         </Flex>
-        <HStack spacing={{ base: "0", md: "6" }}>
+        <HStack spacing={{ base: "2", md: "6" }}>
           <CartHeader />
           <Flex alignItems={"center"}>
             <Menu>
@@ -136,7 +136,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                     />
                     <NameClientUser name={auth.user} />
                   </>}
-                  <Box display={{ base: "none", md: "flex" }}>
+                  <Box display={{ base: "auto", md: "flex" }}>
                     <FiChevronDown />
                   </Box>
                 </HStack>
@@ -178,31 +178,31 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             </Menu>
           </Flex>
         </HStack>
-        <Flex justifyContent="center" display={{ base: "block", sm: "none" }}>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              setRedirect(true);
-              setSearcherState({ where: true, key: buscador });
-            }}>
-            {redirect && <Redirect to={"/buscador/" + buscador} />}
-            <InputGroup margin="5">
-              <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
-              <Input
-                bgColor="white"
-                onChange={(event) => {
-                  if (event.target.value != "") {
-                    setBuscador(event.target.value);
-                    setRedirect(false);
-                  }
-                }}
-                focusBorderColor=""
-                type="tel"
-                placeholder="Buscar producto"
-              />
-            </InputGroup>
-          </form>
-        </Flex>
+      </Flex>
+      <Flex justifyContent="center" display={{ base: "block", md: "none" }}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            setRedirect(true);
+            setSearcherState({ where: true, key: buscador });
+          }}>
+          {redirect && <Redirect to={"/buscador/" + buscador} />}
+          <InputGroup margin="5" w={"auto"} >
+            <InputLeftElement pointerEvents="painted" children={<BiSearch />} />
+            <Input
+              bgColor="white"
+              onChange={(event) => {
+                if (event.target.value != "") {
+                  setBuscador(event.target.value);
+                  setRedirect(false);
+                }
+              }}
+              focusBorderColor=""
+              type="tel"
+              placeholder="Buscar producto"
+            />
+          </InputGroup>
+        </form>
       </Flex>
       <Divider />
       <CategoriaComp />

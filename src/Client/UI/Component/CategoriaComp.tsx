@@ -54,6 +54,12 @@ export const CategoriaComp = ({
               </Link>
 
             )}
+            <Link
+              className="link__cat"
+              to={"/nosotros"}
+            >
+              <Button color={"white"} fontSize={"xl"}> Nosotros</Button>
+            </Link>
           </ButtonGroup>
         </HStack></>
         :
@@ -268,7 +274,7 @@ export const ProductFindComp = ({
   return (
     <>
       <Box display={!nextStep ? "block" : "none"}>
-        <Flex gap={5} overflowX={"auto"}>
+        <Flex gap={5} overflowX={"auto"} className="category_scroll" overflowY={"hidden"}>
           {categorias.map((val: any, idx: number) => (
             <Box
               key={idx}
@@ -303,7 +309,7 @@ export const ProductFindComp = ({
         </Flex>
         {//@ts-ignore
           usuarios.message && <h1>No se encontro resultados, asugurece de tener Stock o una Lisa de Precios activa</h1>}
-        <Flex gap={5} overflowX={"auto"}>
+        <Flex gap={5} overflowX={"auto"} className="category_scroll" overflowY={"hidden"}>
           {//@ts-ignore
             !(usuarios.message) && usuarios.map((val: any, idx: number) => (
               <Box

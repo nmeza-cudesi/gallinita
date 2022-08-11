@@ -90,7 +90,7 @@ export const AdminLogIn = () => {
                 <Image
                   //   borderRadius="full"
                   w="150px"
-                  src="http://143.110.154.185:4000/upload/iconlogin.png"
+                  src={import.meta.env.VITE_APP_LOGO + "/upload/iconlogin.png"}
                   alt="Phiona App"
                 />
               </Center>

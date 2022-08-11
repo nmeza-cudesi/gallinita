@@ -76,12 +76,11 @@
 }
 
 .category_scroll::-webkit-scrollbar:horizontal {
-    height: 10px;
+    height: 5px;
 }
 
 .category_scroll::-webkit-scrollbar-thumb {
-    background-color: #a3ca77;
-    border-radius: 20px;
+    background-color: #c3c1bc;
 }
 
 .category_scroll::-webkit-scrollbar-track {

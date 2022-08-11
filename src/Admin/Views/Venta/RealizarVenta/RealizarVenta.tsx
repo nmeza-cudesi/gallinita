@@ -137,7 +137,7 @@ export const RealizarVenta = () => {
               />
               <Divider m="2" />
 
-              <Box pt={3} style={{marginBottom:"100px"}} >
+              <Box pt={3}>
                 <h2 >
                   <b >Descripción</b>
                 </h2>
