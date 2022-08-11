@@ -583,7 +583,7 @@ export const InfoVenta = (props: any) => {
                     </Button>
                   </Link>
 
-                  <Button colorScheme="blue" mr={3}>
+                  <Button marginTop="10px" colorScheme="blue" mr={3}>
                     Imprimir
                   </Button>
                 </Box>
