@@ -119,7 +119,7 @@ export const AddTicket = ({
       event.type == "keypress"
     ) {
       var user= await SearchUser(searchInput);
-      await setPersonTicket(user);
+      await setPersonTicket(user.PER_ID);
     }
   }
 
