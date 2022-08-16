@@ -1,20 +1,40 @@
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import { Box, List, ListItem, ListIcon, Flex } from '@chakra-ui/layout';
+import { useToast } from '@chakra-ui/react';
 import React, { useEffect } from 'react'
 import { FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { MdCall, MdPlace } from 'react-icons/md';
 import { useSetRecoilState } from 'recoil';
 import { HeaderClient, NavClient } from '../../../Data/Atoms/Client';
+import { sendEmailContactanos } from '../../../Service/TiendaOnlineService';
 import './Contactanos.css'
 export const Contactanos = () => {
     const setNavClient = useSetRecoilState(NavClient);
     const setHeadClient = useSetRecoilState(HeaderClient);
+    const messageToast = useToast();
+
     useEffect(() => {
         setNavClient(false)
         setHeadClient(true)
     }, [])
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        let formDataObject = Object.fromEntries((new FormData(e.target)).entries());
+        e.target.reset()
+        sendEmailContactanos(formDataObject).then((data) => {
+            messageToast({
+                title: "Correo enviado",
+                description:
+                    "Nos Comunicaremos lo antes posible con usted",
+                status: "success",
+                duration: 3000,
+                isClosable: true,
+            });
+        })
+    };
     return (
         <>
             {/* <Box w={"100%"}>
@@ -63,7 +83,7 @@ export const Contactanos = () => {
                                     <a href="https://www.facebook.com/La-Gallinita-de-Corral-112035834934660"><FaFacebookF /></a>
                                 </Box>
                             </Box>
-                            <form id="form_agregar" className="formulario" >
+                            <form id="form_agregar" className="formulario" onSubmit={handleSubmit}>
                                 <Input type="text" name="nombre" id="nombre" placeholder="Nombre" />
                                 <Input type="text" name="correo" id="correo" placeholder="Correo" />
                                 <Input type="text" name="asunto" id="asunto" placeholder="Asunto" />

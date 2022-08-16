@@ -94,7 +94,7 @@ export const VentasTable = () => {
                   data={data}
                   isPaginated
                   hasFilters
-                  pagesOptions={[5, 2, 10]}
+                  pagesOptions={[15, 25, 50]}
                 />
               </Box>
             </MyContain>

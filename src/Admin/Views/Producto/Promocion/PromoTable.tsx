@@ -1,4 +1,4 @@
-import { Button, Text, Stack, Skeleton, Img, IconButton, HStack, Spacer } from '@chakra-ui/react'
+import { Button, Text, Stack, Skeleton, Img, IconButton, HStack, Spacer, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
@@ -35,7 +35,7 @@ export const PromoTable = () => {
             accessor: 'PRT_IMAGE',
             // @ts-ignore
             Cell: ({ row }) => (
-                <Img boxSize="200px" style={{ objectFit: "cover" }} src={ row.original.PRT_IMAGE } />
+                <Img boxSize="200px" style={{ objectFit: "cover" }} src={row.original.PRT_IMAGE} />
             ),
         },
         {
@@ -64,7 +64,7 @@ export const PromoTable = () => {
             */
             // @ts-ignore
             Cell: ({ row }) => (
-                <ActionCell promotion={ row.original } />
+                <ActionCell promotion={row.original} />
             ),
         },
     ]
@@ -72,24 +72,24 @@ export const PromoTable = () => {
     if (isLoading || isFetching) return (<TableCharge />)
 
     // @ts-ignore
-    if (isError) return <h1>{ error.message } { ':(' }</h1>
-    
+    if (isError) return <h1>{error.message} {':('}</h1>
+
     // @ts-ignore
-    if (data.message) return <h1>{ data.message }</h1>
+    if (data.message) return <h1>{data.message}</h1>
 
     return (
         <>
             <MyContain mb={3}  >
                 <HStack>
                     <CreatePromoModal>
-                        <Button leftIcon={ <FaPlus /> } colorScheme="green" >Agregar</Button>
+                        <Button leftIcon={<FaPlus />} colorScheme="green" >Agregar</Button>
                     </CreatePromoModal>
                     <Spacer />
-                    <ButtonRefetch refetch={ refetch } />
+                    <ButtonRefetch refetch={refetch} />
                 </HStack>
             </MyContain>
             <MyContain>
-                <MyReactTable columns={ columns } data={ data || [] } isPaginated hasFilters pagesOptions={ [5, 10, 15] } />
+                <MyReactTable columns={columns} data={data || []} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
             </MyContain>
         </>
     )
@@ -104,16 +104,34 @@ const ActionCell = ({ promotion }: { promotion: any }) => {
 
     const status = promotion.PRT_STATUS === '1'
     const queryClient = useQueryClient();
-
+    const toast = useToast();
     const { mutate, isLoading } = useMutation(EditPromotionStatus, {
         onSuccess: (res) => {
             queryClient.invalidateQueries('promociones')
             if (res.status == 500) {
+                //@ts-ignore
+                if (res.error.errno == 1062) {
+                    toast({
+                        title: "Acción no valida",
+                        description: "Nombre de Banner ya Existente",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                    })
+                }
                 throw new Error("error intentar mas adelante");
             }
 
         },
-        onError: () => alert("error intentarlo luego")
+        onError: () => {
+            toast({
+                title: "Acción no valida",
+                description: "Intentarlo más tarde",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+            })
+        }
     })
 
     function handleStatus() {
@@ -121,21 +139,21 @@ const ActionCell = ({ promotion }: { promotion: any }) => {
     }
 
     return (
-        <Stack direction={ { base: "column", md: "row" } }>
+        <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
-            { <EditPromoModal promotion={ promotion }>
-                <IconButton icon={ <AiFillEdit /> } aria-label="Editar" colorScheme="blue" />
-            </EditPromoModal> }
+            {<EditPromoModal promotion={promotion}>
+                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+            </EditPromoModal>}
             // ! MODAL PARA ELIMINAR
-            { <DeletePromoDialog promoID={ promotion.PRT_ID }>
-                <IconButton icon={ <AiFillDelete /> } aria-label="Eliminar" colorScheme="red" />
-            </DeletePromoDialog> }
+            {<DeletePromoDialog promoID={promotion.PRT_ID}>
+                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+            </DeletePromoDialog>}
             <Button size="sm"
-                colorScheme={ status ? "green" : "yellow" }
-                onClick={ handleStatus }
-                isLoading={ isLoading }
+                colorScheme={status ? "green" : "yellow"}
+                onClick={handleStatus}
+                isLoading={isLoading}
             >
-                <Text fontSize={ { base: "sm", md: "lg" } }>{ status ? 'Activado' : 'Desactivado' }</Text>
+                <Text fontSize={{ base: "sm", md: "lg" }}>{status ? 'Activado' : 'Desactivado'}</Text>
             </Button>
         </Stack>)
 }

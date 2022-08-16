@@ -75,11 +75,15 @@ export const ProviderSearchSelect = ({ itemClick, getdata, loading, data, label,
 };
 
 // @ts-ignore
-export const ProductSearchSelect = ({ itemClick, setPro, pro, loading, data, label, ...props }) => {
+export const ProductSearchSelect = ({ itemClick, setPro, pro, loading, data, label, product, ...props }) => {
   const formikProps = useFormikContext();
 
   // @ts-ignore
   const [field, meta] = useField(props);
+  if (data && !data.status) {
+    //@ts-ignore
+    console.log(data.filter(el => !product.includes(el)), product, data);
+  }
 
   const changeInput = (value: any) => {
     formikProps.setFieldValue(field.name, value);
@@ -100,7 +104,8 @@ export const ProductSearchSelect = ({ itemClick, setPro, pro, loading, data, lab
           <AutoCompleteList>
             {!loading && data ? (
               data.length > 0 ? (
-                data.map((option: any, oid: any) => (
+                //@ts-ignore
+                data.filter(el => !product.includes(el)).map((option: any, oid: any) => (
                   <AutoCompleteItem
                     key={`option-${oid}`}
                     value={option}

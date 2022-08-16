@@ -416,7 +416,7 @@ const CodigoQR = () => {
           /> */}
         </Center>
         <Text align="center">
-          Podra ser Consultado en https://cudesi.com.pe/
+          Representación impresa del comprobante de venta
         </Text>
       </Box>
     </React.Fragment>

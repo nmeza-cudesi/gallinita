@@ -203,7 +203,7 @@ export const ListarVentas = () => {
                         columns={columnas}
                         isPaginated
                         hasFilters
-                        pagesOptions={[5, 10, 15]}
+                        pagesOptions={[15, 25, 50]}
                       />
                     </Box>
                   ) :
@@ -218,7 +218,7 @@ export const ListarVentas = () => {
                         columns={columnas}
                         isPaginated
                         hasFilters
-                        pagesOptions={[5, 10, 15]}
+                        pagesOptions={[15, 25, 50]}
                       />
 
                     </Box>

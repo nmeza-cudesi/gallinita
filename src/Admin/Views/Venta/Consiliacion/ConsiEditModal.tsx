@@ -42,7 +42,7 @@ PMT_NAME: "7 DIAS"
                 onClose={onClose}
             >
                 <ModalOverlay />
-                <ModalContent maxW="40%">
+                <ModalContent maxW={{ base: "95%", md: "40%" }}>
                     <ModalHeader>Indicar Fecha de Pago</ModalHeader>
                     <ModalCloseButton />
                     <Formik
@@ -72,7 +72,7 @@ PMT_NAME: "7 DIAS"
                             <ModalBody pb={6}>
                                 <Grid
                                     h="auto"
-                                    templateColumns="repeat(6, 16.6%)"
+                                    templateColumns={{ base: "repeat(3, 33.3%)", sm: "repeat(6, 16.6%)" }}
                                     w="full"
                                 >
                                     <GridItem mx={2} colSpan={3}>

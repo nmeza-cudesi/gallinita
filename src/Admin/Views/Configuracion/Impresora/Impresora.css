@@ -3,8 +3,8 @@ input[type="radio"] {
 }
 
 .label_radio {
-    color: var(--chakra-colors-teal-500);
-    border: 2px solid var(--chakra-colors-teal-500);
+    color: #0080ff; 
+    border: 2px solid #0080ff;
     width: fit-content;
     border-radius: 5px;
     height: 150px;
@@ -19,12 +19,12 @@ input[type="radio"] {
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    border: 2px solid var(--chakra-colors-teal-500);
+    border: 2px solid #0080ff;
     margin-right: 30px;
 }
 
 .input_radio:checked+label {
-    background-color: var(--chakra-colors-teal-500);
+    background-color: #0080ff;
     color: white;
 }
 
@@ -32,5 +32,5 @@ input[type="radio"] {
     height: 30px;
     width: 30px;
     border: 7px solid white;
-    background-color: var(--chakra-colors-teal-500);
+    background-color: #0080ff;
 }

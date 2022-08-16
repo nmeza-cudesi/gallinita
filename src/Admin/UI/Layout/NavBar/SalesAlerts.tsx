@@ -110,11 +110,12 @@ export const SalesAlert = (props: any) => {
               _focus={{ boxShadow: "none" }}
             >
               <Button
+                bg="#3e49f9"
                 isLoading={isLoading || isFetching}
                 isDisabled={isLoading || isFetching}
               >
                 {data ? (
-                  <VscBellDot color="red" key={"VscBellDot"} />
+                  <VscBellDot color="white" key={"VscBellDot"} />
                 ) : (
                   <VscBell color="green" key={"VscBell"} />
                 )}

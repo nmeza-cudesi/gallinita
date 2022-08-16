@@ -22,7 +22,7 @@ import { getTicketsOpenAlerts } from "../../../../Service/AlertsService";
 import { ViewTicket } from "../../../Views/Soporte/ViewTicket";
 import { AlertMessageAtom } from "./Mobilenav";
 
-export const TicketAlert = (props:any) => {
+export const TicketAlert = (props: any) => {
   const toast = useToast();
 
   const {
@@ -117,11 +117,12 @@ export const TicketAlert = (props:any) => {
               _focus={{ boxShadow: "none" }}
             >
               <Button
+                bg="#3e49f9"
                 isLoading={isLoading || isFetching}
                 isDisabled={isLoading || isFetching}
               >
                 {data ? (
-                  <IoTicketOutline color="red" />
+                  <IoTicketOutline color="white" />
                 ) : (
                   <IoTicketOutline color="green" />
                 )}
@@ -186,7 +187,7 @@ export const TicketAlert = (props:any) => {
                     </Box>
                   </MenuItem>
                 );
-              }): isError ? (
+              }) : isError ? (
                 <AlertMessageAtom data={error} />
               ) : (
                 <Box>Cargando...</Box>

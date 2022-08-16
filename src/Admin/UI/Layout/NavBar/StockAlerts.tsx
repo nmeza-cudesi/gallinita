@@ -58,11 +58,12 @@ export const StockAlert = (props: any) => {
               _focus={{ boxShadow: "none" }}
             >
               <Button
+                bg="#3e49f9"
                 isLoading={isLoading || isFetching}
                 isDisabled={isLoading || isFetching}
               >
                 {data ? (
-                  <GiOpenChest color="red" key="GiOpenChest" />
+                  <GiOpenChest color="white" key="GiOpenChest" />
                 ) : (
                   <GiChest color="green" key="GiChest" />
                 )}

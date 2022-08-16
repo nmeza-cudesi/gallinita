@@ -83,7 +83,7 @@ export const DescTable = ({ online }: { online: boolean }) => {
     return (
         <>
             {/* <IconButton m="2" onClick={() => refetch()} aria-label="Recargar" icon={<IoReload />} /> */}
-            <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+            <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
         </>
     )
 }
@@ -140,6 +140,10 @@ export const DescDetailTable = ({ data, setProduct }: { data: any, setProduct: a
             Cell: ({ row }) => (
                 <Image width="100px" src={row.original.PRO_IMAGE} />
             ),
+        },
+        {
+            Header: 'Nombre',
+            accessor: 'PRO_BARCODE',
         },
         {
             Header: 'Nombre',

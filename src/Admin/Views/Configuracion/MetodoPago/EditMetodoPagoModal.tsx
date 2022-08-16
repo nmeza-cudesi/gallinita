@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Button } from '@chakra-ui/react'
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Button, useToast } from '@chakra-ui/react'
 import React, { ReactNode, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Form, Formik } from 'formik';
@@ -11,7 +11,7 @@ import { EditMetodoPago } from '../../../../Service/MetodoPagoService';
 export const EditMetPagoModal = ({ children, metodopago }: { children: ReactNode, metodopago: any }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-
+    const toast = useToast();
     const [image, setImage] = useState(metodopago.MPG_IMAGE || 'https://ayjoe.engrave.site/img/default.jpg')
     const [file, setFile] = useState([])
     const queryClient = useQueryClient();
@@ -22,8 +22,19 @@ export const EditMetPagoModal = ({ children, metodopago }: { children: ReactNode
             if (res.status == 500) {
                 throw new Error("error intentar mas adelante");
             }
+            if (res.status == 300) {
+                toast({
+                    title: "limite excedido",
+                    description: "excediste el limite para la imagen",
+                    duration: 8000,
+                    isClosable: true,
+                });
+            }
         },
-        onError: () => alert("error intentarlo luego")
+        onError: (e) => {
+            console.log(e);
+            alert("error intentarlo luego")
+        }
     })
 
     const validate = yup.object().shape({
@@ -49,7 +60,7 @@ export const EditMetPagoModal = ({ children, metodopago }: { children: ReactNode
                         initialValues={metodopago}
                         validationSchema={validate}
                         onSubmit={async (values: any) => {
-                            let metodopagos  = {
+                            let metodopagos = {
                                 MPG_DESCRIPTION: values.MPG_DESCRIPTION,
                                 MPG_NAME: values.MPG_NAME,
                             }

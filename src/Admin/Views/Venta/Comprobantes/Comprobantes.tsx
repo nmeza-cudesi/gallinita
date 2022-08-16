@@ -125,7 +125,7 @@ export const Comprobantes = () => {
             columns={columnas}
             isPaginated
             hasFilters
-            pagesOptions={[5, 10, 15]}
+            pagesOptions={[15, 25, 50]}
           />
         </Box>
       </MyContain>

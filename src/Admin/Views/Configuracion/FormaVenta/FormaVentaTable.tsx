@@ -49,7 +49,7 @@ export const FormaVentaTable = () => {
     return (
         <>
             {/* <IconButton m="2" onClick={() => refetch()} aria-label="Recargar" icon={<IoReload />} /> */}
-            <MyReactTable columns={columns} data={data || []} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+            <MyReactTable columns={columns} data={data || []} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
         </>
     )
 }

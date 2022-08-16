@@ -176,7 +176,7 @@ const OrderDetail = ({ ORD_ID, ORD_VOUCHER }: { ORD_ID: number, ORD_VOUCHER?: st
                     data={data}
                     isPaginated
                     hasFilters
-                    pagesOptions={[5, 10, 15]}
+                    pagesOptions={[15, 25, 50]}
                 />
             </Box>
         </>

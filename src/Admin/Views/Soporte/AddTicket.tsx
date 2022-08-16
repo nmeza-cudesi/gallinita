@@ -123,6 +123,8 @@ export const AddTicket = ({
   }
 
   async function changeSelect(changeValueId: any, changeValueName: any) {
+    console.log(changeValueName);
+
     await setValueId(changeValueId);
     await setValueName(changeValueName);
   }
@@ -249,14 +251,14 @@ export const AddTicket = ({
 
   return (
     <>
-      { viewModal == true ? (
+      {viewModal == true ? (
         <>
           <ModalAlertMessage
-            message={ messageModal }
-            status={ statusModal }
-            icon={ <AlertIcon boxSize="40px" mr={ 0 } /> }
+            message={messageModal}
+            status={statusModal}
+            icon={<AlertIcon boxSize="40px" mr={0} />}
             buttons={
-              <Button colorScheme="blue" mr={ 3 } onClick={ () => closeAll() }>
+              <Button colorScheme="blue" mr={3} onClick={() => closeAll()}>
                 SALIR
               </Button>
             }
@@ -264,11 +266,11 @@ export const AddTicket = ({
         </>
       ) : (
         <></>
-      ) }
+      )}
       <HStack>
         <Button
-          onClick={ onOpen }
-          onClickCapture={ () => getValuesForSelects() }
+          onClick={onOpen}
+          onClickCapture={() => getValuesForSelects()}
           colorScheme="teal"
           variant="ghost"
           w="110px">
@@ -279,7 +281,7 @@ export const AddTicket = ({
         </Button>
       </HStack>
       <br />
-      <Drawer onClose={ closeAll } isOpen={ isOpen } size={ size }>
+      <Drawer onClose={closeAll} isOpen={isOpen} size={size}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader>Crear Ticket</DrawerHeader>
@@ -288,38 +290,38 @@ export const AddTicket = ({
               <Flex color="white">
                 <Box flex="1" color="black">
                   <FormLabel>Solicitante</FormLabel>
-                  { valueId == "" ? (
+                  {valueId == "" ? (
                     <InputSearch
-                      setValueSearch={ setSearchInput }
-                      sendValueSearch={ searchPerson }
-                      valueSearch={ searchInput }
-                      dataGet={ listPerson }
-                      selectedValue={ changeSelect }
+                      setValueSearch={setSearchInput}
+                      sendValueSearch={searchPerson}
+                      valueSearch={searchInput}
+                      dataGet={listPerson}
+                      selectedValue={changeSelect}
                     />
                   ) : (
-                    <Text fontWeight="bold">{ valueName }</Text>
-                  ) }
+                    <Text fontWeight="bold">{valueName}</Text>
+                  )}
                 </Box>
                 <Box flex="1" color="black">
                   <FormLabel>Estado</FormLabel>
-                  { listUsers.length != 0 ? (
+                  {listUsers.length != 0 ? (
                     <Select
                       w="250px"
                       placeholder="Selecciona un estado"
-                      onChange={ (e) => handleChangeSelect("STC_ID", e) }>
-                      { listStatus.map((sts, idx) => {
+                      onChange={(e) => handleChangeSelect("STC_ID", e)}>
+                      {listStatus.map((sts, idx) => {
                         return (
-                          <option key={ idx } value={ sts.STC_ID }>
-                            { sts.STC_NAME }
+                          <option key={idx} value={sts.STC_ID}>
+                            {sts.STC_NAME}
                           </option>
                         );
-                      }) }
+                      })}
                     </Select>
                   ) : (
                     <>
-                      <Skeleton isLoaded={ false }>CARGANDO... </Skeleton>
+                      <Skeleton isLoaded={false}>CARGANDO... </Skeleton>
                     </>
-                  ) }
+                  )}
                 </Box>
               </Flex>
             </FormControl>
@@ -328,7 +330,7 @@ export const AddTicket = ({
               <FormLabel>Asunto</FormLabel>
               <Input
                 placeholder="Aqui va el asunto"
-                onChange={ (e) => handleChangeInput("TCK_PETITIONER", e) }
+                onChange={(e) => handleChangeInput("TCK_PETITIONER", e)}
               />
             </FormControl>
             <br />
@@ -336,7 +338,7 @@ export const AddTicket = ({
               <FormLabel>Descripción</FormLabel>
               <Textarea
                 placeholder="Aqui va una Descripción"
-                onChange={ (e) => handleChangeTextArea("TCK_DESCRIPTION", e) }
+                onChange={(e) => handleChangeTextArea("TCK_DESCRIPTION", e)}
               />
             </FormControl>
             <br />
@@ -344,7 +346,7 @@ export const AddTicket = ({
               <FormLabel>Lugar</FormLabel>
               <Input
                 placeholder="Aqui va el lugar"
-                onChange={ (e) => handleChangeInput("TCK_FINAL_LOCATION", e) }
+                onChange={(e) => handleChangeInput("TCK_FINAL_LOCATION", e)}
               />
             </FormControl>
             <br />
@@ -352,16 +354,16 @@ export const AddTicket = ({
             <FormControl>
               <FormLabel>Tiempo Estimado de cierre</FormLabel>
               <Input
-                style={ { width: "250px", marginRight: "10px" } }
+                style={{ width: "250px", marginRight: "10px" }}
                 placeholder="HH:MM:SS"
                 type="date"
                 min="2021-12-27"
-                onChange={ (e) => handleChangeTime("date", e) }
+                onChange={(e) => handleChangeTime("date", e)}
               />
               <Input
-                style={ { width: "250px" } }
+                style={{ width: "250px" }}
                 type="time"
-                onChange={ (e) => handleChangeTime("hour", e) }
+                onChange={(e) => handleChangeTime("hour", e)}
               />
             </FormControl>
             <br />
@@ -371,65 +373,65 @@ export const AddTicket = ({
                   <FormLabel>Tipo de soporte</FormLabel>
                   <Input
                     placeholder="Producto Dañado / Producto Vencido / Otros"
-                    onChange={ (e) => handleChangeInput("TCK_SUPPORT_TYPE", e) }
+                    onChange={(e) => handleChangeInput("TCK_SUPPORT_TYPE", e)}
                   />
                 </Box>
                 <Box flex="1" width="150px" color="black">
                   <FormLabel>TAG</FormLabel>
                   <Input
                     placeholder="Importante"
-                    onChange={ (e) => handleChangeInput("TCK_TAG", e) }
+                    onChange={(e) => handleChangeInput("TCK_TAG", e)}
                   />
                 </Box>
               </Flex>
             </FormControl>
             <br />
             <FormControl>
-              <Stack direction={ ["column", "row"] } spacing="24px">
+              <Stack direction={["column", "row"]} spacing="24px">
                 <FormLabel>Asignar a</FormLabel>
                 <Switch
                   colorScheme="blue"
-                  defaultChecked={ false }
-                  onChange={ getIdUser }
+                  defaultChecked={false}
+                  onChange={getIdUser}
                 />
                 <Text fontSize="sm">Asignarmelo</Text>
               </Stack>
-              { flag == false ? (
+              {flag == false ? (
                 <Select
                   placeholder="Selecciona un usuario"
-                  onChange={ (e) => handleChangeSelect("USR_ID", e) }>
-                  {/* TO DO --> Traer todos los usuarios sin el rol cliente */ }
-                  { listUsers.map((user, idx) => {
+                  onChange={(e) => handleChangeSelect("USR_ID", e)}>
+                  {/* TO DO --> Traer todos los usuarios sin el rol cliente */}
+                  {listUsers.map((user, idx) => {
                     return (
-                      <option key={ idx } value={ user.USR_ID }>
-                        { user.USR_USER }
+                      <option key={idx} value={user.USR_ID}>
+                        {user.USR_USER}
                       </option>
                     );
-                  }) }
+                  })}
                 </Select>
               ) : (
                 <></>
-              ) }
+              )}
             </FormControl>
             <br />
             <FormControl>
               <MyImageInput
-                image={ image }
-                setImage={ setImage }
-                setFile={ setFile }
+                image={image}
+                setImage={setImage}
+                setFile={setFile}
               />
             </FormControl>
 
             <FormControl>
               <Button
                 colorScheme="blue"
-                mr={ 3 }
-                onClick={ saveTicket }
-                disabled={ disable }
-                isLoading={ isLoading }>
+                mr={3}
+                onClick={saveTicket}
+                disabled={disable}
+                isLoading={isLoading}>
                 Agregar
               </Button>
-              <Button onClick={ closeAll } disabled={ isLoading }>
+              <Button onClick={closeAll} disabled={isLoading}>
                 Cancel
               </Button>
             </FormControl>

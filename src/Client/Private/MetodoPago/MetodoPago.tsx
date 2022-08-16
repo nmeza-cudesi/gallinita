@@ -21,7 +21,6 @@ import { GrGallery } from "react-icons/gr";
 import { useMutation, useQuery } from "react-query";
 import { Redirect, useHistory } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { async } from "regenerator-runtime";
 import { CostoCompraState, IdOderState } from "../../../Data/Atoms/Carrito";
 import { ClientState, HeaderClient, NavClient } from "../../../Data/Atoms/Client";
 import { CarritoState } from "../../../Data/Atoms/Carrito";
@@ -272,11 +271,13 @@ const Metodo_Pago = ({ data, isLoading, isFetching, isError, error, setPayMethod
         <Tab >{data[0].MPG_NAME}</Tab>
         <Tab >{data[1].MPG_NAME}</Tab>
         <Tab >{data[2].MPG_NAME}</Tab>
+        <Tab >{data[3].MPG_NAME}</Tab>
       </TabList>
       <TabPanels bg={bg}>
         <TabPanel>{data[0].MPG_DESCRIPTION}</TabPanel>
         <TabPanel>{data[1].MPG_DESCRIPTION}</TabPanel>
         <TabPanel>{data[2].MPG_DESCRIPTION}</TabPanel>
+        <TabPanel>{data[3].MPG_DESCRIPTION}</TabPanel>
       </TabPanels>
     </Tabs>
   );

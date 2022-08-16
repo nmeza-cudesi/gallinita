@@ -81,7 +81,7 @@ export const PriceListTable = () => {
                 </HStack>
             </MyContain>
             <MyContain>
-                <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[5, 10, 15]} />
+                <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
             </MyContain>
         </>
     )

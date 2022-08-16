@@ -50,7 +50,7 @@ export const KarxTable = () => {
 
     return (
         <>
-            <MyReactTable columns={ columns } data={ [] } isPaginated hasFilters pagesOptions={ [5, 10, 15] } />
+            <MyReactTable columns={ columns } data={ [] } isPaginated hasFilters pagesOptions={ [15, 25, 50] } />
         </>
     )
 }

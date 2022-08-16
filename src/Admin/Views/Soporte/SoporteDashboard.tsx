@@ -86,7 +86,7 @@ export const SoporteDashboard = () => {
         <Box h="100%">
           <Center border="1px solid black" borderRadius="5px">
             <Text fontSize="xl" fontWeight="800" color="#011627">
-              Tickets de soporte a travez del tiempo
+              Tickets de soporte a través del tiempo
             </Text>
           </Center>
           { dataweek.length > 0 ? (

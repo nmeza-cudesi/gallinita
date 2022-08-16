@@ -152,27 +152,11 @@ const TableProduct = ({ prlid, tipo }: { prlid: number, tipo: string }) => {
     if (isError) return <h1>{error.message} {':('}</h1>
     if (data) { if (data.message) return <h1>{data.message}</h1> }
     return tipo == "productprice" ?
-        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[5, 10, 15]} /></Box>
+        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[15, 25, 50]} /></Box>
         :
-        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated pagesOptions={[5, 10, 15]} /></Box>
+        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated pagesOptions={[15, 25, 50]} /></Box>
 }
 const ActionCell = ({ productPriceList }: { productPriceList: any }) => {
-
-    const status = productPriceList.PRD_STATUS === '1'
-    const queryClient = useQueryClient();
-    const { mutate, isLoading } = useMutation(editePriceList, {
-        onSuccess: (res) => {
-            queryClient.invalidateQueries('promociones')
-            if (res.status == 500) {
-                throw new Error("error intentar mas adelante");
-            }
-        },
-        onError: (err: Error) => alert(err.message + "error manooo")
-    })
-
-    function handleStatus() {
-        mutate({ ...productPriceList, PRD_STATUS: productPriceList.PRD_STATUS === '1' ? '2' : '1' })
-    }
 
     return (
         <Stack direction={{ base: "column", md: "row" }} justifyContent="center">
@@ -184,21 +168,6 @@ const ActionCell = ({ productPriceList }: { productPriceList: any }) => {
             {<DeleteProdListDialog priceListID={productPriceList.PRD_ID}>
                 <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
             </DeleteProdListDialog>}
-            {status ?
-                <IconButton
-                    onClick={handleStatus}
-                    variant="outline"
-                    colorScheme="teal"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                /> : <IconButton
-                    onClick={handleStatus} border="none"
-                    variant="outline"
-                    colorScheme="gray"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                />}
-
         </Stack>)
 }
 const CreatePriceByProduct = ({ productPriceList, PRL_ID }: { productPriceList: any, PRL_ID: number }) => {

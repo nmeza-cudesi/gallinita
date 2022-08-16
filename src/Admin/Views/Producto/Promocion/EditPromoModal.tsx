@@ -1,4 +1,4 @@
-import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Button } from '@chakra-ui/react'
+import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Button, useToast } from '@chakra-ui/react'
 import React, { ReactNode, useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { Form, Formik } from 'formik';
@@ -13,15 +13,35 @@ export const EditPromoModal = ({ children, promotion }: { children: ReactNode, p
 
     const [image, setImage] = useState(promotion.PRT_IMAGE || 'https://ayjoe.engrave.site/img/default.jpg')
     const [file, setFile] = useState([])
+    const toast = useToast();
     const queryClient = useQueryClient();
     const { mutate, isLoading } = useMutation(EditPromotion, {
         onSuccess: (res) => {
             queryClient.invalidateQueries('promociones')
             if (res.status == 500) {
+                console.log(res)
+                //@ts-ignore
+                if (res.error.errno == 1062) {
+                    toast({
+                        title: "Acción no valida",
+                        description: "Nombre de Banner ya Existente",
+                        status: "warning",
+                        duration: 5000,
+                        isClosable: true,
+                    })
+                }
                 throw new Error("error intentar mas adelante");
             }
         },
-        onError: () => alert("error intentarlo luego")
+        onError: () => {
+            toast({
+                title: "Acción no valida",
+                description: "Nombre de Banner ya Existente",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+            })
+        }
     })
 
     const validate = yup.object().shape({

@@ -127,7 +127,7 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                 </ModalContent>
             </Modal>
             <Grid padding={{ base: "5", md: "10" }} justify-self="center" maxWidth="1200px" templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }} gap={{ base: "5", md: "8" }}>
-                {!data ? <h1>Cargando...</h1> : data.length > 0 ? data.map((val: any, idx: number) => {
+                {!data ? <h1>Cargando...</h1> : (!data.status && (data.filter((pro: any) => (pro.PRO_DISABLED != 0 || pro.PRO_AGOTADO != 0))).length > 0) ? data.map((val: any, idx: number) => {
                     return (
                         (val.PRO_DISABLED == 0 || val.PRO_AGOTADO == 0) ? <></> :
                             <div className="contenedor__prod">

@@ -127,7 +127,9 @@ export const NotaCredito = ({ venta, action }: { venta: any, action: any }) => {
         SDT_SUBTOTAL: producto.SDT_SUBTOTAL, //CANTIDAD * PRECIO
         SDT_DISCOUNT: producto.SDT_DISCOUNT, //DESCUENTO DEL PRODUCTO
         SDT_TOTAL: producto.SDT_TOTAL, //SUBTOTAL - DESCUENTO
-        SDS_DAYS_TO_SEND: getFecha(), //FECHA DE CREACIÓN
+        SDS_DAYS_TO_SEND: 0, //FECHA DE CREACIÓN
+        SDS_DATA: getFecha(), //FECHA DE CREACIÓN
+        
         //SE MANTIENE POR DEFAULT
         SDS_STATUS: "1", //SIEMPRE 1
       });
@@ -356,7 +358,7 @@ export const NotaCredito = ({ venta, action }: { venta: any, action: any }) => {
         display={venta.DOC_STATUS.includes("ACEPTADO") && venta.DOC_DOC_TYPE != "NOTA DE CREDITO" && venta.DOC_ID_CLIENT != "00000000" ? "block" : "none"}
         onClick={OpenModal}
       >
-        Generar Nota de Crédito
+        Generar N.C.
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} size="4xl">

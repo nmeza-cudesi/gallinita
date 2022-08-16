@@ -1,20 +1,20 @@
 import React, { ReactNode } from 'react';
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button, useToast } from "@chakra-ui/react"
 import { useRef, useState } from "react"
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { deleteProduct } from '../../../../Service/ProductAdminService';
 
 export const DeleteProdDialog = ({ children, proId }: { children: ReactNode, proId: string }) => {
     const [isOpen, setIsOpen] = useState(false)
     const cancelRef = useRef()
     const toast = useToast();
+    const queryClient = useQueryClient();
 
     const { mutateAsync, isLoading } = useMutation(deleteProduct,
         {
             onSuccess: async (data) => {
                 const validate = await data.json();
                 if (validate.code) {
-
                     toast({
                         title: "Acción no valida",
                         description: "No se puede elimar este producto",
@@ -22,6 +22,9 @@ export const DeleteProdDialog = ({ children, proId }: { children: ReactNode, pro
                         duration: 5000,
                         isClosable: true,
                     });
+                }
+                if (validate.message == "Producto ha sido eliminado con éxito.") {
+                    queryClient.invalidateQueries("products")
                 }
             },
         })

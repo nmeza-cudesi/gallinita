@@ -278,7 +278,7 @@ export const InputSearch = ({
                 key={idx}
                 _hover={{ backgroundColor: "gray.100" }}
                 p={2}
-                onClick={() => selectedValue(val)}
+                onClick={() => { selectedValue(val.PER_ID, val.PERSON) }}
                 cursor="pointer">
                 <Text>{val.PER_TRADENAME || val.PERSON}</Text>
               </Box>

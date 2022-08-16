@@ -80,7 +80,7 @@ export const Impresora = () => {
                     <Box height={ { base: "fit-content", md: "70vh" } } overflowY="scroll" overflowX="hidden">
                         <Image w="100%" src={ value }></Image>
                     </Box>
-                    <Button onClick={ () => { updateTemplate() } } disabled={ save } my="4" w="100%" leftIcon={ <BiSave /> } colorScheme="teal" variant="solid">
+                    <Button onClick={ () => { updateTemplate() } } disabled={ save } my="4" w="100%" leftIcon={ <BiSave /> } colorScheme="teal" bg={"#0080ff"} variant="solid">
                         Guardar Preferencia
                     </Button>
                 </MyContain>

@@ -32,7 +32,7 @@ export const ReportBar = () => {
           marginX={"20%"}
           borderRadius="10px">
           <Text fontSize="xl" fontWeight="800" color="white">
-            Documentos a travez del tiempo
+            Documentos a través del tiempo
           </Text>
         </Center>
         <ButtonRefetch refetch={refetch} />

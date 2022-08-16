@@ -224,7 +224,7 @@ export const ListarClientes = () => {
                 data={data}
                 isPaginated
                 hasFilters
-                pagesOptions={[2, 5, 10]}
+                pagesOptions={[15, 25, 50]}
               />
             )
           ) : (

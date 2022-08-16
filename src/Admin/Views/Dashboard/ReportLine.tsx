@@ -69,10 +69,10 @@ export const ReportLine = () => {
         <Center
           bg={"#3e49f9"}
           paddingY={"3"}
-          marginX={"20%"}
+          marginX={{base:"5%",sm:"20%"}}
           borderRadius="10px">
           <Text fontSize="xl" fontWeight="800" color="white">
-            Ingresos a travez del tiempo
+            Ingresos a través del tiempo
           </Text>
         </Center>
         <Box >

@@ -232,7 +232,7 @@ const StockDetailTable = ({ idStock }: { idStock: any }) => {
                 data={data}
                 isPaginated
                 hasFilters
-                pagesOptions={[2, 5, 10]} />
+                pagesOptions={[15, 25, 50]} />
         </>
     )
 }

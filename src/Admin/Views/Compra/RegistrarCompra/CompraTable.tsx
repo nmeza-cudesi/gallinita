@@ -94,7 +94,7 @@ export const CompraTable = () => {
           data={data}
           isPaginated
           hasFilters
-          pagesOptions={[5, 10, 15]}
+          pagesOptions={[15, 25, 50]}
         />}
     </>
   );

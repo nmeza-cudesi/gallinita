@@ -62,8 +62,10 @@ export const Descuento = ({ online }: { online: boolean }) => {
         }
     }
     function addProduct() {
+        console.log(prod);
+
         setProd({})
-        setProduct([...product, producto.data.filter((val: any) => val.PRO_BARCODE === choosed)[0]])
+        setProduct([...product, producto.data.filter((val: any) => val.PRO_ID === prod.PRO_ID)[0]])
     }
     function addDiscount() {
         const discount: IDicount =
@@ -110,7 +112,9 @@ export const Descuento = ({ online }: { online: boolean }) => {
                         <Formik initialValues={{}} onSubmit={() => undefined}>
                             <ProductSearchSelect
                                 loading={producto.isLoading}
+                                //@ts-ignore
                                 data={producto.data}
+                                product={product}
                                 label="Cliente"
                                 setPro={getCodeProduct}
                                 pro={pro}
@@ -118,7 +122,7 @@ export const Descuento = ({ online }: { online: boolean }) => {
                                 itemClick={(option, func) => {
                                     getCodeProduct(option.PRO_BARCODE)
                                     setProd(option)
-                                    console.log(option);
+                                    //console.log(option);
                                 }}
                                 placeholder="Buscar Insumo"
                                 name="search"

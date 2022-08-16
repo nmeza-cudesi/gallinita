@@ -41,6 +41,33 @@ const editPerson = async (res) => {
     const data = await response.json();
     return data;
 }
+
+//@ts-ignore
+const validationAlert = async (res) => {
+    console.log(res);
+
+    const response = await fetch(import.meta.env.VITE_APP_API + '/orders/validationAlert', {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(res)
+    })
+    const data = await response.json();
+    return data;
+}
+
+//@ts-ignore
+const closeAlert = async (res) => {
+    console.log(res);
+
+    const response = await fetch(import.meta.env.VITE_APP_API + '/orders/closeAlert', {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(res)
+    })
+    const data = await response.json();
+    return data;
+}
+
 const getPerfilFact = async () => {
     const token = cookies.get('clientToken')
     const res = await fetch(import.meta.env.VITE_APP_API + "/client/detail", {
@@ -175,6 +202,19 @@ const tenProduct = async () => {
     const res = await fetch(import.meta.env.VITE_APP_API + '/product/tenProduct/')
     return res.json()
 }
+const sendEmailContactanos = async (mailData: any) => {
+    const requestOptionsEmail = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(mailData),
+    };
+    const resEmail = await fetch(
+        import.meta.env.VITE_APP_API + "/mail/sendEmailContactanos/",
+        requestOptionsEmail
+    );
+    return resEmail.json()
+}
+
 export {
     getProductWithDiscount,
     templateActive,
@@ -196,5 +236,8 @@ export {
     getPersonByIdUser,
     ListSoporteByIdPerson,
     getPerfilFact,
-    readOrderDetailByOrderID
+    sendEmailContactanos,
+    readOrderDetailByOrderID,
+    validationAlert,
+    closeAlert
 }

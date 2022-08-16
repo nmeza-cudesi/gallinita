@@ -6,7 +6,7 @@ export const producstRemision = async (remision: number, categoria: number) => {
 }
 
 export const producstCategoria = async () => {
-    const res = await fetch(import.meta.env.VITE_APP_API + '/category')
+    const res = await fetch(import.meta.env.VITE_APP_API + '/category/tienda/active')
     const dat = await res.json()
     return dat
 }

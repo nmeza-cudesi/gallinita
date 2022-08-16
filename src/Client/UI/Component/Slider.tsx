@@ -26,7 +26,7 @@ export const Slider = (promocion: any) => {
       dots[slideIndex - 1].className += " active";
 
 
-      timer = setTimeout(showSlides, 4000); // Change image every 4 seconds
+      timer = setTimeout(showSlides, 7000); // Change image every 4 seconds
     } else {
       clearTimeout(timer);
     }
@@ -48,7 +48,6 @@ export const Slider = (promocion: any) => {
           <Box key={idx} className="mySlides fade">
             <Box className="numbertext">{idx+1} / {promocionesActivas.length}</Box>
             <Img src={val.PRT_IMAGE} width="100%" />
-            <Box className="text">{val.PRT_TITLE}</Box>
           </Box>
         ) }
       </Box>
