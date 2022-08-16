@@ -324,7 +324,7 @@ export const ModalConf = (props: any) => {
                   </Button>
                 </Link>
 
-                <Button variant="ghost" onClick={AbrirVentana}>
+                <Button  variant="ghost" onClick={AbrirVentana}>
                   Imprimir
                 </Button>
               </Box>
