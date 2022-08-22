@@ -426,29 +426,8 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
       direction={{ base: "column", md: "row" }}
       justifyContent="space-around"
     >
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader></ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Alert status="success">
-              <AlertIcon />
-              Se guardo con éxito
-            </Alert>
-          </ModalBody>
-          <ModalFooter>
-            <Link to="/">
-              <Button colorScheme="blue" mr={3} onClick={onClose}>
-                Seguir Comprando
-              </Button>
-            </Link>
-            <Link to="/carrito">
-              <Button variant="ghost">Ir a Carrito</Button>
-            </Link>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ProductSavedSuccessfully isOpen={isOpen} onClose={onClose} />
+
       {where == "ofert" ? (
         <>
           {/* <ProductExist data={data} isLoading={isLoading} AgregarCarrito={AgregarCarrito} CambioCantidad={CambioCantidad} cantidad={cantidad} /> */}
