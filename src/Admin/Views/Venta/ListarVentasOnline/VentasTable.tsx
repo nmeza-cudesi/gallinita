@@ -22,6 +22,8 @@ import { TablaSinDatos } from "../../../UI/Components/TablaSinDatos";
 import { ButtonRefetch } from "../../../UI/Components/ButtonRefetch";
 import { IoReload } from "react-icons/io5";
 import { DescargarPedidos } from "./ExportPedidos";
+import { DeleteVentasModal } from "./DeleteVentasModal";
+import { BiTrash } from "react-icons/bi";
 
 
 export const VentasTable = ({ isLoading, isError, data, error, isFetching, refetch }: { isLoading: any, isError: any, data: any, error: any, isFetching: any, refetch: any }) => {
@@ -114,6 +116,14 @@ const ActionCell = ({ ven }: { ven: any }) => {
           colorScheme="yellow"
         />
       </EditVentasModal>
+      {ven.APROBACION == 2 && <DeleteVentasModal venta={ven}>
+        <IconButton
+          icon={<BiTrash />}
+          aria-label="Ver"
+          _hover={{}}
+          bg="#3e49f9"
+        />
+      </DeleteVentasModal>}
     </Stack>
   );
 };
