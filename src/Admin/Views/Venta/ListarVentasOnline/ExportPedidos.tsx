@@ -36,7 +36,7 @@ const ExportCSV = ({ csvData, fileName, isLoading }: any) => {
                 "TOTAL A PAGAR": val.totalPrecio,
             }
         })
-        const ws = XLSX.utils.json_to_sheet(dataExport);
+        const ws = XLSX.utils.json_to_sheet(dataExport); 
 
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
 
