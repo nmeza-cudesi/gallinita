@@ -36,7 +36,7 @@ export const CancelledOrder = ({ cancelled }: any) => {
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
-          <ModalHeader>Cancelar Orden</ModalHeader>
+          <ModalHeader>Cancelar Pedido</ModalHeader>
           <ModalBody>
             <Box>
               <Text fontWeight={"semibold"} fontSize="md">
@@ -57,7 +57,7 @@ export const CancelledOrder = ({ cancelled }: any) => {
               Cerrar
             </Button>
             <Button colorScheme="orange" onClick={cancelled}>
-              Cancelar Compra
+              Cancelar Pedido
             </Button>
           </ModalFooter>
         </ModalContent>

@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { Link } from "react-router-dom";
+import productsaved from "../assets/productsaved.gif";
+
 
 export const ProductSavedSuccessfully = ({ isOpen, onClose }: any) => {
   return (
@@ -23,7 +25,7 @@ export const ProductSavedSuccessfully = ({ isOpen, onClose }: any) => {
           <Center>
             <Image
               objectFit="cover"
-              src="https://cdn.dribbble.com/users/619199/screenshots/3787913/media/b07e5b261a9286a9455a53a23d845a18.gif"
+              src={productsaved}
               alt="Product Saved Successfully"
               style={{
                 objectFit: "contain",
