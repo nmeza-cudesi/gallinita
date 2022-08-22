@@ -6,10 +6,8 @@ import {
   useColorModeValue,
   Button,
   useDisclosure,
-  Tooltip,
+  Center,
 } from "@chakra-ui/react";
-
-import { MdRemoveShoppingCart } from "react-icons/md";
 import { NewVoucherModal } from "./NewVoucher";
 import { AiOutlineFileSync } from "react-icons/ai";
 
@@ -34,7 +32,7 @@ export const MessageVoucherRejected = ({ voucher, id_order, refetch }: any) => {
           <Text textTransform="uppercase">
             Ingrese un nuevo voucher o Cancele la compra
           </Text>
-          <Flex>
+          <Center>
             <Button
               m={1}
               onClick={onOpen}
@@ -47,24 +45,7 @@ export const MessageVoucherRejected = ({ voucher, id_order, refetch }: any) => {
             >
               Nuevo voucher
             </Button>
-
-            <Tooltip label="No Permitido">
-              <Box>
-                <Button
-                  disabled={true}
-                  m={1}
-                  mt="5"
-                  leftIcon={<MdRemoveShoppingCart />}
-                  bg="blue.700"
-                  color="white"
-                  variant="solid"
-                  _hover={{ bg: buttonarritoVacioBG }}
-                >
-                  Cancelar Compra
-                </Button>
-              </Box>
-            </Tooltip>
-          </Flex>
+          </Center>
         </Box>
       </Flex>
       <NewVoucherModal
