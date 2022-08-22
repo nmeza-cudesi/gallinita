@@ -127,9 +127,9 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                 </ModalContent>
             </Modal>
             <Grid padding={{ base: "5", md: "10" }} justify-self="center" maxWidth="1200px" templateColumns={{ base: "repeat(2, 1fr)", sm: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }} gap={{ base: "5", md: "8" }}>
-                {!data ? <h1>Cargando...</h1> : (!data.status && (data.filter((pro: any) => (pro.PRO_DISABLED != 0 || pro.PRO_AGOTADO != 0))).length > 0) ? data.map((val: any, idx: number) => {
+                {!data ? <h1>Cargando...</h1> : (!data.status && (data.filter((pro: any) => (pro.PRO_AGOTADO != 0))).length > 0) ? data.map((val: any, idx: number) => {
                     return (
-                        (val.PRO_DISABLED == 0 || val.PRO_AGOTADO == 0) ? <></> :
+                        (val.PRO_AGOTADO == 0) ? <></> :
                             <div className="contenedor__prod">
                                 <div>
                                     <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
@@ -140,7 +140,7 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                                             <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} fontWeight={"700"}>{val.PRO_NAME}</Text>
                                         </Link>
                                         <Tooltip label={val.PRO_DESCRIPTION} aria-label='A tooltip'>
-                                            <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >{cortarString(val.PRO_DESCRIPTION)}</Text>
+                                            <Text textOverflow="ellipsis" fontSize={{ base: "small", md: "lg" }} >{cortarString(Number(val.PRO_WEIGHT).toFixed(3))} Kg.</Text>
                                         </Tooltip>
 
                                         {!val.PRO_PRICE_DISCOUNT ? <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span>
@@ -148,7 +148,7 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                                             <><span style={{ color: "#FF4E00", textDecoration: "line-through", fontSize: "1rem" }}>S/.{val.PRO_PRICE.toFixed(2)}</span> <span style={{ color: "#FF4E00", fontWeight: "bold", fontSize: "1.2rem" }}>S/. {(val.PRO_PRICE - val.PRO_PRICE_DISCOUNT).toFixed(2)}</span></>}
                                         <Flex justifyContent={"space-between"} className='button__pro'>
 
-                                            {val.PRO_DISABLED == 0 ?
+                                            {val.PRO_AGOTADO == 0 ?
                                                 <Box cursor="not-allowed" width="min-content" fontSize={{ base: "30px", md: "40px" }} >
                                                     <FaCartPlus />
                                                 </Box> :
@@ -156,7 +156,7 @@ export const ProductoComp = ({ searcher, where }: IBuscador) => {
                                                     <FaCartPlus onClick={() => { AgregarCarrito(val); }} />
                                                 </Box>}
 
-                                            {val.PRO_DISABLED == 0 ? <Button borderRadius={"full"} disabled fontWeight={"200"} variant='outline'>Agotado</Button> : <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
+                                            {val.PRO_AGOTADO == 0 ? <Button borderRadius={"full"} disabled fontWeight={"200"} variant='outline'>Agotado</Button> : <Link to={val.PRO_PRICE_DISCOUNT ? "/ofert/" + val.PRO_ID : "/producto/" + val.PRO_ID}>
                                                 <Button borderRadius={"full"} fontWeight={"200"} variant='outline'>Ver más</Button>
                                             </Link>}
                                         </Flex>
@@ -308,8 +308,8 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                                 Agregar a Carrito
                             </Button>
                             :
-                            <Button disabled={data[0].PRO_DISABLED == 0} leftIcon={<FaCartPlus />} onClick={AgregarCarrito} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
-                                {data[0].PRO_DISABLED == 1 ? "Agregar a Carrito" : "Excede el Limite"}
+                            <Button disabled={data[0].PRO_AGOTADO == 0} leftIcon={<FaCartPlus />} onClick={AgregarCarrito} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
+                                {data[0].PRO_AGOTADO == 1 ? "Agregar a Carrito" : "Excede el Limite"}
                             </Button>
                         }
                     </Flex>
@@ -336,8 +336,8 @@ export const ProductoDetail = ({ id, where }: IproductoDetail) => {
                                         Agregar a Carrito
                                     </Button>
                                     :
-                                    <Button disabled={data[0].PRO_DISABLED == 0} leftIcon={<FaCartPlus />} onClick={AgregarCarrito} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
-                                        {data[0].PRO_DISABLED == 1 ? "Agregar a Carrito" : "Excede el Limite"}
+                                    <Button disabled={data[0].PRO_AGOTADO == 0} leftIcon={<FaCartPlus />} onClick={AgregarCarrito} colorScheme="teal" variant="solid" _hover={{ bg: buttonHoverBG }}>
+                                        {data[0].PRO_AGOTADO == 1 ? "Agregar a Carrito" : "Excede el Limite"}
                                     </Button>
                                 }
 
