@@ -8,10 +8,10 @@ import { Button, Stack, Skeleton } from '@chakra-ui/react';
 import { BsDownload } from 'react-icons/bs';
 import { ExportOrders } from '../../../../Service/Sales';
 
-export const DescargarPedidos = () => {
+export const DescargarPedidos = ({ fechas }: { fechas: { fechaIni: string, fechaFin: string } }) => {
     const { isLoading, data } = useQuery(
-        "exportDetailOrder",
-        ExportOrders,
+        ["exportDetailOrder", fechas],
+        () => ExportOrders(fechas),
         { refetchOnWindowFocus: false }
     );
     return <ExportCSV isLoading={isLoading} csvData={data} fileName="Pedidos Online" />
@@ -36,7 +36,7 @@ const ExportCSV = ({ csvData, fileName, isLoading }: any) => {
                 "TOTAL A PAGAR": val.totalPrecio,
             }
         })
-        const ws = XLSX.utils.json_to_sheet(dataExport);
+        const ws = XLSX.utils.json_to_sheet(dataExport); 
 
         const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
 
@@ -52,7 +52,7 @@ const ExportCSV = ({ csvData, fileName, isLoading }: any) => {
 
     return (
 
-        <Button isLoading={isLoading} bg={"#3e49f9"} leftIcon={<BsDownload />} onClick={(e) => exportToCSV(csvData, fileName)}>Export</Button>
+        <Button isLoading={isLoading} bg={"#3e49f9"} color={"white"} _hover={{}} leftIcon={<BsDownload />} onClick={(e) => exportToCSV(csvData, fileName)}>Export</Button>
 
     )
 

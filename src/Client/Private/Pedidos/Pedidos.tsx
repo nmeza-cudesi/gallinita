@@ -31,7 +31,7 @@ export const Pedidos = () => {
 export const PedidosContent = () => {
   const boxColorBG = useColorModeValue("white", "gray.700");
 
-  const { data, isLoading } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     "orders",
     async () => await getPedidosByIdClient()
   );
@@ -65,7 +65,7 @@ export const PedidosContent = () => {
               <DivAddCarrito />
             </Box>
           ) : (
-            <PedidosComp orders={data} />
+            <PedidosComp orders={data} refetch={refetch} />
           )}
         </Box>
       </Box>

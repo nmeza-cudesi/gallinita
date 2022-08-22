@@ -5,8 +5,10 @@ import {
   Text,
   Badge,
   Box,
+  Flex,
+  Input,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { AiFillEye } from "react-icons/ai";
 import { EditVentasModal } from "./EditeVentasModal";
@@ -22,12 +24,7 @@ import { IoReload } from "react-icons/io5";
 import { DescargarPedidos } from "./ExportPedidos";
 
 
-export const VentasTable = () => {
-  const { isLoading, isError, data, error, isFetching, refetch } = useQuery(
-    "salesonline",
-    ListSalesOnline,
-    { refetchOnWindowFocus: false }
-  );
+export const VentasTable = ({ isLoading, isError, data, error, isFetching, refetch }: { isLoading: any, isError: any, data: any, error: any, isFetching: any, refetch: any }) => {
 
   const salesupdate = useRecoilValue(listaSaleOnline);
 
@@ -68,6 +65,7 @@ export const VentasTable = () => {
     },
   ];
 
+
   useEffect(() => {
     refetch();
   }, [salesupdate]);
@@ -83,10 +81,6 @@ export const VentasTable = () => {
       {
         (data.length > 0) ? (
           <>
-            <MyContain>
-              <ButtonRefetch refetch={refetch} />
-              <DescargarPedidos />
-            </MyContain>
             <MyContain>
               <Box w="full">
                 <MyReactTable

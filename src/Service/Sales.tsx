@@ -1,11 +1,11 @@
-export const ListSalesOnline = async () => {
-  const res = await fetch(import.meta.env.VITE_APP_API + "/sales/salesonline");
+export const ListSalesOnline = async ({ fechaIni, fechaFin }: { fechaIni: string, fechaFin: string }) => {
+  const res = await fetch(import.meta.env.VITE_APP_API + "/sales/salesonline/" + fechaIni + "/" + fechaFin);
   const data = await res.json();
   return data;
 };
 
-export const ExportOrders = async () => {
-  const res = await fetch(import.meta.env.VITE_APP_API + "/orders/export");
+export const ExportOrders = async ({ fechaIni, fechaFin }: { fechaIni: string, fechaFin: string }) => {
+  const res = await fetch(import.meta.env.VITE_APP_API + "/orders/export/" + fechaIni + "/" + fechaFin);
   const data = await res.json();
   return data;
 };

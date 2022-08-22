@@ -19,7 +19,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaTruck } from "react-icons/fa";
 import { GrGallery } from "react-icons/gr";
 import { useMutation, useQuery } from "react-query";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CostoCompraState, IdOderState } from "../../../Data/Atoms/Carrito";
 import { ClientState, HeaderClient, NavClient } from "../../../Data/Atoms/Client";
@@ -27,8 +27,9 @@ import { CarritoState } from "../../../Data/Atoms/Carrito";
 import { IPedidoDetailModel, IPedidoModel } from "../../../Model/Pedidos";
 import { IProductoCompra } from "../../../Model/Productos";
 import { socketApi } from "../../../Routes/Admin/Socket";
-import { createOrder, orderById, OrederEdit } from "../../../Service/TiendaOnlineService";
+import { changeStatusOrder, closeAlert, createOrder, orderById, OrederEdit, validationAlert } from "../../../Service/TiendaOnlineService";
 import { ListMetodoPago } from "../../../Service/MetodoPagoService";
+import { AiFillClockCircle } from "react-icons/ai";
 
 export const MetodoPago = () => {
 
@@ -36,10 +37,22 @@ export const MetodoPago = () => {
 
   //@ts-ignore
   const idOrderState = useRecoilValue(IdOderState);
+  const location = useLocation();
+
   const setCarritoState = useSetRecoilState(CarritoState)
   const [costoCarrito, setCostoCarrito] = useRecoilState(CostoCompraState)
   const [selectedImage, setSelectedImage] = useState(false);
+  const [close, setClose] = useState(false);
   const [payMethod, setPayMethod] = useState(0)
+
+  const [timer, setTimer] = useState(
+    {
+      seconds: ('0' + Math.floor(900 % 60)).slice(-2),
+      minutes: ('0' + Math.floor(900 / 60 % 60)).slice(-2),
+      time: 900
+    })
+
+
   const [image, setImage] = useState([]);
   const history = useHistory()
   const productos: IProductoCompra[] = JSON.parse(localStorage.getItem('cart') || '[]') as Array<IProductoCompra>
@@ -53,9 +66,19 @@ export const MetodoPago = () => {
   //@ts-ignore
   today = yyyy + '-' + mm + '-' + dd;
   //const { data } = useQuery("orderById", () => orderById(idOrderState), {});
-  const { mutateAsync, isLoading } = useMutation(createOrder)
+  const { data: resChangeStatusOrder } = useQuery("changeOrder", () => { return changeStatusOrder({ orders_detail: productos }) }, {
+    onSuccess: (data) => {
+      setClose(true)
+      console.log(data);
+    },
+    refetchOnWindowFocus: false
+  })
 
+
+  const { mutateAsync, isLoading } = useMutation(createOrder)
   const { mutateAsync: UpdateOrder } = useMutation(OrederEdit,);
+  const { mutate } = useMutation(closeAlert, {})
+
 
   const setHeadClient = useSetRecoilState(HeaderClient);
   const setNavClient = useSetRecoilState(NavClient);
@@ -145,6 +168,20 @@ export const MetodoPago = () => {
     setCarritoState([])
     history.push("/pedidos")
   }
+
+  const handleTabClosing = () => { }
+
+  const alertUser = (event: any) => {
+    event.preventDefault()
+    var items = []
+    for (let i = 0; i < productos.length; i++) {
+      const element = productos[i];
+      items.push(element)
+    }
+    mutate({ orders_detail: items })
+    event.returnValue = ''
+  }
+
   const file = useRef(null);
   useEffect(() => {
     previzualizarImg();
@@ -152,6 +189,63 @@ export const MetodoPago = () => {
     setHeadClient(true);
 
   }, [loading]);
+
+  useEffect(() => {
+    if (close) {
+      window.addEventListener('beforeunload', alertUser)
+      window.addEventListener('unload', handleTabClosing)
+      return () => {
+        window.removeEventListener('beforeunload', alertUser)
+        window.removeEventListener('unload', handleTabClosing)
+      }
+    }
+  }, [close])
+
+  useEffect(() => {
+    return () => {
+      if (!close) {
+        var items = []
+        for (let i = 0; i < productos.length; i++) {
+          const element = productos[i];
+          items.push(element)
+        }
+        mutate({ orders_detail: items })
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!close || location.pathname == "/metodo-pago") {
+      var items = []
+      for (let i = 0; i < productos.length; i++) {
+        const element = productos[i];
+        items.push(element)
+      }
+      mutate({ orders_detail: items })
+      console.log("Location changed");
+    }
+  }, [location]);
+
+  useEffect(() => {
+    setTimeout(function () {
+      if (!(timer.time < 1)) {
+        setTimer({
+          seconds: ('0' + Math.floor((timer.time - 1) % 60)).slice(-2),
+          minutes: ('0' + Math.floor((timer.time - 1) / 60 % 60)).slice(-2),
+          time: (timer.time - 1)
+        })
+        console.log(timer);
+      } else {
+        var items = []
+        for (let i = 0; i < productos.length; i++) {
+          const element = productos[i];
+          items.push(element)
+        }
+        mutate({ orders_detail: items })
+        history.push("/carrito")
+      }
+    }, 1000);
+  }, [timer]);
 
   return (
     <Flex direction={{ base: "column", md: "row" }} p="8">
@@ -163,6 +257,11 @@ export const MetodoPago = () => {
         borderRadius="xl"
         marginY="2"
         flex="7">
+        <Text fontSize="2xl" as="legend">
+          <AiFillClockCircle />
+          <b>{timer.minutes}</b>:
+          <b>{timer.seconds}</b>
+        </Text>
         <FormLabel fontSize="3xl" as="legend">
           Realizar Pago
         </FormLabel>
@@ -213,6 +312,7 @@ export const MetodoPago = () => {
             accept="image/*"
           />
         </Button>
+        <Text>Solo se permite imagenes</Text>
         {loading ?
           <Stack>
             <Skeleton height="70px" />

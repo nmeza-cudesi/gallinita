@@ -32,10 +32,12 @@ import {
   Th,
   Tbody,
   Td,
+  CloseButton,
+  Center,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { BiPurchaseTag, BiStore } from "react-icons/bi";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { Link, Redirect } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { CostoCompraState } from "../../../Data/Atoms/Carrito";
@@ -47,22 +49,30 @@ import {
 import { IProductoCompra } from "../../../Model/Productos";
 import { getCompany } from "../../../Service/CompanyService";
 import { ListFormaVenta } from "../../../Service/FormaVentaService";
-import { getPerfilFact } from "../../../Service/TiendaOnlineService";
+import { closeAlert, getPerfilFact, validationAlert } from "../../../Service/TiendaOnlineService";
+import { IsLoading } from "../../UI/Component/isLoading";
 import { ProductoCarrito } from "../../UI/Component/ProductoComp";
 import { DivAddCarrito } from "./DivAddCarrito";
 
 export const Carrito = () => {
+
   //const state
   const [nextStep, setNextStep] = useState(false);
+  const [validate, setValidate] = useState(false);
+  const [item, setItem] = useState([]);
+
+
   const auth = useRecoilValue(ClientState);
   const setCostoCarrito = useSetRecoilState(CostoCompraState);
   const costoCarrito = useRecoilValue(CostoCompraState);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isOpenAlert, onOpen: onOpenAlert, onClose: onCloseAlert } = useDisclosure();
   const setNavClient = useSetRecoilState(NavClient);
   const setHeadClient = useSetRecoilState(HeaderClient);
 
   const { data: reglas } = useQuery("reglas", ListFormaVenta, { refetchOnWindowFocus: false })
   const { data: company } = useQuery("company", getCompany, { refetchOnWindowFocus: false })
+  const { mutateAsync, isLoading } = useMutation(validationAlert, {})
 
   useEffect(() => {
     setNavClient(false);
@@ -123,11 +133,40 @@ export const Carrito = () => {
     return total;
   }
 
+  async function Validation() {
+    onOpenAlert()
+    setValidate(true)
+
+    var items = []
+    for (let i = 0; i < productos.length; i++) {
+      const element = productos[i];
+      items.push(element)
+    }
+
+    let i = await mutateAsync({ orders_detail: items })
+    console.log(i);
+    if (i.message != "Item Disponible") {
+      setValidate(false)
+      setItem(i.items);
+    } else {
+      setItem([]);
+      setValidate(false)
+      setTimeout(() => {
+        setNextStep(true);
+      }, 3000)
+    }
+
+
+  }
+
+
   useEffect(() => {
     CalcularSubtotal();
     CalcularDescuento();
     CalcularTotal();
   }, [company]);
+
+
   return (
     <Box width="100">
       {nextStep && <Redirect to={"/metodo-pago"} />}
@@ -364,7 +403,7 @@ export const Carrito = () => {
               {productos.length >= 1 && (
                 <Button
                   onClick={() => {
-                    setNextStep(true);
+                    Validation()
                   }}
                   leftIcon={<BiPurchaseTag />}
                   bg="blue.700"
@@ -416,6 +455,58 @@ export const Carrito = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      <Modal size="xl" isOpen={isOpenAlert} onClose={onCloseAlert} closeOnOverlayClick={false}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Realizando Proceso de Validacion</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {!validate ? (
+              item.length > 0 ?
+                <Alert status='error' fontFamily={"Roboto"}>
+                  <AlertIcon />
+                  <Box>
+                    <AlertTitle>Producto Ocupado</AlertTitle>
+                    <AlertDescription>
+                      Alguno de los productos que desea comprar se encuentran en otro proceso de compra
+                      o ya fueron comprado espere o reemplace los siguientes productos:
+                      {/* JSON.stringify(item) */
+                        item.map((val: any) =>
+                          <>
+                            <Text>- <b>{val.PRO_NAME}</b> con un precio de <b>{val.PRO_PRICE}</b> ({val.PRO_WEIGHT})</Text>
+                          </>)
+                      }
+                    </AlertDescription>
+                  </Box>
+                </Alert>
+                :
+                <Alert status='success'>
+                  <AlertIcon />
+                  <Box>
+                    <AlertTitle>Productos Confirmados</AlertTitle>
+                    <AlertDescription>
+                      Ya esta cerca de terminar su compra
+                    </AlertDescription>
+                  </Box>
+                </Alert>
+
+            ) : (
+              <Center>
+                <IsLoading />
+              </Center>
+            )}
+          </ModalBody>
+          <ModalFooter>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
+
+const ModalValidation = (loading: any, items: any) => {
+  console.log(items);
+
+  return
+}
