@@ -380,21 +380,6 @@ export const EditVentasModal = ({
                                     </Center>
                                   </Badge>
                                 </Center>
-                                <Tooltip label="No Permitido">
-                                  <Center>
-                                    <Button
-                                      disabled={false}
-                                      colorScheme="gray"
-                                      variant="outline"
-                                      fontSize="15px"
-                                    >
-                                      <Center>
-                                        <IoMail /> - Solicitar nuevo voucher al
-                                        cliente
-                                      </Center>
-                                    </Button>
-                                  </Center>
-                                </Tooltip>
                               </BoxView>
                               <BoxView>
                                 <Center h="100%" w="100%">

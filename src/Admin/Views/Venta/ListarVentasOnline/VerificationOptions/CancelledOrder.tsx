@@ -18,6 +18,7 @@ import "./VerificationOptions.css";
 
 export const CancelledOrder = ({ cancelled }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -53,10 +54,23 @@ export const CancelledOrder = ({ cancelled }: any) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
+            <Button
+              variant="ghost"
+              mr={3}
+              onClick={onClose}
+              disabled={isLoading}
+            >
               Cerrar
             </Button>
-            <Button colorScheme="orange" onClick={cancelled}>
+            <Button
+              colorScheme="orange"
+              onClick={() => {
+                cancelled();
+                setIsLoading(!isLoading);
+              }}
+              disabled={isLoading}
+              isLoading={isLoading}
+            >
               Cancelar Pedido
             </Button>
           </ModalFooter>

@@ -11,16 +11,7 @@ import {
   Divider,
   IconButton,
   Image,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
   useDisclosure,
-  Alert,
-  AlertIcon,
   Tooltip,
   Skeleton,
 } from "@chakra-ui/react";
@@ -29,8 +20,7 @@ import "./CategoriaComp.css";
 import {
   IProducto,
   IProductoCompra,
-  IProductoCompras,
-  IProductos,
+  IProductoCompras
 } from "../../../Model/Productos";
 import { Link } from "react-router-dom";
 import { FaCartPlus } from "react-icons/fa";
