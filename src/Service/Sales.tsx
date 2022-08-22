@@ -42,6 +42,17 @@ export const getDocumentForSaleOnline = async (id: number) => {
   return data;
 };
 
+// @ts-ignore
+export const deleteOrder = async (ORD_ID) => {
+  return await fetch(import.meta.env.VITE_APP_API + '/orders/' + ORD_ID, {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "DELETE",
+  })
+}
+
 //Cabiar el estado de la Orden
 //@ts-ignore
 export const ChangeOrderState = async ({ ORD_ID, ORD_STATUS, nombre, correo }) => {

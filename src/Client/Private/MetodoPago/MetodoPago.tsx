@@ -209,13 +209,13 @@ export const MetodoPago = () => {
           const element = productos[i];
           items.push(element)
         }
-        mutate({ orders_detail: items })
+        //mutate({ orders_detail: items })
       }
     }
   }, []);
 
   useEffect(() => {
-    if (!close || location.pathname == "/metodo-pago") {
+    if (!close) {
       var items = []
       for (let i = 0; i < productos.length; i++) {
         const element = productos[i];
@@ -224,7 +224,7 @@ export const MetodoPago = () => {
       mutate({ orders_detail: items })
       console.log("Location changed");
     }
-  }, [location]);
+  }, []);
 
   useEffect(() => {
     setTimeout(function () {
