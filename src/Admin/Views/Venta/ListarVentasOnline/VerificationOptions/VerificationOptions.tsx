@@ -13,8 +13,7 @@ export const VerficationOptions = ({ confirmar, rechazar, cancelar }: any) => {
 
           <RejectedVoucher rechazar={rechazar} />
 
-          {/* TO DO: Cuando ya estemos listo para tener esta opcion desde el administrador, descomenten este componente y terminen el proceso */}
-          {/* <CancelledOrder cancelled={cancelar} /> */}
+          <CancelledOrder cancelled={cancelar} />
         </HStack>
       </Center>
     </Box>
