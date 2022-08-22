@@ -18,6 +18,7 @@ import "./VerificationOptions.css";
 
 export const AcceptVoucher = ({ confirmar }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -53,10 +54,23 @@ export const AcceptVoucher = ({ confirmar }: any) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
+            <Button
+              variant="ghost"
+              mr={3}
+              onClick={onClose}
+              disabled={isLoading}
+            >
               Cerrar
             </Button>
-            <Button colorScheme="green" onClick={confirmar}>
+            <Button
+              colorScheme="green"
+              onClick={() => {
+                confirmar();
+                setIsLoading(!isLoading);
+              }}
+              disabled={isLoading}
+              isLoading={isLoading}
+            >
               Confirmar
             </Button>
           </ModalFooter>

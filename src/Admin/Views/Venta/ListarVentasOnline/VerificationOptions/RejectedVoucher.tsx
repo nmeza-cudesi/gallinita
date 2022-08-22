@@ -18,6 +18,7 @@ import "./VerificationOptions.css";
 
 export const RejectedVoucher = ({ rechazar }: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isLoading, setIsLoading] = React.useState(false);
 
   return (
     <>
@@ -52,10 +53,23 @@ export const RejectedVoucher = ({ rechazar }: any) => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button variant="ghost" mr={3} onClick={onClose}>
+            <Button
+              variant="ghost"
+              mr={3}
+              onClick={onClose}
+              disabled={isLoading}
+            >
               Cerrar
             </Button>
-            <Button colorScheme="red" onClick={rechazar}>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                rechazar();
+                setIsLoading(!isLoading);
+              }}
+              disabled={isLoading}
+              isLoading={isLoading}
+            >
               Rechazar
             </Button>
           </ModalFooter>
