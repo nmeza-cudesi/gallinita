@@ -56,6 +56,19 @@ const validationAlert = async (res) => {
 }
 
 //@ts-ignore
+const changeStatusOrder = async (res) => {
+    console.log(res);
+
+    const response = await fetch(import.meta.env.VITE_APP_API + '/orders/changeStatusOrder', {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(res)
+    })
+    const data = await response.json();
+    return data;
+}
+
+//@ts-ignore
 const closeAlert = async (res) => {
     console.log(res);
 
@@ -227,6 +240,7 @@ export {
     getProductsByCategoryOrSearcher,
     getPedidosByIdClient,
     getProductDetail,
+    changeStatusOrder,
     createOrder,
     orderById,
     OrederEdit,

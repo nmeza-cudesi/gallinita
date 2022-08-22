@@ -22,7 +22,7 @@ export const Footer = () => {
                         <ListIcon as={FiMail} color="green.500" />
                         ventas@gallinitadecorral.com
                     </ListItem>
-                    <ListItem>
+                    {/* <ListItem>
                         <Flex justifyContent={"center"}><Text>SÁBADO</Text></Flex>
                         <ListIcon as={MdPlace} color="green.500" />
                         <b>Bioferia Ecológica Parque Reducto #2</b><br />
@@ -40,7 +40,7 @@ export const Footer = () => {
                         <ListIcon as={MdPlace} color="green.500" />
                         <b>Agro Ferias Campesinas</b><br />
                         Puericultoria Pérez Araníbar - Magdalena<br />
-                    </ListItem>
+                    </ListItem> */}
                 </List>
             </Box>
             <Box justifyContent="center" color="whiteAlpha.800" width={{ base: "100%", md: "25vw" }}>
@@ -70,13 +70,16 @@ export const Footer = () => {
                 </Text>
                 <List spacing={3}>
                     <ListItem>
-                        BCP
+                        Tranferencia BCP
+                    </ListItem>
+                    <ListItem>
+                        Tranferencia Scotiabank
                     </ListItem>
                     <ListItem>
                         YAPE
                     </ListItem>
                     <ListItem>
-                        Depósito
+                        Plin
                     </ListItem>
                 </List>
             </Box>

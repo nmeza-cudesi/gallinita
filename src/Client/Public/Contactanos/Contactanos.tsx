@@ -3,6 +3,7 @@ import { Input } from '@chakra-ui/input';
 import { Box, List, ListItem, ListIcon, Flex } from '@chakra-ui/layout';
 import { useToast } from '@chakra-ui/react';
 import React, { useEffect } from 'react'
+import { AiFillInstagram } from 'react-icons/ai';
 import { FaFacebookF, FaWhatsapp } from 'react-icons/fa';
 import { FiMail, FiMapPin } from 'react-icons/fi';
 import { MdCall, MdPlace } from 'react-icons/md';
@@ -81,6 +82,7 @@ export const Contactanos = () => {
                                 </List>
                                 <Box className="redes-s">
                                     <a href="https://www.facebook.com/La-Gallinita-de-Corral-112035834934660"><FaFacebookF /></a>
+                                    <a href="https://www.instagram.com/lagallinitadecorral/"><AiFillInstagram /></a>
                                 </Box>
                             </Box>
                             <form id="form_agregar" className="formulario" onSubmit={handleSubmit}>
