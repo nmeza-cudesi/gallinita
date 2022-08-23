@@ -89,7 +89,7 @@ export const ConsilacionTable = ({ isLoading, isError, data, error, isFetching, 
                   data={data}
                   isPaginated
                   hasFilters
-                  pagesOptions={[15, 25, 50]}
+                  pagesOptions={[50, 75, 100]}
                 />
               </Box>
             </MyContain>

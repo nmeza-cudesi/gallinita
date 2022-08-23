@@ -48,7 +48,7 @@ export const ProvTable = () => {
         {!isLoading ? (
           (data.length > 0) ? (
             <MyContain>
-                <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
+                <MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
             </MyContain>
           ) : (
             <MyContain>

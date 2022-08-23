@@ -60,7 +60,7 @@ export const Accesos = () => {
         isPaginated
         hasFilters
         //@ts-ignore
-        pagesOptions={[15, 25, 50]}
+        pagesOptions={[50, 75, 100]}
       />
     </MyContain>
   );

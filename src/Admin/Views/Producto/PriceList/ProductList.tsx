@@ -152,9 +152,9 @@ const TableProduct = ({ prlid, tipo }: { prlid: number, tipo: string }) => {
     if (isError) return <h1>{error.message} {':('}</h1>
     if (data) { if (data.message) return <h1>{data.message}</h1> }
     return tipo == "productprice" ?
-        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[15, 25, 50]} /></Box>
+        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated hasFilters pagesOptions={[50, 75, 100]} /></Box>
         :
-        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated pagesOptions={[15, 25, 50]} /></Box>
+        <Box padding="2" margin="4" borderRadius="md" border="1px solid #E2E8F0"><MyReactTable columns={columns} data={data} isPaginated pagesOptions={[50, 75, 100]} /></Box>
 }
 const ActionCell = ({ productPriceList }: { productPriceList: any }) => {
 

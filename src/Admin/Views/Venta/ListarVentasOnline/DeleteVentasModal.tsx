@@ -72,6 +72,8 @@ export const DeleteVentasModal = ({
     const { mutateAsync, isLoading } = useMutation(deleteOrder)
     const { mutateAsync: closeAlertAsync, isLoading: isLoadingClose } = useMutation(closeAlert)
 
+    const queryClient = useQueryClient();
+
     async function handleDelete() {
         console.log(venta);
         let dataProduct = await ListProductsSalesOnline(venta.PEDIDO);
@@ -85,7 +87,8 @@ export const DeleteVentasModal = ({
 
         await closeAlertAsync({ orders_detail: items })
         // @ts-ignore
-        //await mutateAsync(venta.PEDIDO);
+        await mutateAsync(venta.PEDIDO);
+        queryClient.invalidateQueries("salesonline")
         onClose()
     }
     return (

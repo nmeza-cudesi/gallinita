@@ -86,7 +86,7 @@ export const TipoPagoTable = () => {
     return (
         <>
             {/* <IconButton m="2" onClick={() => refetch()} aria-label="Recargar" icon={<IoReload />} /> */}
-            <MyReactTable columns={columns} data={data || []} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
+            <MyReactTable columns={columns} data={data || []} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
         </>
     )
 }

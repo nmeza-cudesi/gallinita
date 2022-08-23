@@ -89,7 +89,7 @@ export const ProdTable = ({ online }: { online: boolean }) => {
                                             <Box w="full">
                                                 <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
                                                     return req.PRO_AGOTADO == "1";
-                                                })} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
+                                                })} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
                                             </Box>
                                         ) :
                                         (<TablaSinDatos message="No hay Ventas" />)}
@@ -100,7 +100,7 @@ export const ProdTable = ({ online }: { online: boolean }) => {
                                             <Box w="full">
                                                 <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
                                                     return req.PRO_AGOTADO == "0";
-                                                })} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
+                                                })} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
                                             </Box>
                                         ) :
                                         (<TablaSinDatos message="No hay Ventas" />)}
@@ -109,7 +109,7 @@ export const ProdTable = ({ online }: { online: boolean }) => {
                         </Tabs>
                     </MyContain>
                     : <MyContain>
-                        <MyReactTable columns={columns} data={data.status == 200 ? [] : data} isPaginated hasFilters pagesOptions={[15, 25, 50]} />
+                        <MyReactTable columns={columns} data={data.status == 200 ? [] : data} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
                     </MyContain>}
         </>
 

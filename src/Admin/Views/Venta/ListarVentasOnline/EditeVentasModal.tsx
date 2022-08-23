@@ -30,6 +30,7 @@ import { listaSaleOnline } from "../../../../Data/Atoms/SaleOnline";
 import { ListForDocument } from "../../../../Service/PersonService";
 import {
   ChangeOrderState,
+  deleteOrder,
   getDocumentForSaleOnline,
   ListProductsSalesOnline,
   VerifyVoucherOrder,
@@ -51,6 +52,7 @@ import noimage from "../../../UI/Assets/images/noimage.png";
 import { VerficationOptions } from "./VerificationOptions/VerificationOptions";
 import { VerifiedVoucher } from "./VerifiedVoucher/VerifiedVoucher";
 import { DescriptionOrder } from "./Description/DescriptionOrder";
+import { closeAlert } from "../../../../Service/TiendaOnlineService";
 
 const getFecha = () => {
   let hoy = new Date();
@@ -79,6 +81,10 @@ export const EditVentasModal = ({
   const { mutate, isLoading: isLoadingM } = useMutation(ChangeOrderState, {
     mutationKey: "stateMutation",
   });
+
+  const { mutateAsync, isLoading } = useMutation(deleteOrder)
+  const { mutateAsync: closeAlertAsync, isLoading: isLoadingClose } = useMutation(closeAlert)
+
   const toast = useToast();
 
   const updated = useSetRecoilState(listaSaleOnline);
@@ -214,7 +220,7 @@ export const EditVentasModal = ({
         sales_description: saleProduct,
         stock: stockProduc,
       };
-      api.ventas.addDocument(dataVenta).then((result) => {});
+      api.ventas.addDocument(dataVenta).then((result) => { });
       sendEmail("Aceptar");
       statusdownload(true);
       updated((val) => !val);
@@ -232,9 +238,22 @@ export const EditVentasModal = ({
       statusdownload(false);
     }
   }
-
   async function cancelar() {
-    console.log("cancelar");
+    console.log(venta);
+    let dataProduct = await ListProductsSalesOnline(venta.PEDIDO);
+    console.log(dataProduct);
+    var items = []
+    for (let i = 0; i < dataProduct.length; i++) {
+      const element = dataProduct[i];
+      items.push({ ...element, id: element.PRO_ID })
+    }
+    console.log(items);
+
+    await closeAlertAsync({ orders_detail: items })
+    // @ts-ignore
+    await mutateAsync(venta.PEDIDO);
+    queryClient.invalidateQueries("salesonline")
+    onClose()
   }
 
   return (

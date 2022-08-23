@@ -31,7 +31,7 @@ const ExportCSV = ({ csvData, fileName, isLoading }: any) => {
         const dataExport = csvData.map((val: any) => {
             return {
                 "NOMBRE/RAZON SOCIAL": val.PER_TRADENAME.length > 1 ? val.PER_TRADENAME : val.PER_NAME + " " + val.PER_LASTNAME,
-                "DIRECCIÓN": val.PER_COUNTRY + " " + val.PER_DEPARTMENT + " " + val.PER_DISTRIC + " " + val.PER_DIRECTION,
+                "DIRECCIÓN": val.PER_DISTRIC + " " + val.PER_DIRECTION,
                 "PRODUCTOS": val.Productos,
                 "TOTAL A PAGAR": val.totalPrecio,
             }
