@@ -102,7 +102,6 @@ export const AddCliente = ({
     }
     const [aparecer, setAparecer] = useState(false)
     const [personaNegocio, setPersonaNegocio] = useState(false)
-    console.log(persona);
 
     if (persona.PER_DNI && (persona.PER_DNI.length > 0 || persona.PER_RUC > 0)) {
         isOpenNewClient = true;

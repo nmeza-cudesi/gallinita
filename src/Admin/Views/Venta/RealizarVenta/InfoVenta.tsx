@@ -118,7 +118,7 @@ export const InfoVenta = (props: any) => {
     SetInputBuscarCliente(e.target.value);
   };
   let [spinnerSearchClient, SetSpinnerSearchClient] = React.useState(false);
-  const { mutateAsync, data, isLoading } = useMutation(searchPersonByDocument);
+  const { mutateAsync, data=[], isLoading } = useMutation(searchPersonByDocument);
 
   // @ts-ignore
   const [persona, setPersona] = React.useState<CreatePerson>({});

@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -12,29 +14,54 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  useAutoComplete,
 } from "@choc-ui/chakra-autocomplete";
 import { useField, useFormikContext } from "formik";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 
 // @ts-ignore
 export const ProviderSearchSelect = ({ itemClick, getdata, loading, data, label, ...props }) => {
   const formikProps = useFormikContext();
-
   // @ts-ignore
   const [field, meta] = useField(props);
 
   const changeInput = (value: any) => {
     formikProps.setFieldValue(field.name, value);
   };
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // `current` apunta al elemento de entrada de texto montado
+    //@ts-ignore
+    inputEl.current.focus();
+  };
+
   return (
-    <AutoComplete openOnFocus>
+    <AutoComplete emptyState={<Center>No Hay Resultados 😢</Center>} openOnFocus>
       <FormControl>
-        <AutoCompleteInput
-          {...field}
-          placeholder={props.placeholder}
-          onChange={(e: any) => getdata(e.target.value)}
-          variant="filled"
-        />
+        <Flex alignItems={"center"} gap={"5px"}>
+          <AutoCompleteInput
+            ref={inputEl}
+            {...field}
+            autoComplete="off"
+            placeholder={props.placeholder}
+            onKeyUp={(e: any) => {
+              console.log(e.target.value);
+              setTimeout(() => {
+                getdata(e.target.value)
+              }, 2000);
+
+            }}
+            variant="filled"
+          />
+          <Button
+            h="1.75rem"
+            size="sm"
+            onClick={onButtonClick}
+          >
+            <BiSearchAlt />
+          </Button>
+        </Flex>
         <AutoCompleteList>
           {!loading && data ? (
             data.length > 0 ? (
@@ -65,12 +92,13 @@ export const ProviderSearchSelect = ({ itemClick, getdata, loading, data, label,
               <Skeleton height="35%" borderRadius="5px" />
             )
           ) : (
-            <></>
+            <Skeleton height="35%" borderRadius="5px" />
           )}
         </AutoCompleteList>
-        <FormErrorMessage>{meta.error}</FormErrorMessage>
+        <FormErrorMessage>{"a"}</FormErrorMessage>
       </FormControl>
     </AutoComplete>
+
   );
 };
 
