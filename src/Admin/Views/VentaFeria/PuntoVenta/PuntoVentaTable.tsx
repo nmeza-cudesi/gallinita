@@ -1,9 +1,11 @@
-import { Text } from '@chakra-ui/react'
+import { Button, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useQuery } from 'react-query'
 import { MyReactTable } from '../../../../GlobalUI/Table/MyReactTable'
 import { getPointSales } from '../../../../Service/PoaintSaleService'
 import { TableCharge } from '../../../UI/Components/TableCharge/tablecharge'
+import { DeletePosModal } from './DeletePosModal'
+import { UpdatePosModal } from './UpdatePosModal'
 
 export const PuntoVentaTable = () => {
     const { data, isError, isLoading, isFetching, refetch } = useQuery("PointSales", getPointSales, { refetchOnWindowFocus: false })
@@ -45,13 +47,19 @@ export const PuntoVentaTable = () => {
              data={data}
              isPaginated
              hasFilters/>
+
+             
              
         </>
     )
 }
-const ActionCell = () => (
+const ActionCell = (ven : any) => (
     <>
-        <button>eliminar</button>
-        <button>actualizar</button>
+        <DeletePosModal pointSale = {ven["ven"]}>
+            <Button>Eliminar</Button>
+        </DeletePosModal>
+        <UpdatePosModal pointSale={ven["ven"]}>
+            <Button>Editar</Button>
+        </UpdatePosModal>
     </>
 )
