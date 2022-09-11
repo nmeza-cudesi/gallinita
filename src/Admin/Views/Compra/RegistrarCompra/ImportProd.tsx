@@ -3,11 +3,8 @@ import { Text } from "@chakra-ui/layout";
 import React, { useRef, useState } from "react";
 import { BsUpload } from "react-icons/bs";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { async } from "regenerator-runtime";
 import * as XLSX from "xlsx";
 import { getCategoryById } from "../../../../Service/CategoryAdminService";
-import { createPriceList } from "../../../../Service/PriceListAdminService";
-import { createStock } from "../../../../Service/ProductAdminService";
 import { AgregarRemission, AgregarRemissionDetail, DocumentRemission, ProductByCode, updateDocumentSequence } from "../../../../Service/RemisionAdminService";
 
 interface RemissionsDetail {
@@ -56,8 +53,7 @@ export const ImportProdRemision = () => {
         DocumentRemission,
         { refetchOnWindowFocus: false }
     );
-    //const { mutateAsync: createPriceListAsync } = useMutation(createPriceList)
-    //const { mutateAsync, isLoading } = useMutation('createProductDetail')
+   
     const handleFile = () => {
         // @ts-ignore
         file.current.click();
@@ -91,18 +87,13 @@ export const ImportProdRemision = () => {
         });
 
         promise.then(async (d) => {
-            //const dataJson = await createPriceListAsync()
-            //const data = await dataJson.json()
-            //const idPriceList = data.data
             setCargando(true)
             //@ts-ignore
             for (let i = 0; i < d.length; i++) {
                 //@ts-ignore
                 const val = d[i];
 
-                console.log(val);
                 let productoEncontrado = await ProductByCode((val.codigo).toString().substring(1, 6));
-                console.log(productoEncontrado);
 
                 let categoriaEncontrada = await getCategoryById(productoEncontrado[0].CAT_ID);
                 let horaCreate = new Date().toLocaleTimeString().toLocaleString()
@@ -113,15 +104,14 @@ export const ImportProdRemision = () => {
                 prods.push({
                     //@ts-ignore
                     PRO_ID: productoEncontrado[0].PRO_ID,
-                    RDT_AMOUNT: Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)),
+                    RDT_AMOUNT: Number((val.codigo).toString().substring(6, 8) + "." + (val.codigo).toString().substring(8, 11)),
                     RDT_CODEBAR: (val.codigo).toString(),
                     RDT_DUEDATE: dateexpere,
-                    RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)))),
+                    RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(6, 8) + "." + (val.codigo).toString().substring(8, 11)))),
                     RDT_STATUS: "1",
                     //@ts-ignore
                     nameproduct: productoEncontrado[0].PRO_NAME,
                 })
-                console.log(prods);
 
             }
             const cretedRemission = await CrateRemission({
@@ -137,7 +127,6 @@ export const ImportProdRemision = () => {
                 REM_PLATE: "Por Llenar",
                 REM_UPDATEOUT: "Por Llenar"
             })
-            console.log(cretedRemission);
             await UpdateDocumentSequence({
                 sequence: data.DCT_SEQUENCE,
                 idDocument: 76
@@ -155,7 +144,6 @@ export const ImportProdRemision = () => {
             })
             queryClient.invalidateQueries("remision")
             setCargando(false)
-            //queryClient.invalidateQueries('PriceList');
         });
     };
 
