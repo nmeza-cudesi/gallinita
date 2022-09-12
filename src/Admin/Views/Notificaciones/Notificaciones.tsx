@@ -25,7 +25,7 @@ export const NotificacionesView = () => {
 
   return (
     <Box bg={"white"} height={"full"}>
-      <Flex padding={"10px"} direction={{base: 'column', sm: "column", md: "column", lg: "column", xl:"row" }}>
+      <Flex padding={"10px"} direction={{ base: 'column', sm: "column", md: "column", lg: "column", xl: "row" }}>
         <SalesAlert />
         <AlmacenAlert />
         <TicketsAlert />
@@ -51,7 +51,7 @@ export const TicketsAlert = () => {
           >
             Historico de Alertas de Tickets
           </Text>
-          <Button size="xs" onClick={() => {}}>
+          <Button size="xs" onClick={() => { }}>
             <Icon as={GrRefresh} />
           </Button>
         </Flex>
@@ -111,7 +111,7 @@ export const AlmacenAlert = () => {
         padding={"10px"}
         className="box_almacen_alert"
       >
-        {warehouse ? (
+        {warehouse && !warehouse.message ? (
           warehouse.map((row: any, idx: any) => (
             <WarehuseRow
               name={row.MESSAGE}

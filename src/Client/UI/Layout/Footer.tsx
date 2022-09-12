@@ -16,11 +16,11 @@ export const Footer = () => {
                 <List spacing={3}>
                     <ListItem>
                         <ListIcon as={MdCall} color="green.500" />
-                        +51 994 034 030
+                        +51 929 592 657
                     </ListItem>
                     <ListItem>
                         <ListIcon as={FiMail} color="green.500" />
-                        ventas@gallinitadecorral.com
+                        jalbornoz@cudesi.com.pe
                     </ListItem>
                     {/* <ListItem>
                         <Flex justifyContent={"center"}><Text>SÁBADO</Text></Flex>

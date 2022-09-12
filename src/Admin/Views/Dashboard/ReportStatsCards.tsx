@@ -77,10 +77,10 @@ export const SelectTitle = (props: any) => {
       onChange={(e: any) => props.changeSelect(e.target.value)}
       style={{ fontSize: "small" }}
     >
-      <option style={{background:"#2321fd"}} value="">Todo</option>
+      <option style={{ background: "#2321fd" }} value="">Todo</option>
       {props.data.map((item: any, idx: any) => {
         return (
-          <option style={{background:"#2321fd"}} key={idx} value={item.TOTAL}>
+          <option style={{ background: "#2321fd" }} key={idx} value={item.TOTAL}>
             {item.PAY}
           </option>
         );
@@ -130,7 +130,7 @@ export default function ReportStatsCards() {
           <StatsCard
             color="#0f1e49"
             title={"Total Vendido"}
-            stat={(data.contado).toFixed(2)}
+            stat={data.contado ? (data.contado).toFixed(2) : 0}
             defaultstat={"0.00"}
             icon={<FaMoneyBillAlt size={"3em"} color="white" />}
             loading={isLoading || isFetching}
@@ -138,7 +138,7 @@ export default function ReportStatsCards() {
           <StatsCard
             color="#0080ff"
             title={"Total a cobrar"}
-            stat={(data.totalcredito).toFixed(2)}
+            stat={data.totalcredito ? (data.totalcredito).toFixed(2) : 0}
             defaultstat={"0.00"}
             icon={<FiServer size={"3em"} color="white" />}
             loading={isLoading || isFetching}
@@ -148,11 +148,11 @@ export default function ReportStatsCards() {
             title={
               <Flex gap={"1"}>
                 <Text >Total por cobrar a</Text>
-                <SelectTitle background="#00ffff" data={data.credito} changeSelect={setDataSelect} />
+                <SelectTitle background="#00ffff" data={data.credito ? data.credito : 0} changeSelect={setDataSelect} />
               </Flex>
             }
             stat={dataSelect}
-            defaultstat={(data.totalcredito).toFixed(2)}
+            defaultstat={data.totalcredito ? (data.totalcredito).toFixed(2) : 0}
             icon={<GiReceiveMoney size={"3em"} color="white" />}
             loading={isLoading || isFetching}
           />
