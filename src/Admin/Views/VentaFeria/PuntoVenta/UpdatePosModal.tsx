@@ -1,26 +1,19 @@
-import { Button, Flex, Grid, GridItem, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react';
-import { Form, Formik } from 'formik';
-import React, { useEffect } from 'react'
-import { BiPlus } from 'react-icons/bi';
-import { useMutation, useQueryClient } from 'react-query';
-import { MyTextInput } from '../../../../GlobalUI/Forms/MyInputs';
-import { createPointSale } from '../../../../Service/PoaintSaleService';
+import { Box, Button, Grid, GridItem, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Form, Formik } from "formik";
+import React, { ReactNode } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { MyTextInput } from "../../../../GlobalUI/Forms/MyInputs";
+import { editePointSale } from "../../../../Service/PoaintSaleService";
 
-export const RegPosModal = ({ }: {}) => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const { mutateAsync } = useMutation(createPointSale)
+export const UpdatePosModal = ({pointSale, children} : {pointSale : any, children : ReactNode}) => {
+
 
     const queryClient = useQueryClient()
-
-    useEffect(() => {
-        //@ts-ignore
-        document.getElementById('title_view').textContent = 'Punto de Venta(Feria)';
-    }, [])
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { mutateAsync } = useMutation(editePointSale)
     return (
         <>
-            <Flex>
-                <Button onClick={onOpen} aria-label='Search database'><BiPlus fontSize={"xl"} /> &nbsp; &nbsp; Agregar</Button>
-            </Flex>
+        <Box onClick={onOpen}>{children}</Box>
             <Modal
                 closeOnOverlayClick={false}
                 closeOnEsc={false}
@@ -33,11 +26,11 @@ export const RegPosModal = ({ }: {}) => {
                     <ModalCloseButton />
                     <Formik
                         /* enableReinitialize={true} */
-                        initialValues={{}}
+                        initialValues={pointSale}
                         /* validationSchema={validate} */
                         onSubmit={async (values: any) => {
                             console.log(values)
-                            await mutateAsync(values)
+                            await mutateAsync({objSale : values, POS_ID : pointSale.POS_ID})                            
                             queryClient.invalidateQueries("PointSales")
                             onClose()
                         }}
@@ -88,4 +81,5 @@ export const RegPosModal = ({ }: {}) => {
             </Modal>
         </>
     )
+
 }

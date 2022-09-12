@@ -113,10 +113,10 @@ export const ImportProdRemision = () => {
                 prods.push({
                     //@ts-ignore
                     PRO_ID: productoEncontrado[0].PRO_ID,
-                    RDT_AMOUNT: Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)),
+                    RDT_AMOUNT: Number((val.codigo).toString().substring(6, 8) + "." + (val.codigo).toString().substring(8, 11)),
                     RDT_CODEBAR: (val.codigo).toString(),
                     RDT_DUEDATE: dateexpere,
-                    RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(7, 8) + "." + (val.codigo).toString().substring(8, 11)))),
+                    RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number((val.codigo).toString().substring(6, 8) + "." + (val.codigo).toString().substring(8, 11)))),
                     RDT_STATUS: "1",
                     //@ts-ignore
                     nameproduct: productoEncontrado[0].PRO_NAME,

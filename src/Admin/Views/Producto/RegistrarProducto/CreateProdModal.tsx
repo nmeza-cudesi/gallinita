@@ -87,8 +87,8 @@ export const CreateProdModal = ({ children, online }: { children: ReactNode, onl
             PRO_BARCODE: producto,
             PRO_CREATE_DATE: productoEncontrado[0].PRO_CREATE_DATE,
             CAT_ID: productoEncontrado[0].CAT_ID,
-            PRO_WEIGHT: Number(producto.substring(7, 8) + "." + producto.substring(8, 11)),
-            PRO_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(7, 8) + "." + producto.substring(8, 11)))),
+            PRO_WEIGHT: Number(producto.substring(6, 8) + "." + producto.substring(8, 11)),
+            PRO_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(6, 8) + "." + producto.substring(8, 11)))),
         } : {
             PRO_NAME: '',
             PRO_DESCRIPTION: '',

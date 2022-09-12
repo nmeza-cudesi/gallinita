@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IPrivateRoute {
     guard: IGuard;
     component: React.ElementType,
@@ -37,7 +39,7 @@ export interface ISubRoute {
 
 export interface IClientRoutes {
     path: string;
-    component: React.ElementType,
+    component: any,
     isPrivate: boolean;
     exact?: boolean;
 }

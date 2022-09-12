@@ -1,34 +1,13 @@
 import { Button, IconButton } from "@chakra-ui/button";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import { Input } from "@chakra-ui/input";
 import { Box, Divider, Flex, Spacer, Text } from "@chakra-ui/layout";
-import {
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-} from "@chakra-ui/number-input";
 import { Skeleton } from "@chakra-ui/skeleton";
 import React, { useEffect, useState } from "react";
-import { AiFillDelete, AiOutlineSearch } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { MyReactTable } from "../../../../GlobalUI/Table/MyReactTable";
-import {
-  getProductsStocks,
-} from "../../../../Service/ProductAdminService";
 import { useToast } from "@chakra-ui/react";
-
-import { MyTextInput } from "../../../../GlobalUI/Forms/MyInputs";
 import { AgregarRemission, AgregarRemissionDetail, DocumentRemission, ProductByCode, updateDocumentSequence } from "../../../../Service/RemisionAdminService";
-/* interface RemissionsDetail {
-  REM_CODEBAR: string;
-  REM_WEIGHT: string;
-  REM_DUEDATE: string;
-  REM_PRICE: number;
-  REM_OUT: string;
-  PRO_ID: number;
-  PRO_NAME: string;
-} */
 interface RemissionsDetail {
   RDT_ID?: number;
   REM_ID?: number;
@@ -55,11 +34,7 @@ export const AddProdCompra = ({
   const { mutateAsync: CrateRemission } = useMutation(AgregarRemission)
   const { mutateAsync: UpdateDocumentSequence } = useMutation(updateDocumentSequence)
   const { mutateAsync: CrateRemissionDetail } = useMutation(AgregarRemissionDetail)
-  /* const { data, isLoading, isError, isFetching, refetch } = useQuery(
-    "producstStock",
-    getProductsStocks,
-    { refetchOnWindowFocus: false }
-  ); */
+
   const { data, isLoading, isError, isFetching, refetch } = useQuery(
     "documentoRemisionData",
     DocumentRemission,
@@ -108,10 +83,10 @@ export const AddProdCompra = ({
       {
         //@ts-ignore
         PRO_ID: productoEncontrado[0].PRO_ID,
-        RDT_AMOUNT: Number(producto.substring(7, 8) + "." + producto.substring(8, 11)),
+        RDT_AMOUNT: Number(producto.substring(6, 8) + "." + producto.substring(8, 11)),
         RDT_CODEBAR: producto,
         RDT_DUEDATE: form.dudedate,
-        RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(7, 8) + "." + producto.substring(8, 11))).toFixed(2)),
+        RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(6, 8) + "." + producto.substring(8, 11))).toFixed(2)),
         RDT_STATUS: "1",
         //@ts-ignore
         nameproduct: productoEncontrado[0].PRO_NAME,

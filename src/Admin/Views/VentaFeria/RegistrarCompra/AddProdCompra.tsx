@@ -108,10 +108,10 @@ export const AddProdCompra = ({
       {
         //@ts-ignore
         PRO_ID: productoEncontrado[0].PRO_ID,
-        RDT_AMOUNT: Number(producto.substring(7, 8) + "." + producto.substring(8, 11)),
+        RDT_AMOUNT: Number(producto.substring(6, 8) + "." + producto.substring(8, 11)),
         RDT_CODEBAR: producto,
         RDT_DUEDATE: form.dudedate,
-        RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(7, 8) + "." + producto.substring(8, 11))).toFixed(2)),
+        RDT_PRICE: Number((productoEncontrado[0].PRD_UNIT_PRICE * Number(producto.substring(6, 8) + "." + producto.substring(8, 11))).toFixed(2)),
         RDT_STATUS: "1",
         //@ts-ignore
         nameproduct: productoEncontrado[0].PRO_NAME,

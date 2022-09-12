@@ -1,10 +1,9 @@
 import { IRoute } from "../../../../Model/Routing";
 import {
-    ListarProveedorGuard,
-    RegistrarCompraGuard
+    ListarProveedorGuard
 } from "../../../Guards/Compra";
 import {
-    ListarProveedor,
+    ListarProveedor
 } from '../../../../Admin/Views/Compra';
 
 export const CompraRoutes: IRoute[] = [
