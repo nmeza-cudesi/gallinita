@@ -6,6 +6,7 @@ import {
   Icon,
   Stack,
   Text,
+  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React from "react";
@@ -51,9 +52,12 @@ export const TicketsAlert = () => {
           >
             Historico de Alertas de Tickets
           </Text>
+          <Tooltip label='Actualizar'>
+
           <Button size="xs" onClick={() => {}}>
             <Icon as={GrRefresh} />
           </Button>
+          </Tooltip>
         </Flex>
       </Center>
       <Box
@@ -157,9 +161,12 @@ export const SalesAlert = () => {
           >
             Histórico de Alertas de Ventas
           </Text>
+          <Tooltip label='Actualizar'>
+
           <Button size="xs" onClick={() => sales_refetch()}>
             <Icon as={GrRefresh} />
           </Button>
+          </Tooltip>
         </Flex>
       </Center>
       <Box

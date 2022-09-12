@@ -1,4 +1,4 @@
-import { Stack, Skeleton, Img, IconButton } from '@chakra-ui/react'
+import { Stack, Skeleton, Img, IconButton, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillEdit } from 'react-icons/ai';
@@ -8,7 +8,7 @@ import { ListMetodoPago } from '../../../../Service/MetodoPagoService';
 import { EditMetPagoModal } from './EditMetodoPagoModal';
 
 export const MetodoPagoTable = () => {
-    
+
     const { isLoading, isError, data, error, isFetching, refetch } = useQuery('metodo_pago', ListMetodoPago, { refetchOnWindowFocus: false })
 
     const columns = [
@@ -41,7 +41,7 @@ export const MetodoPagoTable = () => {
         {
             Header: 'Acciones',
             Footer: 'Acciones',
-            id: 'actions', 
+            id: 'actions',
             // @ts-ignore
             Cell: ({ row }) => (
                 <ActionCell metodopago={row.original} />
@@ -88,7 +88,9 @@ const ActionCell = ({ metodopago }: { metodopago: any }) => {
         <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
             {<EditMetPagoModal metodopago={metodopago}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditMetPagoModal>}
         </Stack>)
 }

@@ -1,4 +1,4 @@
-import { Flex, Box, Stack, Skeleton, IconButton, HStack, Spacer, Text } from '@chakra-ui/react'
+import { Flex, Box, Stack, Skeleton, IconButton, HStack, Spacer, Text, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillDelete, AiOutlineEye } from 'react-icons/ai';
@@ -113,25 +113,36 @@ const ActionCell = ({ promotion }: { promotion: any }) => {
     return (
         <Stack direction={{ base: "column", md: "row" }} justifyContent="center">
             {<DeletePriceLisDialog priceListID={promotion.PRL_ID}>
-                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                <Tooltip label='Eliminar'>
+                    <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                </Tooltip>
             </DeletePriceLisDialog>}
             {<ProductList prlid={promotion.PRL_ID}>
-                <IconButton icon={<AiOutlineEye />} aria-label="Ver" border="none" variant="outline" colorScheme="teal" />
+                <Tooltip label='Lista de Insumos'>
+                    <IconButton icon={<AiOutlineEye />} aria-label="Ver" border="none" variant="outline" colorScheme="teal" />
+                </Tooltip>
             </ProductList>}
             {status ?
-                <IconButton
-                    onClick={handleStatus}
-                    variant="outline"
-                    colorScheme="teal"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                /> : <IconButton
-                    onClick={handleStatus} border="none"
-                    variant="outline"
-                    colorScheme="gray"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                />}
+                <Tooltip label='Desactivar'>
+                    <IconButton
+                        onClick={handleStatus}
+                        variant="outline"
+                        colorScheme="teal"
+                        aria-label="Estado"
+                        icon={<IoMdCheckmark />}
+                    /></Tooltip>
+                :
+                <Tooltip label='Activar'>
+                    <IconButton
+                        onClick={handleStatus} border="none"
+                        variant="outline"
+                        colorScheme="gray"
+                        aria-label="Estado"
+                        icon={<IoMdCheckmark />}
+                    /></Tooltip>
+
+
+            }
 
         </Stack>)
 }

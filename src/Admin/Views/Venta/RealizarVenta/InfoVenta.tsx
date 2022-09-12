@@ -43,6 +43,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import api from "./ApiVentas";
@@ -837,6 +838,7 @@ export const InfoVenta = (props: any) => {
                     <InputRightElement width="4.5rem">
                       <Box width={20} justifyContent="flex-start">
                         <Flex>
+                        <Tooltip label='Buscar'>
                           <Button
                             h="1.75rem"
                             size="sm"
@@ -846,6 +848,7 @@ export const InfoVenta = (props: any) => {
                           >
                             <BiSearchAlt />
                           </Button>
+                          </Tooltip>
                           <Spacer />
                           <Box display={clienteEncontrado ? "none" : "block"}>
                             <AddCliente

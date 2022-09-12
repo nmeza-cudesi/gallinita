@@ -1,4 +1,4 @@
-import { Button, Text, Stack, Skeleton, Img, IconButton } from '@chakra-ui/react'
+import { Button, Text, Stack, Skeleton, Img, IconButton, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
@@ -118,21 +118,28 @@ const ActionCell = ({ tipopago }: { tipopago: any }) => {
         <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
             {<EditTipPagoModal tipopago={tipopago}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditTipPagoModal>}
             {status ?
-                <IconButton
-                    onClick={handleStatus}
-                    variant="outline"
-                    colorScheme="teal"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                /> : <IconButton
-                    onClick={handleStatus} border="none"
-                    variant="outline"
-                    colorScheme="gray"
-                    aria-label="Estado"
-                    icon={<IoMdCheckmark />}
-                />}
+                <Tooltip label='Desactivar'>
+                    <IconButton
+                        onClick={handleStatus}
+                        variant="outline"
+                        colorScheme="teal"
+                        aria-label="Estado"
+                        icon={<IoMdCheckmark />}
+                    /></Tooltip>
+                :
+                <Tooltip label='Activar'>
+                    <IconButton
+                        onClick={handleStatus} border="none"
+                        variant="outline"
+                        colorScheme="gray"
+                        aria-label="Estado"
+                        icon={<IoMdCheckmark />}
+                    /></Tooltip>
+            }
         </Stack>)
 }

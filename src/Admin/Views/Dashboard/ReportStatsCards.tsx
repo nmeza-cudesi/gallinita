@@ -9,6 +9,7 @@ import {
   StatLabel,
   StatNumber,
   Text,
+  Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ReactNode } from "react";

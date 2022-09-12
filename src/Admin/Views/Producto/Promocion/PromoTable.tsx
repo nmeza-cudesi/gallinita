@@ -1,4 +1,4 @@
-import { Button, Text, Stack, Skeleton, Img, IconButton, HStack, Spacer, useToast } from '@chakra-ui/react'
+import { Button, Text, Stack, Skeleton, Img, IconButton, HStack, Spacer, useToast, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
@@ -141,12 +141,17 @@ const ActionCell = ({ promotion }: { promotion: any }) => {
     return (
         <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
+
             {<EditPromoModal promotion={promotion}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditPromoModal>}
             // ! MODAL PARA ELIMINAR
             {<DeletePromoDialog promoID={promotion.PRT_ID}>
-                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                <Tooltip label='Eliminar'>
+                    <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                </Tooltip>
             </DeletePromoDialog>}
             <Button size="sm"
                 colorScheme={status ? "green" : "yellow"}
