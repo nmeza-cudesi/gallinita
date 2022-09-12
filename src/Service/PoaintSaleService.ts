@@ -8,6 +8,11 @@ export const getPointSaleById = async (id: number) => {
     return res.json()
 }
 
+export const getSaleByPOS = async (id: number) => {
+    const res = await fetch(import.meta.env.VITE_APP_API + '/point_sale/VentaByPOS/' + id)
+    return res.json()
+}
+
 export const editePointSale = async ({ objSale, POS_ID }: { objSale: any, POS_ID: number }) => {
 
     return await fetch(import.meta.env.VITE_APP_API + '/point_sale/' + POS_ID, {
