@@ -1,5 +1,5 @@
 import { Box, Button, Input } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { MyReactTable } from "../../../../GlobalUI/Table/MyReactTable";
 import { getPointSaleById, getSaleByPOS } from "../../../../Service/PoaintSaleService";
@@ -18,6 +18,7 @@ export const VentaPosTable = () => {
     // Use State de Data para poder modificar su valor al agregar producto
     const [array, setArray] = useState([])
 
+    const valorcito = useRef(null)
 
     const [skipPageReset, setSkipPageReset] = useState(false);
     const columns = [
@@ -61,6 +62,8 @@ export const VentaPosTable = () => {
                 setListProd((old) => [...old, listCode[0]])
                 // @ts-ignore
                 setArray((old) => old.filter((d: any) => d.RDT_ID !== listCode[0].RDT_ID))
+                // @ts-ignore
+                valorcito.current.value = ''
                 console.log(array);
 
             } else {
@@ -91,7 +94,7 @@ export const VentaPosTable = () => {
     return (
         <Box flex={'7'}>
             <MyContain>
-                <Input placeholder='Basic usage' onKeyUp={searchCodebar} onKeyDown={handleEnter} />
+                <Input placeholder='Basic usage' onKeyUp={searchCodebar} onKeyDown={handleEnter} ref = {valorcito}/>
                 <MyReactTable
                     columns={columns}
                     // @ts-ignore
