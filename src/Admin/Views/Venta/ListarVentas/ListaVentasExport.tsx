@@ -54,9 +54,11 @@ const ExportCSV = ({ csvData, fileName }: any) => {
 
     return (
         <Button
-            colorScheme="blue"
+            bg={"#0080ff"}
+            color={"white"}
+            _hover={{ bg: "rgb(237 242 247)", color: "#0080ff" }}
             leftIcon={<BsDownload />}
             onClick={(e) => exportToCSV(data, fileName)}>Export</Button>
     )
 
-}
+}       

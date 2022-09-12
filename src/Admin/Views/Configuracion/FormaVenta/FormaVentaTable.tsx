@@ -1,4 +1,4 @@
-import { Stack, Skeleton, Img, IconButton } from '@chakra-ui/react'
+import { Stack, Skeleton, Img, IconButton, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillEdit } from 'react-icons/ai';
@@ -60,7 +60,9 @@ const ActionCell = ({ formaveta }: { formaveta: any }) => {
         <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
             {<EditFormaVentaModal formaveta={formaveta}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditFormaVentaModal>}
         </Stack>)
 }

@@ -46,6 +46,7 @@ import { AdminState } from "../../../Data/Atoms/Admin";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { CreateEvidenceTicket } from "../../../Service/SoporteService";
 import { listaTickets } from "../../../Data/Atoms/Ticket";
+import { FaPlus } from "react-icons/fa";
 
 export const AddTicket = ({
   title,
@@ -272,12 +273,8 @@ export const AddTicket = ({
         <Button
           onClick={onOpen}
           onClickCapture={() => getValuesForSelects()}
-          colorScheme="teal"
-          variant="ghost"
+          leftIcon={<FaPlus />} colorScheme="green"
           w="110px">
-          <Circle size="40px" color="gray.900">
-            <BsPlusSquare />
-          </Circle>
           Agregar
         </Button>
       </HStack>

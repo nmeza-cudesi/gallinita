@@ -17,6 +17,7 @@ import {
   Td,
   Th,
   Thead,
+  Tooltip,
   Tr,
   useDisclosure,
   useToast,
@@ -54,13 +55,16 @@ export const VerAccesos = (props: any) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          refetch(), onOpen();
-        }}
-      >
-        <Icon as={AiOutlineEye} />
-      </Button>
+      <Tooltip label='Ver'>
+
+        <Button
+          onClick={() => {
+            refetch(), onOpen();
+          }}
+        >
+          <Icon as={AiOutlineEye} />
+        </Button>
+      </Tooltip>
 
       <Modal isOpen={isOpen} onClose={onClose} size={"6xl"}>
         <ModalOverlay />
@@ -77,7 +81,7 @@ export const VerAccesos = (props: any) => {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data && 
+                  {data &&
                     data.map((acc: any, idx: any) => (
                       <Tr key={idx}>
                         <Td>{acc.Acceso}</Td>

@@ -1,5 +1,5 @@
 //DescTable
-import { Button, IconButton, Stack, Skeleton, Image } from '@chakra-ui/react'
+import { Button, IconButton, Stack, Skeleton, Image, Tooltip } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
@@ -111,11 +111,15 @@ const ActionCell = ({ discount }: { discount: any }) => {
         <Stack direction={{ base: "column", md: "row" }}>
             // * MODAL PARA EDITAR
             <EditDesModal discount={discount}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditDesModal>
             // ! MODAL PARA ELIMINAR
             <DeleteDescDialog discountId={discount.DIS_ID}>
-                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                <Tooltip label='Eliminar'>
+                    <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                </Tooltip>
             </DeleteDescDialog>
             <Button
                 colorScheme={status ? "green" : "yellow"}

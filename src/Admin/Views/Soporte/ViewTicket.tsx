@@ -23,6 +23,7 @@ import {
   Text,
   useToast,
   useDisclosure,
+  Tooltip,
 } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
@@ -158,13 +159,16 @@ export const ViewTicket = ({
 
   return (
     <>
-      <Button
-        onClickCapture={() => getOneTicket(idTicket)}
-        onClick={onOpen}
-        colorScheme="teal"
-        variant="ghost">
-        {icon}
-      </Button>
+      <Tooltip label='Ver'>
+
+        <Button
+          onClickCapture={() => getOneTicket(idTicket)}
+          onClick={onOpen}
+          colorScheme="teal"
+          variant="ghost">
+          {icon}
+        </Button>
+      </Tooltip>
 
       <Drawer onClose={onClose} isOpen={isOpen} size={"xl"}>
         <DrawerOverlay />
@@ -283,6 +287,7 @@ export const ViewTicket = ({
                         {({ isExpanded }) => (
                           <>
                             <h2>
+                            <Tooltip label='Ver Más'>
                               <AccordionButton>
                                 <Box flex="1" textAlign="left">
                                   EVIDENCIA
@@ -293,6 +298,7 @@ export const ViewTicket = ({
                                   <AiOutlinePlusSquare fontSize="12px" />
                                 )}
                               </AccordionButton>
+                              </Tooltip>
                             </h2>
                             <AccordionPanel pb={4}>
                               <AspectRatio maxW="400px" ratio={4 / 3}>
@@ -317,6 +323,7 @@ export const ViewTicket = ({
                         {({ isExpanded }) => (
                           <>
                             <h2>
+                            <Tooltip label='Ver Más'>
                               <AccordionButton>
                                 <Box flex="1" textAlign="left">
                                   MENSAJES
@@ -327,6 +334,7 @@ export const ViewTicket = ({
                                   <BsPlusSquareFill fontSize="12px" />
                                 )}
                               </AccordionButton>
+                              </Tooltip>
                             </h2>
 
                             <AccordionPanel pb={4}>
@@ -449,7 +457,7 @@ export const ViewTicket = ({
                     <FormControl>
                       <Button
                         ml={4}
-                        background="teal"
+                        background="#0080ff"
                         color="white"
                         type="submit"
                         isLoading={updateActivate}

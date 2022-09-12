@@ -2,6 +2,7 @@ import { Box, Button, Center, Icon, Stack } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { AiOutlineReload } from "react-icons/ai";
 import { useQuery } from "react-query";
+import { Tooltip } from "recharts";
 import { MyReactTable } from "../../../../GlobalUI/Table/MyReactTable";
 import { GetAllRol } from "../../../../Service/RolService";
 import { MyContain } from "../../../UI/Components/MyContain";
@@ -49,9 +50,11 @@ export const Accesos = () => {
     <MyContain>
       <Box>
         <RegistrarRol />
+        <Tooltip label='Actualizar'>
         <Button onClick={() => refetch()}>
           <Icon as={AiOutlineReload} />
         </Button>
+        </Tooltip>
       </Box>
       <MyReactTable
         columns={columns}

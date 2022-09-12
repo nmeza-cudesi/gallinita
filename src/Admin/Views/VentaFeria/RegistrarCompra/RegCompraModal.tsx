@@ -30,7 +30,7 @@ export const RegCompraModal = () => {
   return (
     <>
       <Box w={"fit-content"} display="flex" gap={5}>
-        <Button onClick={onOpen}>Agregar</Button>
+        <Button color={"white"} backgroundColor={ "#38a169"} onClick={onOpen}>Agregar</Button>
         <ImportProdRemision />
       </Box>
       <Modal

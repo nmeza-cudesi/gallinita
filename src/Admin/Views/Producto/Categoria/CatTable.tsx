@@ -1,4 +1,4 @@
-import { Button, IconButton, Stack, Skeleton, Img, HStack, Spacer } from '@chakra-ui/react'
+import { Button, IconButton, Stack, Skeleton, Img, HStack, Spacer, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
@@ -127,10 +127,14 @@ const ActionCell = ({ cat }: { cat: any }) => {
     return (
         <Stack direction={{ base: "column", md: "row" }}>
             <EditCatModal category={cat}>
-                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                <Tooltip label='Editar'>
+                    <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+                </Tooltip>
             </EditCatModal>
             <DeleteCatDialog catId={cat.CAT_ID}>
-                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                <Tooltip label='Eliminar'>
+                    <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+                </Tooltip>
             </DeleteCatDialog>
             <Button
                 colorScheme={status ? "green" : "yellow"}

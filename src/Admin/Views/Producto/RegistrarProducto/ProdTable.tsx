@@ -1,5 +1,5 @@
 import { Image } from '@chakra-ui/image'
-import { Stack, IconButton, Button, HStack, Spacer, Tabs, TabList, Tab, TabPanels, TabPanel, Box } from '@chakra-ui/react'
+import { Stack, IconButton, Button, HStack, Spacer, Tabs, TabList, Tab, TabPanels, TabPanel, Box, Tooltip } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { useQuery } from 'react-query'
@@ -79,15 +79,15 @@ export const ProdTable = ({ online }: { online: boolean }) => {
                     <MyContain>
                         <Tabs variant='enclosed'>
                             <TabList>
-                                <Tab onClick={() => {  }}>Disponibles</Tab>
-                                <Tab onClick={() => {  }}>Vendidas</Tab>
+                                <Tab onClick={() => { }}>Disponibles</Tab>
+                                <Tab onClick={() => { }}>Vendidas</Tab>
                             </TabList>
                             <TabPanels>
                                 <TabPanel>
                                     {(isLoading || isFetching) ? (<TableCharge />) : (data.length > 0) ?
                                         (
                                             <Box w="full">
-                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
+                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req: any) => {
                                                     return req.PRO_AGOTADO == "1";
                                                 })} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
                                             </Box>
@@ -98,7 +98,7 @@ export const ProdTable = ({ online }: { online: boolean }) => {
                                     {(isLoading || isFetching) ? (<TableCharge />) : (data.length > 0) ?
                                         (
                                             <Box w="full">
-                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req:any)=>{
+                                                <MyReactTable columns={columns} data={data.status == 200 ? [] : data.filter((req: any) => {
                                                     return req.PRO_AGOTADO == "0";
                                                 })} isPaginated hasFilters pagesOptions={[50, 75, 100]} />
                                             </Box>
@@ -120,12 +120,18 @@ export const ProdTable = ({ online }: { online: boolean }) => {
 const ActionCell = ({ pro }: { pro: any }) =>
     <Stack direction={{ base: "column", md: "row" }}>
         {pro.PRO_FATHER == 1 && <CreateProdHijoModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1) }}>
-            <IconButton borderRadius={"full"} icon={<BsPlusLg />} aria-label="Editar" colorScheme="blue" />
+            <Tooltip label='Registrar Cliente con Insumo'>
+                <IconButton borderRadius={"full"} icon={<BsPlusLg />} aria-label="Editar" colorScheme="blue" />
+            </Tooltip>
         </CreateProdHijoModal>}
         <EditeProdModal product={{ ...pro, PRO_REMISION: (pro.PRO_REMISION == 1), PRO_FATHER: (pro.PRO_FATHER == 1), PRO_INAFECT: (pro.PRO_INAFECT == "1") }}>
-            <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+            <Tooltip label='Editar'>
+                <IconButton icon={<AiFillEdit />} aria-label="Editar" colorScheme="blue" />
+            </Tooltip>
         </EditeProdModal>
         <DeleteProdDialog proId={pro.PRO_ID}>
-            <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+            <Tooltip label='Eliminar'>
+                <IconButton icon={<AiFillDelete />} aria-label="Eliminar" colorScheme="red" />
+            </Tooltip>
         </DeleteProdDialog>
     </Stack>

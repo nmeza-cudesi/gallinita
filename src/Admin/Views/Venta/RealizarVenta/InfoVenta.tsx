@@ -43,6 +43,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
+  Tooltip,
 } from "@chakra-ui/react";
 import React from "react";
 import api from "./ApiVentas";
@@ -430,7 +431,7 @@ export const InfoVenta = (props: any) => {
     }
     function AbrirVentana() {
       getConfiguracionImpresion().then((result: any) => {
-        let ruta = import.meta.env.VITE_APP_API_SUNAT_2 + "/impresion/";
+        let ruta = import.meta.env.VITE_APP_API + "/impresion/";
         if (result[0].TEM_ID == 5) {
           ruta = ruta + "ventas/" + messageOfSended.lastId;
         } else if (result[0].TEM_ID == 15) {
@@ -456,8 +457,7 @@ export const InfoVenta = (props: any) => {
           isClosable: true,
         });
         api.ventas.sendCorreo(messageOfSended.lastId, correo).then((result) => {
-          console.log(result)
-          if (result.message == "Correo enviado.") {
+          if (result.message == "Mail send") {
             messageToast({
               title: "Correo enviado",
               description:
@@ -506,17 +506,18 @@ export const InfoVenta = (props: any) => {
                 }
               : saveDataVenta
           }
-          bg={"#2321fd"}
+
           w="100%"
+          bg={"#0080ff"}
           color={"white"}
-          _hover={{ bg: "#0080ff" }}
+          _hover={{ bg: "rgb(237 242 247)", color: "#0080ff" }}
         >
           Generar
         </Button>
 
         <Modal
           isOpen={isOpen}
-          onClose={() => { location.reload(); }}
+          onClose={() => { }}
           closeOnOverlayClick={false}
           isCentered={true}
         >
@@ -574,17 +575,23 @@ export const InfoVenta = (props: any) => {
               <Box display={loadSend ? "none" : "block"}>
                 <Box display={messageOfSended.status == 200 ? "block" : "none"}>
                   <Link href="/admin/ventas/listar-venta">
-                    <Button colorScheme="blue" mr={3}>
+                    <Button bg={"#2321fd"}
+                      color={"white"}
+                      _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                       Ver Listado
                     </Button>
                   </Link>
                   <Link href="/admin/ventas/realizar-venta">
-                    <Button colorScheme="blue" mr={3}>
+                    <Button bg={"#2321fd"}
+                      color={"white"}
+                      _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                       Nueva Venta
                     </Button>
                   </Link>
 
-                  <Button marginTop="10px" colorScheme="blue" mr={3} onClick={AbrirVentana}>
+                  <Button marginTop="10px" bg={"#2321fd"}
+                    color={"white"}
+                    _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                     Imprimir
                   </Button>
                 </Box>
@@ -831,6 +838,7 @@ export const InfoVenta = (props: any) => {
                     <InputRightElement width="4.5rem">
                       <Box width={20} justifyContent="flex-start">
                         <Flex>
+                        <Tooltip label='Buscar'>
                           <Button
                             h="1.75rem"
                             size="sm"
@@ -840,6 +848,7 @@ export const InfoVenta = (props: any) => {
                           >
                             <BiSearchAlt />
                           </Button>
+                          </Tooltip>
                           <Spacer />
                           <Box display={clienteEncontrado ? "none" : "block"}>
                             <AddCliente
