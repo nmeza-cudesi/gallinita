@@ -106,7 +106,9 @@ export const VerComprobante = ({ venta }: { venta: any }) => {
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
+            <Button bg={"#0080ff"}
+              color={"white"}
+              _hover={{ bg: "rgb(237 242 247)", color: "#0080ff" }} variant="outline" mr={3} onClick={onClose}>
               Cancelar
             </Button>
           </DrawerFooter>

@@ -118,7 +118,7 @@ export const InfoVenta = (props: any) => {
     SetInputBuscarCliente(e.target.value);
   };
   let [spinnerSearchClient, SetSpinnerSearchClient] = React.useState(false);
-  const { mutateAsync, data=[], isLoading } = useMutation(searchPersonByDocument);
+  const { mutateAsync, data = [], isLoading } = useMutation(searchPersonByDocument);
 
   // @ts-ignore
   const [persona, setPersona] = React.useState<CreatePerson>({});
@@ -505,10 +505,11 @@ export const InfoVenta = (props: any) => {
                 }
               : saveDataVenta
           }
-          bg={"#2321fd"}
+
           w="100%"
+          bg={"#0080ff"}
           color={"white"}
-          _hover={{ bg: "#0080ff" }}
+          _hover={{ bg: "rgb(237 242 247)", color: "#0080ff" }}
         >
           Generar
         </Button>
@@ -573,17 +574,23 @@ export const InfoVenta = (props: any) => {
               <Box display={loadSend ? "none" : "block"}>
                 <Box display={messageOfSended.status == 200 ? "block" : "none"}>
                   <Link href="/admin/ventas/listar-venta">
-                    <Button colorScheme="blue" mr={3}>
+                    <Button bg={"#2321fd"}
+                      color={"white"}
+                      _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                       Ver Listado
                     </Button>
                   </Link>
                   <Link href="/admin/ventas/realizar-venta">
-                    <Button colorScheme="blue" mr={3}>
+                    <Button bg={"#2321fd"}
+                      color={"white"}
+                      _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                       Nueva Venta
                     </Button>
                   </Link>
 
-                  <Button marginTop="10px" colorScheme="blue" mr={3}>
+                  <Button marginTop="10px" bg={"#2321fd"}
+                    color={"white"}
+                    _hover={{ bg: "rgb(237 242 247)", color: "#2321fd" }} mr={3}>
                     Imprimir
                   </Button>
                 </Box>
