@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListarProveedor, RegistrarStock } from '../../Admin/Views/Compra';
-import { PuntoVenta, RegistrarCompra } from '../../Admin/Views/VentaFeria';
+import { PuntoVenta, RegistrarCompra, VentaPOS } from '../../Admin/Views/VentaFeria';
 import { Accesos, Empresa, FormaVenta, Impresora, TipoPago, Usuarios } from "../../Admin/Views/Configuracion/Index"
 import { MetodoPago } from '../../Admin/Views/Configuracion/MetodoPago/MetodoPago';
 import { DashboardView } from '../../Admin/Views/Dashboard';
@@ -48,6 +48,7 @@ export const MyAdminRoutes = ({ name }: { name: string }) => {
         'Notificaciones': () => <NotificacionesView />,
         'Accesos': () => <Accesos />,
         'Punto de Venta': () => <PuntoVenta />,
+        'Venta en Punto de Venta': () => <VentaPOS />,
     }
 
     // @ts-ignore
