@@ -118,7 +118,7 @@ export const InfoVenta = (props: any) => {
     SetInputBuscarCliente(e.target.value);
   };
   let [spinnerSearchClient, SetSpinnerSearchClient] = React.useState(false);
-  const { mutateAsync, data=[], isLoading } = useMutation(searchPersonByDocument);
+  const { mutateAsync, data = [], isLoading } = useMutation(searchPersonByDocument);
 
   // @ts-ignore
   const [persona, setPersona] = React.useState<CreatePerson>({});
@@ -430,7 +430,7 @@ export const InfoVenta = (props: any) => {
     }
     function AbrirVentana() {
       getConfiguracionImpresion().then((result: any) => {
-        let ruta = import.meta.env.VITE_APP_API + "/impresion/";
+        let ruta = import.meta.env.VITE_APP_API_SUNAT_2 + "/impresion/";
         if (result[0].TEM_ID == 5) {
           ruta = ruta + "ventas/" + messageOfSended.lastId;
         } else if (result[0].TEM_ID == 15) {
@@ -456,7 +456,8 @@ export const InfoVenta = (props: any) => {
           isClosable: true,
         });
         api.ventas.sendCorreo(messageOfSended.lastId, correo).then((result) => {
-          if (result.message == "Mail send") {
+          console.log(result)
+          if (result.message == "Correo enviado.") {
             messageToast({
               title: "Correo enviado",
               description:
@@ -515,7 +516,7 @@ export const InfoVenta = (props: any) => {
 
         <Modal
           isOpen={isOpen}
-          onClose={() => { }}
+          onClose={() => { location.reload(); }}
           closeOnOverlayClick={false}
           isCentered={true}
         >
@@ -583,7 +584,7 @@ export const InfoVenta = (props: any) => {
                     </Button>
                   </Link>
 
-                  <Button marginTop="10px" colorScheme="blue" mr={3}>
+                  <Button marginTop="10px" colorScheme="blue" mr={3} onClick={AbrirVentana}>
                     Imprimir
                   </Button>
                 </Box>
