@@ -293,6 +293,8 @@ export const InfoVenta = (props: any) => {
     const getProductosTabla = () => {
       let productosTabla: any[] = [];
       props.vistaDescripcion.map((producto: any) => {
+        console.log(producto);
+
         productosTabla.push({
           DOC_ID: 0,
           PRO_ID: producto.PRO_ID, //ID DEL PRODUCTO
@@ -300,10 +302,10 @@ export const InfoVenta = (props: any) => {
           SDT_CODE: producto.PRO_CODE, //CODIGO DEL PRODUCTO
           SDT_AMOUNT: producto.cantidad, //CANTIDAD VENDIDA
           SDT_DESCRIPTION: producto.PRO_NAME, //DESCRIPCION DEL PRODUCTO
-          SDT_PRICE: producto.precio.toFixed(2), //PRECIO DEL PRODUCTO
-          SDT_SUBTOTAL: producto.subtotal.toFixed(2), //CANTIDAD * PRECIO
+          SDT_PRICE: (producto.inafecta=="1" ? (producto.precio / 1.18) : producto.precio).toFixed(2), //PRECIO DEL PRODUCTO
+          SDT_SUBTOTAL: (producto.inafecta=="1" ? (producto.subtotal / 1.18) : producto.subtotal).toFixed(2), //CANTIDAD * PRECIO
           SDT_DISCOUNT: producto.descuento.toFixed(2), //DESCUENTO DEL PRODUCTO
-          SDT_TOTAL: producto.total.toFixed(2), //SUBTOTAL - DESCUENTO
+          SDT_TOTAL: (producto.inafecta=="1" ? (producto.total / 1.18) : producto.total).toFixed(2), //SUBTOTAL - DESCUENTO
           SDS_DAYS_TO_SEND: getFecha(), //FECHA DE CREACIÓN
           SDT_DATE: getFecha(),
           //SE MANTIENE POR DEFAULT
@@ -354,19 +356,19 @@ export const InfoVenta = (props: any) => {
           DOC_NUMBER: comprobanteSeleccionado.DCT_SEQUENCE, //NUMERO QUE ACOMPAÑA A LA SERIE, ES EL CORRELATIVO
           //CAMBIA - DATOS DOCUMENTO - TOTAL
           DOC_SUB_SUBTOTAL:
-            ((props.total + props.descuentoGeneral + props.descuento) / 1.18) + Number(props.totalIGVInafecto.toFixed(2)), // OPERACION GRAVADA + TOTAL IGV INAFECETA
+            (props.total + props.descuentoGeneral + props.descuento), // OPERACION GRAVADA + TOTAL IGV INAFECETA
           DOC_SUB_DISCOUNT: props.descuento,
           DOC_SUBTOTAL: props.total + props.descuentoGeneral + props.descuento, //EL TOTAL DEL SUBTOTAL SIN IGV SIN EL DESCUENTO
           DOC_DISCOUNT: props.descuentoGeneral, //EL TOTAL DEL DESCUENTO
           DOC_TAXED:
-            ((props.total + props.descuentoGeneral + props.descuento) / 1.18) - Number(props.totalMontoInafecto.toFixed(2)), //TOTAL DEL SUBTOTAL SIN IGV CON DESCUENTO - TOTAL MONTO INAFECETA
+            ((props.totalGravada + props.descuentoGeneral + props.descuento) / 1.18), //TOTAL DEL SUBTOTAL SIN IGV CON DESCUENTO - TOTAL MONTO INAFECETA
           //SE DEJA EN 0.00
-          DOC_INAFECT: Number(props.totalIGVInafecto.toFixed(2)) + Number(props.totalMontoInafecto.toFixed(2)), //TOTAL DE INAFECTO // TOTAL MONTO INAFECETA + TOTAL IGV INAFECETA = total precio de productos inafectos
+          DOC_INAFECT: Number(props.totalMontoInafecto.toFixed(2)), //TOTAL DE INAFECTO // TOTAL MONTO INAFECETA + TOTAL IGV INAFECETA = total precio de productos inafectos
           DOC_RELEASED: 0.0, //TOTAL QUE EXONERA IGV
 
           //CAMBIA
           DOC_IGV:
-            (((props.total + props.descuentoGeneral + props.descuento) / 1.18) * 0.18) - Number(props.totalIGVInafecto.toFixed(2)), //IGV DEL DOC_TAXED - TOTAL IGV INAFECETA
+            (((props.totalGravada + props.descuentoGeneral + props.descuento) / 1.18) * 0.18), //IGV DEL DOC_TAXED - TOTAL IGV INAFECETA
           DOC_NETO: props.total.toFixed(2), //DOC_TAXED + DOC_IGV
           //CAMBIA - ESTADO DOCUMENTO
           DOC_STATUS: "CREADO", //HAY 2 ESTADO [CREADO,ACEPTADO ]
@@ -838,16 +840,16 @@ export const InfoVenta = (props: any) => {
                     <InputRightElement width="4.5rem">
                       <Box width={20} justifyContent="flex-start">
                         <Flex>
-                        <Tooltip label='Buscar'>
-                          <Button
-                            h="1.75rem"
-                            size="sm"
-                            onClick={buscarCliente}
-                            isDisabled={isLoading}
-                            isLoading={isLoading}
-                          >
-                            <BiSearchAlt />
-                          </Button>
+                          <Tooltip label='Buscar'>
+                            <Button
+                              h="1.75rem"
+                              size="sm"
+                              onClick={buscarCliente}
+                              isDisabled={isLoading}
+                              isLoading={isLoading}
+                            >
+                              <BiSearchAlt />
+                            </Button>
                           </Tooltip>
                           <Spacer />
                           <Box display={clienteEncontrado ? "none" : "block"}>
