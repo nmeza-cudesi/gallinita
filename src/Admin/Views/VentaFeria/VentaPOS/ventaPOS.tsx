@@ -7,7 +7,7 @@ import { getPointSales } from '../../../../Service/PoaintSaleService';
 import { VentaPosTable } from './VentaPosTable';
 import { VentaPosInfo } from './VentaPosInfo';
 
-export const VentaPOS = ({ proList }: { proList: any }) => {
+export const VentaPOS = () => {
 
     // const { data, isError, isFetching, isLoading, refetch } = useQuery('PuntoVenta', getPointSales)
     const [venta, setVenta] = useState({
