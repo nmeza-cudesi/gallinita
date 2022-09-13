@@ -60,6 +60,7 @@ export const ImpresionVenta = ({
     );
   //@ts-ignore
   if (isError) return <h1>{error.message}</h1>;
+  console.log(data);
 
   return (
     <div>
@@ -90,12 +91,12 @@ export const ImpresionVenta = ({
 
           {/* precios total Info */}
           <InformacionTotal
-            grabada={(data.DOC_NETO / 1.18).toFixed(2)}
+            grabada={(data.DOC_TAXED).toFixed(2)}
             exonerada={data.DOC_RELEASED.toFixed(2)}
             inafecta={data.DOC_INAFECT.toFixed(2)}
-            igv={(data.DOC_NETO / 1.18 * 0.18).toFixed(2)}
+            igv={(data.DOC_IGV).toFixed(2)}
             total={data.DOC_NETO.toFixed(2)}
-            subtotal={(data.DOC_SUBTOTAL / 1.18).toFixed(2)}
+            subtotal={(data.DOC_INAFECT+ data.DOC_TAXED).toFixed(2)}
             descuento={((data.DOC_SUBTOTAL - data.DOC_NETO) / 1.18).toFixed(2)}
           />
         </HStack>

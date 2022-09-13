@@ -80,6 +80,8 @@ export const RealizarVenta = () => {
   let [vistaDescripcion, SetVistaDescripcion] = React.useState([]);
   let [totalMontoInafecto, SetTotalMontoInafecto] = React.useState(0);
   let [totalIGVInafecto, SetTotalIGVInafecto] = React.useState(0);
+  let [totalIGV, SetTotalIGV] = React.useState(0);
+  let [totalGravada, SetTotalGravada] = React.useState(0);
 
   const updateTotal = () => {
     const valores = vistaDescripcion.map((prod) => {
@@ -97,19 +99,30 @@ export const RealizarVenta = () => {
     let totalDescuento = 0;
     let totalInafect = 0;
     let totalIGVInafect = 0;
+    let totaIGV = 0;
+    let gravada = 0;
     valores.map((e) => {
-      totalTotal = totalTotal + e.total;
+      console.log(e, e.total);
+
+      gravada = gravada + (e.inafec == 1 ? 0 : e.total);
+      totalTotal = totalTotal + (e.inafec == 1 ? e.total / 1.18 : e.total);
+      totaIGV = totaIGV + (e.inafec == 1 ? 0 : (e.total / 1.18) * 0.18);
       totalDescuento = totalDescuento + e.decuento;
+      console.log(gravada)
       if (e.inafec == "1") {
         totalInafect = totalInafect + (e.total / 1.18);
         totalIGVInafect = totalIGVInafect + ((e.total / 1.18) * 0.18);
       }
     });
+    console.log(totalInafect, totalIGVInafect);
+
     SetTotalMontoInafecto(totalInafect);
     SetTotalIGVInafecto(totalIGVInafect);
     SetSubtotalGeneral(totalTotal);
     SetTotal(subtotalGeneral - descuentoGeneral);
     SetDescuento(totalDescuento);
+    SetTotalIGV(totaIGV);
+    SetTotalGravada(gravada);
   };
 
   return (
@@ -141,7 +154,7 @@ export const RealizarVenta = () => {
                 <h2 >
                   <b >Descripción</b>
                 </h2>
-                
+
                 <VentaTable
                   updateTotal={updateTotal}
                   cambioVuelto={cambioVuelto}
@@ -151,6 +164,7 @@ export const RealizarVenta = () => {
                   SetDescuentoGeneral={SetDescuentoGeneral}
                 />
                 <CalculadorTotal
+                  totalIGV={totalIGV}
                   SetTotal={SetTotal}
                   total={total}
                   subtotalGeneral={subtotalGeneral}
@@ -183,6 +197,7 @@ export const RealizarVenta = () => {
               SetCambio={SetCambio}
               handleChangeCambio={handleChangeCambio}
               formDetalle={formDetalle}
+              totalGravada={totalGravada}
             />
           </Box>
         </Box>

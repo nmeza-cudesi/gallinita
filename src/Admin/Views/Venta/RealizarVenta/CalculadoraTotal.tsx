@@ -56,7 +56,7 @@ export const CalculadorTotal = (props: any) => {
                     </tr>
                     <tr>
                         <th style={ { textAlign: 'right', paddingRight: '10px' } }>IGV</th>
-                        <td>{ (props.total - props.total / 1.18).toFixed(2) }</td>
+                        <td>{ (props.totalIGV).toFixed(2) }</td>
                     </tr>
                     <tr>
                         <th style={ { textAlign: 'right', paddingRight: '10px' } }>Total a Pagar</th>

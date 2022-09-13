@@ -196,7 +196,7 @@ export const Enviar = ({ venta, action }: { venta: any; action: any }) => {
           nombreComercial: "EMPRESA", // CAMBIAR PERO EN CRUDO
         },
         productosTotal: {
-          operacionGravada: Number(venta.DOC_SUB_SUBTOTAL.toFixed(2)) - Number(venta.DOC_INAFECT.toFixed(2)),
+          operacionGravada: Number(venta.DOC_TAXED.toFixed(2)) ,
           montoIgv: venta.DOC_IGV.toFixed(2),
           totalImpuestos: venta.DOC_IGV.toFixed(2),
           valorVenta: venta.DOC_SUB_SUBTOTAL.toFixed(2),
