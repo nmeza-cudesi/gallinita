@@ -118,7 +118,6 @@ export const InfoVenta = (props: any) => {
   const handleChangeBuscar = (e: any) => {
     SetInputBuscarCliente(e.target.value);
   };
-  let [spinnerSearchClient, SetSpinnerSearchClient] = React.useState(false);
   const { mutateAsync, data = [], isLoading } = useMutation(searchPersonByDocument);
 
   // @ts-ignore
@@ -148,7 +147,7 @@ export const InfoVenta = (props: any) => {
 
   const buscarCliente = () => {
     SetClienteEncontrado(true);
-    SetSpinnerSearchClient(false);
+    (false);
     const valor = inputBuscarCliente;
     props.SetFormDetalle({
       ...props.formDetalle,
@@ -158,7 +157,7 @@ export const InfoVenta = (props: any) => {
       direccion: "",
     });
     if (valor == "00000000") {
-      SetSpinnerSearchClient(true);
+      (true);
       defaultFormDetalle();
     } else {
       mutateAsync(valor)
@@ -249,7 +248,7 @@ export const InfoVenta = (props: any) => {
   const ActivarClient = () => {
     const valor = inputBuscarCliente;
     SetClienteEncontrado(false);
-    SetSpinnerSearchClient(true);
+    (true);
     props.SetFormDetalle({
       ...props.formDetalle,
       idCliente: valor,
@@ -879,10 +878,6 @@ export const InfoVenta = (props: any) => {
           <FormControl id="idCliente" mt="2">
             <HStack>
               <FormLabel>ID-Cliente</FormLabel>
-              <Spinner
-                color="red.500"
-                display={!spinnerSearchClient ? "none" : "block"}
-              />
             </HStack>
             <Text fontSize="sm">{props.formDetalle.idCliente}</Text>
             <Input
