@@ -1,7 +1,8 @@
 import { ClientCreateTicket } from "../Model/Tickets"
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
-const getCategories = async () => {
+const getCategories = async (asdasd:any) => {
+    console.log('getCategories tienda online service')
     const res = await fetch(import.meta.env.VITE_APP_API + '/category/tienda/active')
     return res.json()
 }

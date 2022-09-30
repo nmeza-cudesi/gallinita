@@ -341,20 +341,3 @@ export const ProductFindComp = ({
     </>
   );
 };
-
-/* 
-export const CategoriaCompHeader = (categorias: ICategoria[]) => {
-  const { data, isLoading, refetch } = useQuery('categories', getCategories)
-  return (
-    <>
-      <div className="dropdown">
-        <button className="dropbtn">Dropdown</button>
-        <div className="dropdown-content">
-          {data.map((val: any) =>
-            <a href="#">{val.CAT_NAME}</a>
-          )}
-        </div>
-      </div>
-
-    </>)
-} */

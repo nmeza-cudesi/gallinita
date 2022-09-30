@@ -1,13 +1,8 @@
-import { Button, Text, Stack, Skeleton, Img, IconButton, Tooltip } from '@chakra-ui/react'
+import { Stack, Skeleton, IconButton, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
-import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import { IoReload } from 'react-icons/io5';
-import { getCategories } from '../../../../Service/TiendaOnlineService';/* 
-import { EditCatModal } from './EditeCatModal';
-import { DeleteCatDialog } from './DeleteCatDialog'; */
-import { MyReactTable, NumberRangeColumnFilter } from '../../../../GlobalUI/Table/MyReactTable';
-import { EditPromotionStatus, ListPromotion } from '../../../../Service/PromotionAdminService';
+import { AiFillEdit } from 'react-icons/ai';
+import { MyReactTable} from '../../../../GlobalUI/Table/MyReactTable';
 import { EditTipPagoModal } from './EditTipoPagoModal';
 import { EditTipoPago, ListTipoPago } from '../../../../Service/PayMetho';
 import { IoMdCheckmark } from 'react-icons/io';
